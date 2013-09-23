@@ -8,76 +8,115 @@ jQuery(document).ready(function($) {
 
 //********** SLIDER AIDS ***********//
 	// Conditional Slider Template Fixer
-	var content_row = $('.acf_postbox td').filter("[data-field_name='content']").parent();
-	var content_position_field = $('.acf_postbox td').filter("[data-field_name='content_position']").parent();
-	var image_big_src = $('.acf_postbox td').filter("[data-field_name='images']").find('img').eq(0).attr('src');
-	
-	function conditional_template(){
-		content_row.show();
-		content_position_field.show();
-		var val = $( ".acf-radio-list input:checked" ).val();
-	  	if (val === 'Text' || val ==='Veckans Bok') {
+	function init_aids () {
+		$('.acf_postbox tr.row').each(function(){
+		var root = $(this);
+		
+		var content_row = root.find('td').filter("[data-field_name='content']").parent();
+		var content_position_field = root.find('td').filter("[data-field_name='content_position']").parent();
+		var images = root.find('td').filter("[data-field_name='images']").parent();
+		var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(0).attr('src');
+
+		root.find('.order').next().prepend('<h3>Slide</h3>');
+
+		function conditional_template(){
 			content_row.hide();
+			images.hide();
 			content_position_field.hide();
-	  	};
-	}
-	conditional_template();
-
-	$( ".acf-radio-list" ).change(function() {
+			var val = root.find( ".acf-radio-list input:checked" ).val();
+		  	if (val === 'Veckans Bok') {
+				content_row.fadeOut();
+				content_position_field.fadeOut();
+				images.fadeIn();
+		  	};
+		  	if (val === 'Featured Content') {
+				content_row.fadeIn();
+				content_position_field.fadeIn();
+				images.fadeIn();
+		  	}
+		  	if (val === 'Image Only') {
+				content_row.fadeOut();
+				content_position_field.fadeOut();
+				images.fadeIn();
+		  	};
+		}
 		conditional_template();
-	});
 
+		root.find( ".acf-radio-list" ).change(function() {
+			conditional_template();
+		});
 
+		// Content Position Visual Aid
+		var markup = '<div class="position_preview slide-box"><div class="preview-img"></div><div class="content-box"></div></div><a class="refresh">Reload Image</a>';
+		
+		if (root.find('.position_preview').length == 0) {
+		    content_position_field.find('td').eq(1).prepend(markup);
+		}
+		
 
-	// Content Position Visual Aid
-	var markup = '<div class="position_preview slide-box"><div class="preview-img"></div><div class="content-box"></div></div>';
-	
-	content_position_field.find('td').eq(1).prepend(markup);
+		var xpos_input = content_position_field.find('input').eq(0);
+		var ypos_input = content_position_field.find('input').eq(1);
+		var container_width = $( ".slide-box" ).width();
+		var container_height = $( ".slide-box" ).height();
 
-	var xpos_input = content_position_field.find('input').eq(0);
-	var ypos_input = content_position_field.find('input').eq(1);
-	var container_width = $( ".slide-box" ).width();
-	var container_height = $( ".slide-box" ).height();
+		var contentbox = root.find( ".content-box" );
 
-	var contentbox = $( ".content-box" );
+		contentbox.css('left',xpos_input.val()+'%');
+		contentbox.css('top',ypos_input.val()+'%');
 
-	contentbox.css('left','5%');
-	contentbox.css('top','40%');
-
-	contentbox.parent().find('.preview-img').css('background-image', 'url(' + image_big_src + ')');
-	//FIX change!
-	$( ".no-image" ).eq(0).change(function() {
 		contentbox.parent().find('.preview-img').css('background-image', 'url(' + image_big_src + ')');
+
+		root.find('.refresh').on( "click", function() {
+			var contentbox = root.find( ".content-box" );
+			var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(0).attr('src');
+	  		contentbox.parent().find('.preview-img').css('background-image', 'url(' + image_big_src + ')');
+		});
+
+		//FIX change!
+		$('.has-image').bind('DOMNodeInserted', function(event) {
+	             alert('inserted ' + event.target.nodeName + // new node
+	           ' in ' + event.relatedNode.nodeName); // parent
+	       });
+
+		//xpos_input.val('5');
+		//ypos_input.val('40');
+
+		xpos_input.on("input", null, null, function(){
+			var pos = $(this).val() + '%';
+			contentbox.css('left', pos);
+			});
+		ypos_input.on("input", null, null, function(){
+			var pos = $(this).val() + '%';
+			contentbox.css('top', pos);
+			});
+
+		contentbox.draggable({
+				containment: "parent",
+				cursor: "crosshair",
+				opacity: 0.7,
+				drag: function(){
+		            var position = $(this).position();
+		            var xPos = position.left;
+		            var yPos = position.top;
+
+		            var xPos_percent = (xPos/container_width)*100;
+		            var yPos_percent = (yPos/container_height)*100;
+
+		            $(xpos_input).val(xPos_percent.toFixed(1));
+		            $(ypos_input).val(yPos_percent.toFixed(1));
+		        }
+			});
+		});
+	}
+	init_aids();
+	$('.add-row-end').live('click', function(){
+		init_aids();
+		return false;
 	});
-
-	xpos_input.val('5');
-	ypos_input.val('40');
-
-	xpos_input.on("input", null, null, function(){
-		var pos = $(this).val() + '%';
-		contentbox.css('left', pos);
-		});
-	ypos_input.on("input", null, null, function(){
-		var pos = $(this).val() + '%';
-		contentbox.css('top', pos);
-		});
-
-	contentbox.draggable({
-			containment: "parent",
-			cursor: "crosshair",
-			opacity: 0.7,
-			drag: function(){
-	            var position = $(this).position();
-	            var xPos = position.left;
-	            var yPos = position.top;
-
-	            var xPos_percent = (xPos/container_width)*100;
-	            var yPos_percent = (yPos/container_height)*100;
-
-	            $(xpos_input).val(xPos_percent.toFixed(1));
-	            $(ypos_input).val(yPos_percent.toFixed(1));
-	        }
-		});
+	$('.field-repeater-toggle').live('click', function(){
+		$('.acf_postbox tr.row').find('tr').removeAttr( "style" );
+	});
+	
 //********** END SLIDER AIDS ***********//
 
 });//End jQuery
