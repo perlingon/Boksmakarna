@@ -1,0 +1,603 @@
+/******************************************************************
+ELEMENTS (Buttons and such)
+******************************************************************/
+//SOUNDMANAGER PLAYER
+ul.flat
+  list-style-type none
+  padding-left 0px
+
+ul.flat li,
+ul.graphic li
+  padding-bottom 1px
+
+ul.flat li a
+  display:inline-block
+  padding:2px 4px 2px 4px
+
+ul.graphic
+  list-style-type none
+  padding-left 0px
+  margin-left 0px
+
+/* background-image-based CSS3 example */
+
+ul.graphic
+  list-style-type none
+  margin 0px
+  padding 0px
+
+ul.graphic li
+  margin-bottom 2px
+
+ul.graphic li a,
+ul.graphic li a.sm2_link
+  display inline-block
+  padding-left 22px
+  min-height 16px
+  vertical-align middle
+  background-color orange
+  border-radius 3px
+  padding 3px 3px 3px 25px
+  min-width 19em
+  _width 19em /* IE 6 */
+  text-decoration none
+  font-weight normal
+  color #f6f9ff
+
+ul.graphic li a.sm2_link
+  -webkit-transition-property hover
+  -webkit-transition background-color 0.15s linear
+  -moz-transition background-color 0.15s linear 0s /* firefox 4 */
+  -o-transition-property background-color /* opera 10.5 */
+  -o-transition-duration 0.15s
+
+ul.graphic li a,
+ul.graphic li a.sm2_paused:hover,
+ul.graphic li a.sm2_link:hover
+  background-image url(../images/icon_play.png)
+  background-position 3px 50%
+  background-repeat no-repeat
+  _background-image url(../images/icon_play.gif)
+
+ul.graphic li a.sm2_link:hover
+  background-color #003366
+  color #fff
+
+ul.graphic li a.sm2_paused
+  background-color #999
+
+
+ul.graphic li a.sm2_paused:hover
+  background:#003366 url(../images/icon_play.png) no-repeat 3px 50%
+  _background-image:url(../images/icon_play.gif)
+
+
+ul.graphic li a.sm2_playing,
+ul.graphic li a.sm2_playing:hover
+  background #003366 url(../images/icon_pause.png) no-repeat 3px 50%
+  _background-image url(../images/icon_pause.gif)
+  text-decoration none
+
+
+/* hide button while playing?
+ul.graphic li a.sm2_playing {
+ background-image:none;
+}
+*/
+
+body #sm2-container object,
+body #sm2-container embed
+  left -9999em
+  top -9999em
+
+/* flat CSS example */
+
+ul.flat
+  a.sm2_link
+    border-left 6px solid #999
+    padding-left 4px
+    padding-right 4px
+    &:hover
+      border-left-color #333
+
+
+  a.sm2_playing
+    border-left-color #6666ff
+    background-color #000
+    color #fff
+    text-decoration none
+    &:hover
+      border-left-color #cc3333
+
+  a.sm2_paused
+    background-color #666
+    color #FFFFFF
+    text-decoration none
+    &:hover
+      border-left-color #33cc33
+
+// NAV
+
+// NAV BASIC STYLING
+.center
+  padding-top 4.5em
+
+#menu-main
+  margin 0
+  z-index 10
+#menu-main ul
+  margin 0
+  padding 0
+  width 100%
+  display block
+  list-style none
+
+#menu-main li
+  width 100%
+  display block
+
+#menu-main li.current-menu-item
+  background orange
+  a
+    color white
+
+
+.js #menu-main
+  clip rect(0 0 0 0)
+  max-height 0
+  position absolute
+  display block
+  overflow hidden
+  zoom 1
+
+#menu-main.opened
+  max-height 9999px
+
+
+@media screen and (min-width: 40em)
+  .center
+    padding-top 0
+  .js #menu-main
+    position relative
+    overflow visible
+    left 15%
+
+  .js #menu-main.closed
+    max-height none
+
+  #nav-toggle 
+    display none
+
+#menu-main,
+#menu-main *
+  -moz-box-sizing border-box
+  -webkit-box-sizing border-box
+  box-sizing border-box
+
+
+#menu-main,
+#menu-main ul
+  list-style none
+  width 100%
+  float left
+
+
+#menu-main li
+  float left
+  width 100%
+
+
+@media screen and (min-width: 40em) 
+  #menu-main li
+    width auto
+    *width 24.9% /* IE7 Hack */
+    _width 19% /* IE6 Hack */
+  
+
+
+#menu-main a 
+  color #fff
+  text-decoration none
+  width 100%
+  background orange
+  border-bottom 1px solid white
+  padding 0.7em 1em
+  float left
+  font-size 1em
+  font-family sans-serif
+  text-transform uppercase
+
+
+@media screen and (min-width: 40em) 
+  #menu-main a 
+    margin 0
+    padding .85em
+    float left
+    text-align center
+    border-bottom: 0
+    border-right: 1px solid white
+    background none
+    color black
+    padding-top 6em
+    font-size .85em
+    &:hover
+      background white
+  
+
+
+#menu-main ul ul a
+  background #ca3716
+  padding-left 2em
+
+
+@media screen and (min-width: 40em)
+  #menu-main ul ul a
+    display none
+
+
+
+#nav-toggle
+  -webkit-touch-callout none
+  -webkit-user-select none
+  -moz-user-select none
+  -ms-user-select none
+  user-select none
+  width 70px
+  margin-top .5em
+  height 55px
+  float right
+  text-indent -9999px
+  overflow hidden
+  background orange url(../images/hamburger.gif) no-repeat 50% 50%
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.3), screen and (min--moz-device-pixel-ratio: 1.3), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-device-pixel-ratio: 1.3), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)
+  #nav-toggle 
+    background-image url(../images/hamburger-retina.gif)
+    -webkit-background-size 100px 100px
+    -moz-background-size 100px 100px
+    -o-background-size 100px 100px
+    background-size 100px 100px
+  
+
+
+// GRID SORTING
+#sorting
+  clear both
+
+  ul
+    list-style-type none
+    -webkit-padding-start 0
+  .sort-by
+    .active
+      background #FFF
+      a
+        color orange
+
+// CHOSEN
+
+.chosen-container
+  width 100%
+  position relative
+  display inline-block
+  vertical-align middle
+  zoom 1
+  *display inline
+  -webkit-user-select none
+  -moz-user-select none
+  user-select none
+  .chosen-drop
+    position absolute
+    top 100%
+    left -9999px
+    z-index 1010
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+    width 100%
+    border 1px solid #aaa
+    border-top 0
+    background #fff
+    box-shadow 0 4px 5px rgba(0, 0, 0, 0.15)
+  &.chosen-with-drop
+    .chosen-drop
+      left 0
+  a
+    cursor pointer
+  .chosen-results
+    position relative
+    overflow-x hidden
+    overflow-y auto
+    margin 0 4px 4px 0
+    padding 0 0 0 4px
+    max-height 240px
+    -webkit-overflow-scrolling touch
+    li
+      display none
+      margin 0
+      padding 5px 6px
+      list-style none
+      line-height 15px
+      color black
+      &.active-result
+        display list-item
+        cursor pointer
+      &.disabled-result
+        display list-item
+        color #ccc
+        cursor default
+      &.highlighted
+        background-color #3875d7
+        color #fff
+      &.no-results
+        display list-item
+        background #f4f4f4
+      &.group-result
+        display list-item
+        font-weight bold
+        cursor default
+      &.group-option
+        padding-left 15px
+      em
+        font-style normal
+        text-decoration underline
+
+.chosen-container-single
+  .chosen-single
+    position relative
+    display block
+    overflow hidden
+    padding 0 0 0 8px
+    height 23px
+    border 1px solid #aaa
+    border-radius 5px
+    background-color #fff
+    background-clip padding-box
+    box-shadow 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1)
+    color #444
+    text-decoration none
+    white-space nowrap
+    line-height 24px
+    span
+      display block
+      overflow hidden
+      margin-right 26px
+      text-overflow ellipsis
+      white-space nowrap
+    abbr
+      position absolute
+      top 6px
+      right 26px
+      display block
+      width 12px
+      height 12px
+      background url('../images/chosen-sprite.png') -42px 1px no-repeat
+      font-size 1px
+      &:hover
+        background-position -42px -10px
+    div
+      position absolute
+      top 0
+      right 0
+      display block
+      width 18px
+      height 100%
+      b
+        display block
+        width 100%
+        height 100%
+        background url('../images/chosen-sprite.png') no-repeat 0px 2px
+  .chosen-default
+    color #999
+  .chosen-single-with-deselect
+    span
+      margin-right 38px
+  &.chosen-disabled
+    .chosen-single
+      abbr
+        &:hover
+          background-position -42px -10px
+  .chosen-search
+    position relative
+    z-index 1010
+    margin 0
+    padding 3px 4px
+    white-space nowrap
+    input[type="text"]
+      -webkit-box-sizing border-box
+      -moz-box-sizing border-box
+      box-sizing border-box
+      margin 1px 0
+      padding 4px 20px 4px 5px
+      width 100%
+      height auto
+      outline 0
+      border 1px solid #aaa
+      background white url('../images/chosen-sprite.png') no-repeat 100% -20px
+      font-size 1em
+      font-family sans-serif
+      line-height normal
+      border-radius 0
+  .chosen-drop
+    margin-top -1px
+    border-radius 0 0 4px 4px
+    background-clip padding-box
+  &.chosen-container-single-nosearch
+    .chosen-search
+      position absolute
+      left -9999px
+
+.chosen-container-multi
+  .chosen-choices
+    position relative
+    overflow hidden
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+    margin 0
+    padding 0
+    width 100%
+    height auto !important
+    height 1%
+    border 1px solid #aaa
+    background-color #fff
+    cursor text
+    li
+      float left
+      list-style none
+      &.search-field
+        margin 0
+        padding 0
+        white-space nowrap
+        input[type="text"]
+          margin 1px 0
+          padding 5px
+          width 100%
+          outline 0
+          border 0 !important
+          background transparent !important
+          box-shadow none
+          color #666
+          font-size 100%
+          font-family sans-serif
+          line-height normal
+          border-radius 0
+        .default
+          color #999
+      &.search-choice
+        position relative
+        margin 3px 0 3px 5px
+        padding 6px 20px 6px 6px
+        border 1px solid #aaa
+        background-color #e4e4e4
+        background-clip padding-box
+        box-shadow 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05)
+        color #333
+        line-height 13px
+        cursor default
+        .search-choice-close
+          position absolute
+          top 4px
+          right 3px
+          display block
+          width 12px
+          height 12px
+          background url('../images/chosen-sprite.png') -42px 1px no-repeat
+          font-size 1px
+          &:hover
+            background-position -42px -10px
+      &.search-choice-disabled
+        padding-right 5px
+        border 1px solid #ccc
+        background-color #e4e4e4
+        color #666
+      &.search-choice-focus
+        background #d4d4d4
+        .search-choice-close
+          background-position -42px -10px
+  .chosen-results
+    margin 0
+    padding 0
+  .chosen-drop
+    .result-selected
+      display list-item
+      color #ccc
+      cursor default
+
+.chosen-container-active
+  .chosen-single
+    border 1px solid #5897fb
+    box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+  &.chosen-with-drop
+    .chosen-single
+      border 1px solid #aaa
+      -moz-border-radius-bottomright 0
+      border-bottom-right-radius 0
+      -moz-border-radius-bottomleft 0
+      border-bottom-left-radius 0
+      box-shadow 0 1px 0 #fff inset
+      div
+        border-left none
+        background transparent
+        b
+          background-position -18px 2px
+  .chosen-choices
+    border 1px solid #5897fb
+    box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+    li
+      &.search-field
+        input[type="text"]
+          color #111 !important
+
+.chosen-disabled
+  opacity 0.5 !important
+  cursor default
+  .chosen-single
+    cursor default
+  .chosen-choices
+    .search-choice
+      .search-choice-close
+        cursor default
+
+.chosen-rtl
+  text-align right
+  .chosen-single
+    overflow visible
+    padding 0 8px 0 0
+    span
+      margin-right 0
+      margin-left 26px
+      direction rtl
+    div
+      right auto
+      left 3px
+    abbr
+      right auto
+      left 26px
+  .chosen-single-with-deselect
+    span
+      margin-left 38px
+  .chosen-choices
+    li
+      float right
+      &.search-field
+        input[type="text"]
+          direction rtl
+      &.search-choice
+        margin 3px 5px 3px 0
+        padding 3px 5px 3px 19px
+        .search-choice-close
+          right auto
+          left 4px
+  &.chosen-container-single
+    .chosen-results
+      margin 0 0 4px 4px
+      padding 0 4px 0 0
+    .chosen-single
+      div
+        b
+          background-position 6px 2px
+    &.chosen-with-drop
+      .chosen-single
+        div
+          b
+            background-position -12px 2px
+  .chosen-results
+    li
+      &.group-option
+        padding-right 15px
+        padding-left 0
+  &.chosen-container-active
+    &.chosen-with-drop
+      .chosen-single
+        div
+          border-right none
+  .chosen-search
+    input[type="text"]
+      padding 4px 5px 4px 20px
+      background white url('../images/chosen-sprite.png') no-repeat -30px -20px
+      direction rtl
+
+.chosen-rtl.chosen-container-single-nosearch .chosen-search,
+.chosen-rtl .chosen-drop
+  left 9999px

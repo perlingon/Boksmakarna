@@ -1,0 +1,139 @@
+/////////////////
+// Semantic.gs // for Stylus: http://learnboost.github.com/stylus/
+/////////////////
+
+
+// Defaults which you can freely override
+column-width = 70px
+gutter-width = 10px
+columns = 12
+
+// Utility variable — you should never need to modify this
+_gridsystem-width = (column-width + gutter-width) * columns
+
+// Set @total-width to 100% for a fluid layout
+total-width = _gridsystem-width
+
+// Correcting percentage-to-pixel rounding errors in IE6 & 7
+// See http://tylertate.com/blog/2012/01/05/subpixel-rounding.html
+// Override @min with the minimum width of your layout
+min-width = 960
+correction = (((0.5 / min-width) * 100) * 1%)
+
+// The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/
+clearfix()
+ *zoom:1
+
+	&:before,
+	&:after
+		content:""
+		display:table
+
+	&:after
+		clear:both
+
+
+//////////
+// GRID //
+//////////
+
+body
+	width 100%
+	clearfix()
+
+row(columns = columns)
+	display block
+	width total-width * ((gutter-width + _gridsystem-width ) / _gridsystem-width)
+	margin 0 total-width * (((gutter-width * 0.5) / _gridsystem-width ) * - 1)
+	*width total-width * ((gutter-width + _gridsystem-width ) / _gridsystem-width)-correction
+	*margin 0 total-width * (((gutter-width * 0.5) / _gridsystem-width ) * - 1)-correction
+
+column(x, columns = columns)
+	display inline
+	float left
+	overflow hidden
+	width total-width * ((((gutter-width + column-width ) * x) - gutter-width) / _gridsystem-width)
+	margin 0 total-width * ( (gutter-width * 0.5) / _gridsystem-width)
+	*width total-width * ((((gutter-width + column-width ) * x) - gutter-width) / _gridsystem-width)-correction
+	*margin 0 total-width * ( (gutter-width * 0.5) / _gridsystem-width)-correction
+
+offset(offset = 1)
+	margin-left total-width*(((gutter-width+column-width)*offset + (gutter-width*0.5))/_gridsystem-width)
+
+
+/////////////////
+// ISOTOPE //
+/////////////////
+/**** Grid Items and responsive setup ****/
+
+/*#grid-container
+	clear both
+	.grid-item
+		padding 1em
+		background #f9f9f9
+		border 1px solid #e4e4e4
+		margin-bottom 1em
+		display block
+
+		img
+			width 100%
+			height auto
+
+/*two_thirds_of_max = "screen and (min-width: " + max-width/2+ ")"
+
+@media two_thirds_of_max
+	.grid-item
+		max-width (max-width/3*0.97)
+		width 50%
+		padding 1%
+
+*/
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}

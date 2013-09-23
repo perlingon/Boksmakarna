@@ -1,0 +1,414 @@
+/******************************************************************
+Site Name Boksmakarna
+Author WEBABLE
+
+Stylesheet Base Mobile Stylesheet
+
+Be light and don't over style since everything here will be
+loaded by mobile devices. You want to keep it as minimal as
+possible. This is called at the top of the main stylsheet
+and will be used across all viewports.
+
+******************************************************************/
+
+/*********************
+GENERAL STYLES
+*********************/
+
+body 
+	font-family bread
+	font-size 100%
+	line-height 1.5
+	color #b9b9b9
+	background cream
+
+
+/*********************
+LAYOUT
+*********************/
+
+.center
+	width 96%
+	max-width max-width
+	margin 0 auto
+
+.border
+	height .5em
+	width 100%
+	background orange
+	position fixed
+	top 0
+	z-index 999
+	display block
+
+.header
+	position fixed
+	z-index 999
+	width 100%
+	top 0
+	background #FFF
+	nav
+		ul
+			padding 0
+#logo
+	width auto
+	position relative
+	z-index 0
+	line-height auto
+	font-size 1.2em
+	text-transform uppercase
+	font-family sans-serif
+	top 0
+	margin 0
+#featured-content
+	clear both
+	#slider
+		overflow hidden
+		max-width max-width
+		max-height 460px
+		width 100%
+		img
+			width 160%
+			margin-left -30%
+			height auto
+#main
+	clear both
+
+/*********************
+	  THE GRID
+*********************/
+
+#grid-container
+	clear both
+	.grid-item
+		padding 1em
+		background #f9f9f9
+		border 1px solid #e4e4e4
+		margin-bottom 1em
+		display block
+
+		img
+			width 100%
+			height auto
+		h1,h2,h3
+			font-size 1em
+			text-transform uppercase
+		ul
+			list-style-type none
+			margin 0
+			padding 0
+			-webkit-padding-start 0
+			li
+				float left
+				margin-right 5px
+				padding 5px
+				background #E4E4E4
+				font-family sans-serif
+				text-transform uppercase
+		p
+			clear both
+			font-size .8em
+		.date
+			display none
+
+/*********************
+LINK STYLES
+*********************/
+
+a, a:visited 
+	color $link-color
+
+	/* on hover */
+	&:hover, &:focus 
+		color $link-hover
+	
+
+	/* on click */
+	&:active 
+
+	
+
+	/* mobile tap color */
+	&:link 
+		/*
+		this highlights links on iPhones/iPads.
+		so it basically works like the hover selector
+		for mobile devices.
+		*/
+		-webkit-tap-highlight-color  rgba( 0, 0, 0, 0.3 )
+	
+
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 
+	font-family sans-serif
+	text-rendering optimizelegibility
+	font-weight 500
+	/*
+	if you're going to use webfonts, be sure to check your weights
+	http//css-tricks.com/watch-your-font-weight/
+	*/
+
+	/* removing text decoration from all headline links */
+	a 
+		text-decoration none
+	
+
+
+h1, .h1 
+	font-size 2.5em
+	line-height 1.333em
+
+
+h2, .h2 
+	font-size 1.75em
+	line-height 1.4em
+	margin-bottom 0.375em
+
+
+h3, .h3 
+	font-size 1.125em
+
+
+h4, .h4 
+	font-size 1.1em
+	font-weight 700
+
+
+h5, .h5 
+	font-size 0.846em
+	line-height 2.09em
+	text-transform uppercase
+	letter-spacing 2px
+
+
+/*********************
+HEADER STYLES
+*********************/
+
+
+/*********************
+NAVIGATION STYLES
+*********************/
+
+/*
+all navs have a .nav class applied via
+the wp_menu function this is so we can
+easily write one group of styles for
+the navs on the site so our css is cleaner
+and more scalable.
+*/
+
+
+/*********************
+POSTS &: CONTENT STYLES
+*********************/
+
+#content 
+	margin-top 2.2em
+
+
+		.hentry 
+
+			header 
+
+			footer 
+
+		 /* end .hentry */
+
+		.single-title,
+		.page-title 
+
+		.single-title 
+
+		.page-title 
+
+		.archive-title  
+
+		/* want to style individual post classes? Booya! */
+		.post-id          /* post by id (i.e. post-3) */
+		.post             /* general post style */
+		.page             /* general article on a page style */
+		.attachment       /* general style on an attatchment */
+		.sticky           /* sticky post style */
+		.hentry           /* hentry class */
+		.category-slug    /* style by category (i.e. category-videos) */
+		.tag-slug         /* style by tag (i.e. tag-news) */
+
+		/* post meta */
+		.byline 
+			color #999
+
+			time 
+		
+
+		/* entry content */
+		.entry-content 
+
+			p 
+
+
+			ul, ol, table, dl 
+
+			ul, ol 
+
+				li 
+
+			
+
+			ul 
+
+				li 
+
+			
+
+			ol 
+
+				li 
+
+			
+			dl 
+
+			dt 
+
+			dd 
+				margin-left 0
+				font-size 0.9em
+				color #787878
+				margin-bottom 1.5em
+			
+
+			img 
+				margin 0 0 1.5em 0
+				max-width 100%
+				height auto
+			
+
+			/*
+			image alignment on a screen this size may be
+			a bit difficult. It's set to start aligning
+			and floating images at the next breakpoint,
+			but it's up to you. Feel free to change it up.
+			*/
+			.alignleft, img.alignleft 
+			.alignright, img.alignright 
+			.aligncenter, img.aligncenter 
+
+			video, object 
+				max-width 100%
+				height auto
+			
+
+			pre 
+				background #eee
+				border 1px solid #cecece
+				padding 10px
+			
+
+		 /* end .entry-content */
+
+		.wp-caption 
+			max-width 100%
+			background #eee
+			padding 5px
+
+			/* images inside wp-caption */
+			img 
+				max-width 100%
+				margin-bottom 0
+				width 100%
+			
+
+			p.wp-caption-text 
+				font-size 0.85em
+				margin 4px 0 7px
+				text-align center
+			
+
+		 /* end .wp-caption */
+
+/******************************************************************
+PAGE NAVI STYLES
+******************************************************************/
+
+.pagination,
+.wp-prev-next
+	margin 1.1em 0 2.2em
+
+.pagination
+    text-align center
+    ul 
+        display inline-block
+        white-space nowrap
+        padding 0
+        clear both
+        margin 1px
+        li 
+            padding 0
+            margin 0
+            float left
+            display inline
+            overflow hidden
+            a, span 
+                margin 0
+                text-decoration none
+                padding 0
+                line-height 1em
+                font-size 1em
+                font-weight normal
+                padding .5em
+                min-width 1em
+                display block
+            
+            span.current
+            	font-weight bold
+            
+            a:hover, a:focus 
+                    
+                
+            
+        
+     /* end .bones_page_navi */
+
+	/* fallback previous &: next links */
+	.wp-prev-next 
+
+		ul 
+
+		.prev-link 
+			float left
+		
+
+		.next-link 
+			float right
+		
+
+	 /* end .wp-prev-next */
+
+/*********************
+SIDEBARS &: ASIDES
+*********************/
+
+
+/*********************
+FOOTER STYLES
+*********************/
+
+.footer 
+	clear both
+
+	.footer-links
+
+		ul
+			margin 0 0.5em
+
+			li
+				margin 0 0.5em
+	 /* end .footer-links */
+
+
+	.copyright 
+		color green

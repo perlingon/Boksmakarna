@@ -1,0 +1,47 @@
+/******************************************************************
+Stylesheet: 481px and Up Stylesheet
+
+This stylesheet is loaded for larger devices. It's set to 
+481px because at 480px it would load on a landscaped iPhone.
+This isn't ideal because then you would be loading all those
+extra styles on that same mobile connection. 
+
+A word of warning. This size COULD be a larger mobile device,
+so you still want to keep it pretty light and simply expand
+upon your base.styl styles.
+
+******************************************************************/
+
+.header
+	position relative
+	margin 0 auto
+	max-width max-width
+	background transparent
+.chosen-container,
+.grid-item
+	column(4)
+.chosen-container
+	overflow visible!important
+
+#slider
+	img
+		width 100%
+		margin-left 0
+		height auto
+.single,
+.archive
+	#content
+		padding-top 100px
+	.media
+		column(8)
+		img
+			width 100%
+			height auto
+	article
+		column(4)
+.home
+	#push-spaces
+		clear both
+		.widget
+			column(4)
+
