@@ -20,10 +20,7 @@
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
-									<div id="sm2-container">
-  										<!-- SM2 flash goes here -->
-									 </div>
-									 <?php
+									 <?php/*
 									 	$slug = get_the_slug();
 									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC');
 									 			if ($episodes->have_posts()) {
@@ -34,19 +31,23 @@
 													}
 													wp_reset_query();
 													echo '</ul>';
-												}
+												}*/
 																			 
 									?>
-									<br /><br />
-									 <ul class="graphic">
-									  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
-									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3">Avsnitt 1</a></li>
-									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Mak.mp3">Avsnitt 2</a></li>
-									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Things that open, close and roll.mp3">Avsnitt 3</a></li>
-									  <li><a href="http://www.freshly-ground.com/misc/music/20060826%20-%20Armstrong.mp3">Avsnitt 4</a></li>
-									  <li><a href="http://freshly-ground.com/data/video/Rain%20on%20Car%20Roof.aac">Avsnitt 5</a></li>
+									<p><?php the_field('short_description'); ?></p>
+									<div id="sm2-container">
+  										<!-- SM2 flash goes here -->
+									 </div>
+									<ul class="playlist">
+									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Avsnitt 1</a></li>
+									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Mak.mp3"><i></i>Avsnitt 2</a></li>
+									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Things that open, close and roll.mp3"><i></i>Avsnitt 3</a></li>
+									  <li><a href="http://www.freshly-ground.com/misc/music/20060826%20-%20Armstrong.mp3"><i></i>Avsnitt 4</a></li>
+									  <li><a href="http://freshly-ground.com/data/video/Rain%20on%20Car%20Roof.aac"><i></i>Avsnitt 5</a></li>
 									 </ul>
-									<?php the_field('short_description'); ?>
+									 <ul class="playlist">
+									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Fredagsintervju</a></li>
+									 </ul>
 								</section> <!-- end article section -->
 
 								<footer class="article-footer">
@@ -59,7 +60,7 @@
 							</article> <!-- end article -->
 
 							<div class="media">
-								<?php the_post_thumbnail('cover'); ?>
+								<?php the_post_thumbnail('featured'); ?>
 							</div>
 
 						<?php endwhile; ?>

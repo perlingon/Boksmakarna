@@ -55,6 +55,7 @@ add_image_size( 'grid-block', 250, 200, true );
 add_image_size( 'cover', 620, 400, true );
 add_image_size( 'big-slide', 960, 460, true );
 add_image_size( 'preview-slide', 500, 240, true );
+add_image_size( 'featured', 680, 380, true );
 
 
 /************* Episode Titles ***************/
@@ -92,11 +93,16 @@ function additional_libraries() {
   	wp_enqueue_script( 'jquery BBQ' );
 
   	//Sound Manager
-  	wp_register_script( 'sm2', get_template_directory_uri() . '/library/js/soundmanager/soundmanager2-jsmin.js', '', '', false );
-  	wp_register_script( 'sm2-inline-player', get_template_directory_uri() . '/library/js/soundmanager/inlineplayer.js', '', '', false );
+  	if (is_single() || is_archive()) {
+  	wp_register_script( 'sm2', get_template_directory_uri() . '/library/js/soundmanager/soundmanager2.js', '', '', false );
+  	wp_register_script( 'sm2-player', get_template_directory_uri() . '/library/js/soundmanager/page-player.js', '', '', false );
+  	wp_register_style( 'sm2-player', get_stylesheet_directory_uri() . '/library/css/soundmanager/page-player.css', array(), '', 'all' );
+  	wp_register_style( 'flashblock', get_stylesheet_directory_uri() . '/library/css/soundmanager/flashblock.css', array(), '', 'all' );
   	wp_enqueue_script( 'sm2' );
-  	wp_enqueue_script( 'sm2-inline-player' );
-
+  	wp_enqueue_script( 'sm2-player' );
+  	wp_enqueue_style( 'sm2-player' );
+  	wp_enqueue_style( 'flashblock' );
+  	}
   	//Royal Slider
   	wp_register_script( 'jquery easing', get_template_directory_uri() . '/library/js/libs/jquery.easing-1.3.js', array( 'jquery' ), '', false );
 	wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/libs/jquery.royalslider.min.js', array( 'jquery' ), '', false );

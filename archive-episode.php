@@ -10,6 +10,7 @@
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); $count++;?>
 
+							<div class="post-wrapper">
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
 
 								<header class="article-header">
@@ -34,12 +35,16 @@
 							</article> <!-- end article -->
 
 							<div class="media">
-								<?php the_post_thumbnail('cover'); ?>
-									<ul class="graphic">
-									  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
-									  <li><a href="http://localhost/boksmakarna/mp3/<?php echo $count;?>.mp3">Intervju</a></li>
-									</ul>
+								<?php the_post_thumbnail('featured'); ?>
 							</div>
+
+							<div class="player">
+								<ul class="playlist init">
+									  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
+									  <li><a href="http://localhost/boksmakarna/mp3/<?php echo $count;?>.mp3"><i></i>Intervju</a></li>
+								</ul>
+							</div>
+						</div>
 
 							<?php endwhile; ?>
 

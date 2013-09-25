@@ -16,10 +16,10 @@ GENERAL STYLES
 *********************/
 
 body 
-	font-family bread
+	font-family paragraph
 	font-size 100%
 	line-height 1.5
-	color #b9b9b9
+	color bread
 	background cream
 
 
@@ -78,11 +78,13 @@ LAYOUT
 #grid-container
 	clear both
 	.grid-item
-		padding 1em
-		background #f9f9f9
+		padding 0
+		//background #f9f9f9
 		border 1px solid #e4e4e4
+		border-bottom 4px solid lighten(grey,80%)
 		margin-bottom 1em
 		display block
+		min-height 350px
 
 		img
 			width 100%
@@ -144,6 +146,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	font-family sans-serif
 	text-rendering optimizelegibility
 	font-weight 500
+	text-transform uppercase
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -155,27 +158,27 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	
 
 
-h1, .h1 
-	font-size 2.5em
-	line-height 1.333em
+h1,.h1 
+	font-size 1.45em
+	line-height 1.2em
 
 
-h2, .h2 
-	font-size 1.75em
-	line-height 1.4em
+h2,.h2 
+	font-size 1.45em
+	line-height 1.2em
 	margin-bottom 0.375em
 
 
-h3, .h3 
-	font-size 1.125em
-
-
-h4, .h4 
+h3,.h3 
 	font-size 1.1em
+
+
+h4,.h4 
+	font-size 1em
 	font-weight 700
 
 
-h5, .h5 
+h5,.h5 
 	font-size 0.846em
 	line-height 2.09em
 	text-transform uppercase
@@ -204,128 +207,137 @@ and more scalable.
 POSTS &: CONTENT STYLES
 *********************/
 
+.post-wrapper
+	clear both
+	margin-bottom 10px
+	.player
+		clear both
+
 #content 
 	margin-top 2.2em
+	.media img
+		width 100%
+		height auto
 
 
-		.hentry 
+.hentry 
 
-			header 
+	header 
 
-			footer 
+	footer 
 
-		 /* end .hentry */
+ /* end .hentry */
 
-		.single-title,
-		.page-title 
+.single-title,
+.page-title 
 
-		.single-title 
+.single-title 
 
-		.page-title 
+.page-title 
 
-		.archive-title  
+.archive-title  
 
-		/* want to style individual post classes? Booya! */
-		.post-id          /* post by id (i.e. post-3) */
-		.post             /* general post style */
-		.page             /* general article on a page style */
-		.attachment       /* general style on an attatchment */
-		.sticky           /* sticky post style */
-		.hentry           /* hentry class */
-		.category-slug    /* style by category (i.e. category-videos) */
-		.tag-slug         /* style by tag (i.e. tag-news) */
+/* want to style individual post classes? Booya! */
+.post-id          /* post by id (i.e. post-3) */
+.post             /* general post style */
+.page             /* general article on a page style */
+.attachment       /* general style on an attatchment */
+.sticky           /* sticky post style */
+.hentry           /* hentry class */
+.category-slug    /* style by category (i.e. category-videos) */
+.tag-slug         /* style by tag (i.e. tag-news) */
 
-		/* post meta */
-		.byline 
-			color #999
+/* post meta */
+.byline 
+	color #999
 
-			time 
-		
-
-		/* entry content */
-		.entry-content 
-
-			p 
+	time 
 
 
-			ul, ol, table, dl 
+/* entry content */
+.entry-content 
 
-			ul, ol 
+	p
+		font-size .8em
 
-				li 
+	ul, ol, table, dl 
 
-			
+	ul, ol 
 
-			ul 
+		li 
 
-				li 
+	
 
-			
+	ul 
 
-			ol 
+		li 
 
-				li 
+	
 
-			
-			dl 
+	ol 
 
-			dt 
+		li 
 
-			dd 
-				margin-left 0
-				font-size 0.9em
-				color #787878
-				margin-bottom 1.5em
-			
+	
+	dl 
 
-			img 
-				margin 0 0 1.5em 0
-				max-width 100%
-				height auto
-			
+	dt 
 
-			/*
-			image alignment on a screen this size may be
-			a bit difficult. It's set to start aligning
-			and floating images at the next breakpoint,
-			but it's up to you. Feel free to change it up.
-			*/
-			.alignleft, img.alignleft 
-			.alignright, img.alignright 
-			.aligncenter, img.aligncenter 
+	dd 
+		margin-left 0
+		font-size 0.9em
+		color #787878
+		margin-bottom 1.5em
+	
 
-			video, object 
-				max-width 100%
-				height auto
-			
+	img 
+		margin 0 0 1.5em 0
+		max-width 100%
+		height auto
+	
 
-			pre 
-				background #eee
-				border 1px solid #cecece
-				padding 10px
-			
+	/*
+	image alignment on a screen this size may be
+	a bit difficult. It's set to start aligning
+	and floating images at the next breakpoint,
+	but it's up to you. Feel free to change it up.
+	*/
+	.alignleft, img.alignleft 
+	.alignright, img.alignright 
+	.aligncenter, img.aligncenter 
 
-		 /* end .entry-content */
+	video, object 
+		max-width 100%
+		height auto
+	
 
-		.wp-caption 
-			max-width 100%
-			background #eee
-			padding 5px
+	pre 
+		background #eee
+		border 1px solid #cecece
+		padding 10px
+	
 
-			/* images inside wp-caption */
-			img 
-				max-width 100%
-				margin-bottom 0
-				width 100%
-			
+ /* end .entry-content */
 
-			p.wp-caption-text 
-				font-size 0.85em
-				margin 4px 0 7px
-				text-align center
-			
+.wp-caption 
+	max-width 100%
+	background #eee
+	padding 5px
 
-		 /* end .wp-caption */
+	/* images inside wp-caption */
+	img 
+		max-width 100%
+		margin-bottom 0
+		width 100%
+	
+
+	p.wp-caption-text 
+		font-size 0.85em
+		margin 4px 0 7px
+		text-align center
+	
+
+ /* end .wp-caption */
 
 /******************************************************************
 PAGE NAVI STYLES
