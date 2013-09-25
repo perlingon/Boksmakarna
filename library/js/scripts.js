@@ -35,26 +35,32 @@ jQuery(document).ready(function($) {
     arrowsNav: true,
     loop: false,
     keyboardNavEnabled: true,
-    controlsInside: false,
-    imageScaleMode: 'fill',
-    arrowsNavAutoHide: false,
-    autoScaleSlider: true, 
-    autoScaleSliderWidth: 960,     
-    autoScaleSliderHeight: 460,
+    controlsInside: true,
+    imageScaleMode: 'fit-if-smaller',
+    imageScalePadding: 0,
+    arrowsNavAutoHide: true,
+    imageAlignCenter: true,
+    //autoScaleSlider: true, 
+    //autoScaleSliderWidth: 960,     
+    //autoScaleSliderHeight: 460,
     controlNavigation: 'bullets',
     thumbsFitInViewport: false,
-    navigateByClick: true,
+    //fadeinLoadedSlide: true,
     startSlideId: 0,
-    autoPlay: false,
-    transitionType:'move',
+    addActiveClass: true,
+    autoPlay: {
+            //enabled: true,
+            pauseOnHover: true
+        },
+    delay: 5000,
+    loopRewind:  true, 
+    transitionType:'fade',
+    transitionSpeed: 1000,
     globalCaption: false,
     deeplinking: {
       enabled: true,
       change: false
-    },
-    /* size of all images http://help.dimsemenov.com/kb/royalslider-jquery-plugin-faq/adding-width-and-height-properties-to-images */
-    imgWidth: 960,
-    imgHeight: 460
+    }
   });
 
     //RESPONSIVE NAV
@@ -95,7 +101,10 @@ jQuery(document).ready(function($) {
         }
     });
 
-
+     $('#slider').stop(true).fadeIn({
+            duration: 800,
+            queue: false
+        }).css('display', 'none').slideDown(1000);
     $('.sort-by a').not( "#sort-book" ).click(function() {
                 
                 //Set vars

@@ -15,9 +15,9 @@ jQuery(document).ready(function($) {
 		var content_row = root.find('td').filter("[data-field_name='content']").parent();
 		var content_position_field = root.find('td').filter("[data-field_name='content_position']").parent();
 		var images = root.find('td').filter("[data-field_name='images']").parent();
-		var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(0).attr('src');
+		var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(1).attr('src');
 
-		root.find('.order').next().prepend('<h3>Slide</h3>');
+		//root.find('.order').next().prepend('<h3>Slide</h3>');
 
 		function conditional_template(){
 			content_row.hide();
@@ -68,7 +68,7 @@ jQuery(document).ready(function($) {
 
 		root.find('.refresh').on( "click", function() {
 			var contentbox = root.find( ".content-box" );
-			var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(0).attr('src');
+			var image_big_src = root.find('td').filter("[data-field_name='images']").find('img').eq(1).attr('src');
 	  		contentbox.parent().find('.preview-img').css('background-image', 'url(' + image_big_src + ')');
 		});
 

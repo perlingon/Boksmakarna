@@ -61,4 +61,9 @@
 				</div> <!-- end #inner-header -->
 
 			</header> <!-- end header -->
+			<?php 
+				if (is_home()) {
+					require_once( 'library/slider.php' );
+				}
+			?>
 	<div class="center">
