@@ -53,10 +53,27 @@ require_once( 'library/grid-archive.php' );
 add_image_size( 'admin-thumb', 60, 60, true );
 add_image_size( 'grid-block', 250, 200, true );
 add_image_size( 'cover', 620, 400, true );
-add_image_size( 'big-slide', 960, 460, true );
+add_image_size( 'big-slide', 960, 390, true );
 add_image_size( 'preview-slide', 500, 240, true );
 add_image_size( 'featured', 680, 380, true );
+add_image_size( 'logo', 180, false );
 
+/************* LAZY LOAD IMAGE TEMPLATE *************/
+function lazyload_thumbnail($size){
+	$tempimg = get_bloginfo('template_url') . "/library/images/blank.gif";
+	$src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $size);
+	$d_attr = array(
+			'data-original'	=> $src[0],
+			'src'	=> $tempimg,
+			'class'	=> 'lazyload '.$size,
+	);
+	$ie7_attr = array(
+			'src'	=> $src[0],
+			'class'	=> 'ie7 '.$size,
+	);
+	the_post_thumbnail($size, $d_attr);
+	//the_post_thumbnail($size, $ie7_attr);
+}
 
 /************* Episode Titles ***************/
 function set_episode_title( $data , $postarr ) {
@@ -86,11 +103,13 @@ function additional_libraries() {
   	wp_register_script( 'chosen', get_template_directory_uri() . '/library/js/libs/chosen.jquery.js', array( 'jquery' ), '', false );
 	wp_register_script( 'responsive-nav', get_template_directory_uri() . '/library/js/libs/responsive-nav.min.js', array( 'jquery' ), '', false );
 	wp_register_script( 'jquery BBQ', get_template_directory_uri() . '/library/js/libs/jquery.ba-bbq.min.js', array( 'jquery' ), '', false );
-	
+	wp_register_script( 'lazyload', get_template_directory_uri() . '/library/js/libs/jquery.lazyload.min.js', array( 'jquery' ), '', false );
+
   	wp_enqueue_script( 'isotope' );
   	wp_enqueue_script( 'chosen' );
   	wp_enqueue_script( 'responsive-nav' );
   	wp_enqueue_script( 'jquery BBQ' );
+  	wp_enqueue_script( 'lazyload' );
 
   	//Sound Manager
   	if (is_single() || is_archive()) {
@@ -105,12 +124,14 @@ function additional_libraries() {
   	}
   	//Royal Slider
   	wp_register_script( 'jquery easing', get_template_directory_uri() . '/library/js/libs/jquery.easing-1.3.js', array( 'jquery' ), '', false );
-	wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/libs/jquery.royalslider.min.js', array( 'jquery' ), '', false );
+	wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/royalslider/jquery.royalslider.min.js', array( 'jquery' ), '', false );
+	wp_register_script( 'slider', get_template_directory_uri() . '/library/js/royalslider/slider.js', array( 'jquery' ), '', false );
   	wp_register_style( 'royalslider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
-  	wp_register_style( 'royalslider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/default-inverted/rs-default-inverted.css', array(), '', 'all' );
+  	wp_register_style( 'royalslider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
 	if (is_home()) {
 		wp_enqueue_script( 'jquery easing' );
   		wp_enqueue_script( 'royalslider' );
+  		wp_enqueue_script( 'slider' );
 		wp_enqueue_style( 'royalslider' );
 		wp_enqueue_style( 'royalslider-skin' );
     }
@@ -168,6 +189,27 @@ function bones_register_sidebars() {
 
 	*/
 } // don't remove this bracket!
+
+/************* ARCHIVE MOD ************************/
+
+function modify_query( $query ) {
+
+	if ( is_post_type_archive('episode') && !is_admin() && is_main_query() ) {
+	        set_query_var( 'tag', 'fredagsintervju' );
+	        set_query_var( 'posts_per_page', 2 );
+	    }
+	if ( is_post_type_archive('book') && !is_admin() && is_main_query() ) {
+	        set_query_var( 'posts_per_page', -1 );
+	   }
+
+	if ( is_home() && is_main_query() ) {
+	        set_query_var( 'post_type', 'book' );
+	        set_query_var( 'posts_per_page', 3 );
+	    }
+}
+
+add_action( "pre_get_posts", "modify_query" );
+
 
 /************* POST SLUG FUNCTION *****************/
 function get_the_slug(){

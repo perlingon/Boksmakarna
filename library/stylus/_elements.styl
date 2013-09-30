@@ -5,7 +5,7 @@ ELEMENTS (Buttons and such)
 
 // NAV BASIC STYLING
 .center
-  padding-top 4.5em
+  //padding-top 4.5em
 
 #menu-main
   margin 0
@@ -39,13 +39,14 @@ ELEMENTS (Buttons and such)
   max-height 9999px
 
 
-@media screen and (min-width: 40em)
+@media screen and (min-width: 481px)
   .center
     padding-top 0
   .js #menu-main
     position relative
     overflow visible
-    left 15%
+    left 200px
+    top 9.5em
 
   .js #menu-main.closed
     max-height none
@@ -64,7 +65,6 @@ ELEMENTS (Buttons and such)
 #menu-main ul
   list-style none
   width 100%
-  float left
 
 
 #menu-main li
@@ -72,7 +72,7 @@ ELEMENTS (Buttons and such)
   width 100%
 
 
-@media screen and (min-width: 40em) 
+@media screen and (min-width: 481px) 
   #menu-main li
     width auto
     *width 24.9% /* IE7 Hack */
@@ -85,29 +85,34 @@ ELEMENTS (Buttons and such)
   text-decoration none
   width 100%
   background orange
-  border-bottom 1px solid white
+  //border-bottom 1px solid lighten(orange,80%)
   padding 0.7em 1em
   float left
-  font-size 1em
+  font-size .8em
   font-family sans-serif
   text-transform uppercase
 
 
-@media screen and (min-width: 40em) 
-  #menu-main a 
-    margin 0
-    padding .85em
-    float left
-    text-align center
-    border-bottom: 0
-    border-right: 1px solid white
+@media screen and (min-width: 481px) 
+  #menu-main 
+    a 
+      margin 0
+      padding .85em
+      float left
+      text-align center
+      border-bottom: 0
+      //border-right: 1px solid white
+      background none
+      color grey
+      font-size .7em
+      font-weight bold
+      &:hover
+        //background white
+        color black
+  #menu-main li.current-menu-item
     background none
-    color black
-    padding-top 6em
-    font-size .85em
-    &:hover
-      background white
-  
+    a
+      color black 
 
 
 #menu-main ul ul a
@@ -127,45 +132,72 @@ ELEMENTS (Buttons and such)
   -moz-user-select none
   -ms-user-select none
   user-select none
-  width 70px
+  width 90px
   margin-top .5em
-  height 55px
+  padding-top .8em
+  height 50px
   float right
-  text-indent -9999px
+  //text-indent -9999px
   overflow hidden
-  background orange url(../images/hamburger.gif) no-repeat 50% 50%
+  background orange url(../images/hamburger.gif) no-repeat 30% 50%
+  text-align left
+  text-decoration none
+  text-transform uppercase
+  font sans-serif
+  color black
 
 
 @media screen and (-webkit-min-device-pixel-ratio: 1.3), screen and (min--moz-device-pixel-ratio: 1.3), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-device-pixel-ratio: 1.3), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)
   #nav-toggle 
     background-image url(../images/hamburger-retina.gif)
-    -webkit-background-size 100px 100px
-    -moz-background-size 100px 100px
-    -o-background-size 100px 100px
-    background-size 100px 100px
+    -webkit-background-size 200px 200px
+    -moz-background-size 200px 200px
+    -o-background-size 200px 200px
+    background-size 200px 200px
   
 
 
 // GRID SORTING
-#sorting
-  clear both
-
+.sorting
+  font-family sans-serif
+  font-size 70%
+  font-weight bold
+  text-transform uppercase
+  text-align right
+  min-height 1px
+  h4
+    margin 1em 0 .5em
+    padding 0
+  a
+    text-decoration none
+    color grey
+    border-radius 0.5em
+    padding 0.5em
   ul
     list-style-type none
     -webkit-padding-start 0
+    -webkit-margin-before 0
+    -webkit-margin-after 0
+    li
+      margin-bottom .5em
   .sort-by
     .active
-      background #FFF
       a
         color orange
+        background #FFF
 
 // CHOSEN
+.no-js select.chosen-select
+    display block
+select.chosen-select
+    display none
 
 .chosen-container
   width 100%
   position relative
   display inline-block
   vertical-align middle
+  font-family sans-serif
   zoom 1
   *display inline
   -webkit-user-select none
@@ -180,10 +212,13 @@ ELEMENTS (Buttons and such)
     -moz-box-sizing border-box
     box-sizing border-box
     width 100%
-    border 1px solid #aaa
+    //border 1px solid #aaa
     border-top 0
     background #fff
     box-shadow 0 4px 5px rgba(0, 0, 0, 0.15)
+    border-radius 1em
+    padding .3em
+    margin-top .3em
   &.chosen-with-drop
     .chosen-drop
       left 0
@@ -204,15 +239,17 @@ ELEMENTS (Buttons and such)
       list-style none
       line-height 15px
       color black
+      border-radius 5px
       &.active-result
         display list-item
         cursor pointer
+        color #333
       &.disabled-result
         display list-item
         color #ccc
         cursor default
       &.highlighted
-        background-color #3875d7
+        background-color grey
         color #fff
       &.no-results
         display list-item
@@ -319,14 +356,17 @@ ELEMENTS (Buttons and such)
     -webkit-box-sizing border-box
     -moz-box-sizing border-box
     box-sizing border-box
+    border-radius 1em
     margin 0
-    padding 0
+    padding .3em
     width 100%
     height auto !important
     height 1%
-    border 1px solid #aaa
-    background-color #fff
+    //border 1px solid #aaa
+    box-shadow 0px 1px 2px lighten(grey,20%)
+    background-color light-grey
     cursor text
+    font-size 80%
     li
       float left
       list-style none
@@ -343,8 +383,10 @@ ELEMENTS (Buttons and such)
           background transparent !important
           box-shadow none
           color #666
-          font-size 100%
+          font-size 82%
           font-family sans-serif
+          text-transform uppercase
+          font-weight bold
           line-height normal
           border-radius 0
         .default
@@ -352,14 +394,19 @@ ELEMENTS (Buttons and such)
       &.search-choice
         position relative
         margin 3px 0 3px 5px
-        padding 6px 20px 6px 6px
-        border 1px solid #aaa
-        background-color #e4e4e4
+        padding .5em 1.5em .5em .5em
+        //border 1px solid grey
+        background-color light-grey
         background-clip padding-box
-        box-shadow 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05)
-        color #333
+        background linear-gradient(top, 90% cream, #ccc)
+        //box-shadow 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05)
+        color #666
         line-height 13px
         cursor default
+        border-radius .5em
+        text-transform uppercase
+        font-weight bold
+        font-size 85%
         .search-choice-close
           position absolute
           top 4px
@@ -367,10 +414,10 @@ ELEMENTS (Buttons and such)
           display block
           width 12px
           height 12px
-          background url('../images/chosen-sprite.png') -42px 1px no-repeat
+          background url('../images/chosen-sprite.png') -42px 2px no-repeat
           font-size 1px
           &:hover
-            background-position -42px -10px
+            background-position -42px -9px
       &.search-choice-disabled
         padding-right 5px
         border 1px solid #ccc
@@ -383,6 +430,9 @@ ELEMENTS (Buttons and such)
   .chosen-results
     margin 0
     padding 0
+    font-size 70%
+    text-transform uppercase
+    font-weight bold
   .chosen-drop
     .result-selected
       display list-item
@@ -407,12 +457,16 @@ ELEMENTS (Buttons and such)
         b
           background-position -18px 2px
   .chosen-choices
-    border 1px solid #5897fb
-    box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+    border 1px solid grey
+    //box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
+    //border-radius 1em 1em 0 0
+    background orange
     li
       &.search-field
-        input[type="text"]
-          color #111 !important
+          background url('../images/chosen-sprite.png') no-repeat 99% -20px
+          width 100%
+          input[type="text"]
+            color #111 !important
 
 .chosen-disabled
   opacity 0.5 !important

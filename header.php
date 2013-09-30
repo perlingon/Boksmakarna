@@ -51,18 +51,26 @@
 					<!-- if you'd like to use the site description you can un-comment it below -->
 					<?php // bloginfo('description'); ?>
 
-					<nav role="navigation" class="fixed">
+					<nav role="navigation" >
 						<?php bones_main_nav(); ?>
 					</nav>
-
+					<?php 
+						$attachment_id = get_field('logo','option');
+						$size = "logo"; // (thumbnail, medium, large, full or custom size)
+						 
+						$logo = wp_get_attachment_image_src( $attachment_id, $size );
+						echo '<a href="'.home_url().'" rel="nofollow"><img class="logo" src="'.$logo[0].'" alt="'.get_bloginfo('name').'" /></a>';
+					?>
+					<div class="social-box"><img src="http://placehold.it/200x80/" /></div>
 					<!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
-					<p id="logo" class="h1"><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a></p>
+					
 
 				</div> <!-- end #inner-header -->
 
 			</header> <!-- end header -->
 			<?php 
 				if (is_home()) {
+					//echo '<a href="'.home_url().'" rel="nofollow"><img class="logo" src="'.$logo[0].'" alt="'.get_bloginfo('name').'" /></a>';
 					require_once( 'library/slider.php' );
 				}
 			?>

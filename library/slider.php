@@ -1,15 +1,16 @@
 <?php 
 if( get_field('slides','option')){
-			echo '<div id="slider" class="royalSlider heroSlider rsMinW rsDefault rsDefaultInv" style="display:none">';
+      echo '<div class="slider-holder"></div>';
+			echo '<div id="slider" class="royalSlider rsBok" style="display:none">';
 			while( has_sub_field('slides','option') ):
 				if( get_sub_field('link','option')){
 					while(has_sub_field('link','option') ):
 						if (get_sub_field('raw_link')) {
-							//echo '<a href="'.get_sub_field('raw_link').'" >';
+							echo '<a href="'.get_sub_field('raw_link').'" >';
 						}else{
 							$post_object = get_sub_field('object');
 							setup_postdata( $post_object );
-							//echo '<a href="'.get_permalink().'" >';
+							echo '<a href="'.get_permalink().'" >';
 							wp_reset_postdata();
 						};
 						
@@ -79,14 +80,18 @@ if( get_field('slides','option')){
   						}
   						
   						echo '<h2>'.get_sub_field('headline').'</h2>';
-  						echo get_sub_field('content');
+              if ($veckans == 1) {
+  						  echo 'Klicka här';
+              }else{
+                echo get_sub_field('content');
+              }
   						echo '</div></div>';
   					};
 					}
 					echo '</div>';
 					if( get_sub_field('link','option')){
 						while(has_sub_field('link','option') ):
-						//echo '</a>';
+						echo '</a>';
 						endwhile;
 					};
 				endwhile;

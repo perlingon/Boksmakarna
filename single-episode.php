@@ -26,12 +26,11 @@
 								    echo $episode_title;
 									the_content(); ?>
 								</section> <!-- end article section -->
-
+								<img src="http://placehold.it/300x100" />
 								<footer class="article-footer">
 									<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
 
 								</footer> <!-- end article footer -->
-
 								<?php comments_template(); ?>
 
 							</article> <!-- end article -->

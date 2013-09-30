@@ -20,7 +20,7 @@ body
 	font-size 100%
 	line-height 1.5
 	color bread
-	background cream
+	background background
 
 
 /*********************
@@ -37,8 +37,7 @@ LAYOUT
 	width 100%
 	background orange
 	position fixed
-	top 0
-	z-index 999
+	z-index 9999
 	display block
 
 .header
@@ -50,41 +49,35 @@ LAYOUT
 	nav
 		ul
 			padding 0
-#logo
-	width auto
-	position relative
-	z-index 0
-	line-height auto
-	font-size 1.2em
-	text-transform uppercase
-	font-family sans-serif
-	top 0
-	margin 0
-#slider
-	width 100%
-	.rsContent
-		width 100%
-		img.big
-			display none
-		img.small
-			display block
+	.logo
+		display none
+		position relative
+		left 0
+		top -0.8em
+	.social-box
+		position absolute
+		right 0
+		top 1em
+		display none
+
 #main
 	clear both
 
 /*********************
 	  THE GRID
 *********************/
-
-#grid-container
+.grid-container
 	clear both
+	display block
+	padding 1em 0
 	.grid-item
 		padding 0
 		//background #f9f9f9
-		border 1px solid #e4e4e4
+		//border 1px solid #e4e4e4
 		border-bottom 4px solid lighten(grey,80%)
 		margin-bottom 1em
 		display block
-		min-height 350px
+		//box-shadow 0 0 6px rgba(0,0,0,0.1)
 
 		img
 			width 100%
@@ -109,22 +102,21 @@ LAYOUT
 			font-size .8em
 		.date
 			display none
-
 /*********************
 LINK STYLES
 *********************/
 
 a, a:visited 
-	color $link-color
+	color link-color
 
 	/* on hover */
 	&:hover, &:focus 
-		color $link-hover
+		color link-hover
 	
 
 	/* on click */
 	&:active 
-
+		color link-color
 	
 
 	/* mobile tap color */
@@ -155,6 +147,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	/* removing text decoration from all headline links */
 	a 
 		text-decoration none
+		color inherit
 	
 
 
@@ -214,7 +207,7 @@ POSTS &: CONTENT STYLES
 		clear both
 
 #content 
-	margin-top 2.2em
+	//margin-top 2.2em
 	.media img
 		width 100%
 		height auto
@@ -375,32 +368,79 @@ PAGE NAVI STYLES
             span.current
             	font-weight bold
             
-            a:hover, a:focus 
+            //a:hover, a:focus 
                     
                 
             
         
      /* end .bones_page_navi */
 
-	/* fallback previous &: next links */
-	.wp-prev-next 
-
-		ul 
-
-		.prev-link 
-			float left
-		
-
-		.next-link 
-			float right
+/* fallback previous &: next links */
+.wp-prev-next 
+		ul
+			.prev-link 
+				float left
+			.next-link 
+				float right
 		
 
 	 /* end .wp-prev-next */
 
 /*********************
-SIDEBARS &: ASIDES
+SLIDER
 *********************/
-
+.slider-holder
+		background background
+		border none
+		height 320px
+		position relative
+		margin-bottom -320px
+		display block
+		z-index 0
+#slider
+	height 320px
+	width 100%
+	background background
+	margin-bottom 3em
+	.rsContent
+		width 100%
+		background background
+		.info,
+		.info .content
+			//border 1px dashed grey
+		.info
+			width 100%
+			height 320px
+			margin 0 auto
+			margin-top -320px
+			position relative
+			overflow hidden
+			font-family sans-serif
+			text-transform uppercase
+			.content
+				text-align center
+				position absolute
+				width 90%
+				height 40%
+				top 30%
+				left 5%
+				color darken(grey,50%)
+				padding-top 1em
+				hr
+					height 4px
+					border none
+					background url(../images/dot.png) repeat-x
+					width 70%
+				h2,h3
+					font-weight bold
+					margin 0
+		img.big
+			display none
+		img.small
+			display block
+			width 100%
+			height auto
+			
 
 /*********************
 FOOTER STYLES
@@ -408,16 +448,33 @@ FOOTER STYLES
 
 .footer 
 	clear both
-
-	.footer-links
-
+	color cream
+	background gold
+	font-family sans-serif
+	padding 1.5em 0
+	margin-top 1.5em
+	width 100%
+	a
+		color cream
+		text-decoration none
+	#inner-footer
+		width 100%
+		>div
+			margin-bottom 1.5em
 		ul
-			margin 0 0.5em
+			margin 0
+			-webkit-padding-start 0
+			list-style-type none
 
 			li
-				margin 0 0.5em
+				margin 0
+		h4
+			margin 0
 	 /* end .footer-links */
 
 
-	.copyright 
-		color green
+	.copyright
+		clear both
+		font-size 80%
+		text-align center
+		text-transform uppercase

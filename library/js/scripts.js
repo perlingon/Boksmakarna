@@ -30,38 +30,10 @@ if (!window.getComputedStyle) {
 
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
-    //SLIDER
-    $('#slider').royalSlider({
-    arrowsNav: true,
-    loop: false,
-    keyboardNavEnabled: true,
-    controlsInside: true,
-    imageScaleMode: 'fit-if-smaller',
-    imageScalePadding: 0,
-    arrowsNavAutoHide: true,
-    imageAlignCenter: true,
-    //autoScaleSlider: true, 
-    //autoScaleSliderWidth: 960,     
-    //autoScaleSliderHeight: 460,
-    controlNavigation: 'bullets',
-    thumbsFitInViewport: false,
-    //fadeinLoadedSlide: true,
-    startSlideId: 0,
-    addActiveClass: true,
-    autoPlay: {
-            //enabled: true,
-            pauseOnHover: true
-        },
-    delay: 5000,
-    loopRewind:  true, 
-    transitionType:'fade',
-    transitionSpeed: 1000,
-    globalCaption: false,
-    deeplinking: {
-      enabled: true,
-      change: false
-    }
-  });
+    //LAZY LOAD
+    $("img.lazyload").lazyload({ 
+    effect : "fadeIn"
+    });
 
     //RESPONSIVE NAV
     var navigation = responsiveNav("#menu-main", {
@@ -76,9 +48,30 @@ jQuery(document).ready(function($) {
         open: function(){},   // Function: Open callback
         close: function(){}   // Function: Close callback
       });
+    //CHOSEN AND ISOTOPE FILTERING
+    $(".chosen-select").chosen().change(function() {
+        var select_parent = '';
+        var selected_titles = $("#titles").val();
+        var selected_writers = $("#writers").val();
+        var selected_genres = $("#genres").val();
+
+        if (selected_titles === null) {selected_titles = '';}
+        if (selected_writers === null) {selected_writers = '';}
+        if (selected_genres === null) { selected_genres = '';}
+
+        var all_filters = select_parent.concat(selected_titles, selected_writers, selected_genres);
+
+        var hashvalue = $.param({ filter: all_filters });
+        $.bbq.pushState( hashvalue );
+
+        //$(".textwidget").html(all_filters);
+
+        if (all_filters === '') {$container.isotope({ filter: '*' });}
+        else{$container.isotope({ filter: all_filters });}
+    });
 
     //ISOTOPE CONFIG
-    var $container = $('#grid-container');
+    var $container = $('.grid-container');
 
     $container.isotope({
       // options
@@ -101,10 +94,6 @@ jQuery(document).ready(function($) {
         }
     });
 
-     $('#slider').stop(true).fadeIn({
-            duration: 800,
-            queue: false
-        }).css('display', 'none').slideDown(1000);
     $('.sort-by a').not( "#sort-book" ).click(function() {
                 
                 //Set vars
@@ -141,7 +130,7 @@ jQuery(document).ready(function($) {
         if ($(this).hasClass('title')) {
                 sortName = 'title';
                 $container.isotope({ sortBy : sortName, sortAscending : sort_order });
-                $(this).html('Bokstavsordning: Titel');
+                $(this).html('Titel');
                 $(this).attr('href','#'+sortName);
                 //Add to hash
                 var hashvalue = $.param({ sortBy: sortName });
@@ -150,7 +139,7 @@ jQuery(document).ready(function($) {
         if ($(this).hasClass('writer')) {
                 sortName = 'writer';
                 $container.isotope({ sortBy : sortName, sortAscending : sort_order });
-                $(this).html('Bokstavsordning: Författare');
+                $(this).html('Författare');
                 $(this).attr('href','#'+sortName);
                 //Add to hash
                 var hashvalue = $.param({ sortBy: sortName });
@@ -159,7 +148,7 @@ jQuery(document).ready(function($) {
         if ($(this).hasClass('genre')) {
                 sortName = 'genre';
                 $container.isotope({ sortBy : sortName, sortAscending : sort_order });
-                $(this).html('Bokstavsordning: Genre');
+                $(this).html('Genre');
                 $(this).attr('href','#'+sortName);
                 //Add to hash
                 var hashvalue = $.param({ sortBy: sortName });
@@ -206,32 +195,6 @@ jQuery(document).ready(function($) {
                 //ignore default link behaviour
                 return false;
     });
-
-    //CHOSEN AND ISOTOPE FILTERING
-    $(".chosen-select").chosen().change(function() {
-        var select_parent = '';
-        var selected_titles = $("#titles").val();
-        var selected_writers = $("#writers").val();
-        var selected_genres = $("#genres").val();
-
-        if (selected_titles === null) {selected_titles = '';}
-        if (selected_writers === null) {selected_writers = '';}
-        if (selected_genres === null) { selected_genres = '';}
-
-        var all_filters = select_parent.concat(selected_titles, selected_writers, selected_genres);
-
-
-
-        var hashvalue = $.param({ filter: all_filters });
-        $.bbq.pushState( hashvalue );
-
-        //$(".textwidget").html(all_filters);
-
-        if (all_filters === '') {$container.isotope({ filter: '*' });}
-        else{$container.isotope({ filter: all_filters });}
-    });
-
-
 
     
     /* getting viewport width */

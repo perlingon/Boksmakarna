@@ -1,15 +1,13 @@
 <?php get_header(); ?>
-
-			<div id="content">
+			
+			<div id="content" class="episodes">
 
 				<div id="inner-content" class="wrap clearfix">
 
 						<div id="main" class="eightcol first clearfix" role="main">
 
-						<h1 class="archive-title h2"><?php post_type_archive_title(); ?></h1>
-
-							<?php if (have_posts()) : while (have_posts()) : the_post(); $count++;?>
-
+						<!---<h1 class="archive-title h2"><?php post_type_archive_title(); ?></h1>-->
+							<?php if (have_posts()) : while (have_posts()) : the_post();?>
 							<div class="post-wrapper">
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
 
@@ -41,11 +39,10 @@
 							<div class="player">
 								<ul class="playlist init">
 									  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
-									  <li><a href="http://localhost/boksmakarna/mp3/<?php echo $count;?>.mp3"><i></i>Intervju</a></li>
+									  <li><a href="<?php the_field('mp3_source'); ?>"><i></i><?php the_title(); ?></a></li>
 								</ul>
 							</div>
 						</div>
-
 							<?php endwhile; ?>
 
 									<?php if ( function_exists( 'bones_page_navi' ) ) { ?>

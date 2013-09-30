@@ -20,34 +20,72 @@
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
-									 <?php/*
+									<p><?php the_field('short_description'); ?></p>
+									 <?php
 									 	$slug = get_the_slug();
-									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC');
+									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__not_in=35');
+									 	$interview = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__in=35');
 									 			if ($episodes->have_posts()) {
-													echo '<ul class="graphic">';
+													echo '<ul class="playlist">';
 													while ( $episodes->have_posts() ) {
 															$episodes->the_post();
-															echo '<li><a href="'.get_field('mp3_source').'">' . get_the_title() . '</a></li>';
+															echo '<li><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
+													}
+
+													$ep2 = 'Tisdag<br />';
+													$ep3 = 'Onsdag<br />';
+													$ep4 = 'Torsdag<br />';
+													$ep5 = 'Fredag<br />';
+
+													if ($episodes->post_count == 1) {
+														echo $ep2;
+														echo $ep3;
+														echo $ep4;
+														echo $ep5;
+													}elseif($episodes->post_count == 2){
+														echo $ep3;
+														echo $ep4;
+														echo $ep5;
+													}elseif($episodes->post_count == 3){
+														echo $ep4;
+														echo $ep5;
+													}elseif($episodes->post_count == 4){
+														echo $ep5;
 													}
 													wp_reset_query();
 													echo '</ul>';
-												}*/
+												}else{
+													echo '<i>Inga avsnitt.</i>';
+												}
+
+												if ($interview->have_posts()) {
+													echo '<ul class="playlist">';
+													while ( $interview->have_posts() ) {
+															$interview->the_post();
+															echo '<li><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
+													}
+													wp_reset_query();
+													echo '</ul>';
+												}else{
+													echo '<i>Ingen intervju.</i>';
+												}
 																			 
 									?>
-									<p><?php the_field('short_description'); ?></p>
 									<div id="sm2-container">
   										<!-- SM2 flash goes here -->
 									 </div>
+									<!---
 									<ul class="playlist">
-									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Avsnitt 1</a></li>
-									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Mak.mp3"><i></i>Avsnitt 2</a></li>
-									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Things that open, close and roll.mp3"><i></i>Avsnitt 3</a></li>
-									  <li><a href="http://www.freshly-ground.com/misc/music/20060826%20-%20Armstrong.mp3"><i></i>Avsnitt 4</a></li>
-									  <li><a href="http://freshly-ground.com/data/video/Rain%20on%20Car%20Roof.aac"><i></i>Avsnitt 5</a></li>
+									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Avsnitt 1 – (sid. 2-12)</a></li>
+									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Mak.mp3"><i></i>Avsnitt 2 – (sid. 13-23)</a></li>
+									  <li><a href="http://www.freshly-ground.com/data/audio/binaural/Things that open, close and roll.mp3"><i></i>Avsnitt 3 – (sid. 24-34)</a></li>
+									  <li><a href="http://www.freshly-ground.com/misc/music/20060826%20-%20Armstrong.mp3"><i></i>Avsnitt 4 – (sid. 35-45)</a></li>
+									  <li><a href="http://freshly-ground.com/data/video/Rain%20on%20Car%20Roof.aac"><i></i>Avsnitt 5 – (sid. 46-49)</a></li>
 									 </ul>
 									 <ul class="playlist">
-									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Fredagsintervju</a></li>
-									 </ul>
+									  <li><a href="http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3"><i></i>Fredagsintervjun: Peo Bengtsson</a></li>
+									 </ul> 
+									-->
 								</section> <!-- end article section -->
 
 								<footer class="article-footer">
@@ -82,6 +120,7 @@
 						<?php endif; ?>
 
 					</div> <!-- end #main -->
+					<div style="clear:both"></div>
 					<?php grid_archive(false,'book','3'); ?>
 				</div> <!-- end #inner-content -->
 

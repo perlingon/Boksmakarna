@@ -58,7 +58,7 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 	}
 
 	//Grid container
-	echo '<div id="grid-container">';
+	echo '<div class="grid-container">';
 
 		//Query args
 		$items = new WP_Query('post_type='.$post_type.'&posts_per_page='.$post_count.'&orderby=date');
@@ -70,12 +70,12 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 				$writers = get_the_terms( $items->ID , 'writer' );
 				$genres = get_the_terms( $items->ID , 'genre' );
 
-				echo '<div id="block-'.$count.'" class="grid-item '.get_the_slug();
+				echo '<div id="block-'.$count.'" class="grid-item post '.get_the_slug();
 				foreach ( $writers as $writer ) {echo ' '.$writer->slug;}
 				foreach ( $genres as $genre ) {echo ' '.$genre->slug;}
 				echo '">';
 				echo '<a href="'.get_permalink().'">';
-				the_post_thumbnail('grid-block');
+				lazyload_thumbnail('grid-block');
 				echo "</a>";
 				echo '<h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
 				echo '<ul class="tags">';
@@ -83,22 +83,24 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 				foreach ( $genres as $genre ) {echo '<li><a href="#" class="genre-tag" data-filter=".'.$genre->slug.'">'.$genre->name.'</a></li>';}
 				echo '</ul>';
 				echo '<p>'.get_field('short_description').'</p>';
-				echo '<em class="date">'.get_the_date('Y-m-d').'</em>';
+				echo '<em class="date">'.get_the_date('Ymd').'</em>';
 				echo '</div>';
 
 			} else if ($post_type == 'episode') {
-
-				echo '<div id="block-'.$count.'" class="grid-item">';
-				the_post_thumbnail('grid-block');
-				echo '<h3>'.get_the_title().'</h3>';
-				the_excerpt();
-				echo '</div>';
+				if (has_tag('fredagsintervju')) {
+					echo '<div id="block-'.$count.'" class="grid-item">';
+					the_post_thumbnail('grid-block');
+					echo '<h3>'.get_the_title().'</h3>';
+					the_excerpt();
+					echo '</div>';
+				}
 
 			} else {
 				echo '<alert>Invalid post type for archive.</alert>';
 			}
 			
 		} $count = 0;
+
 		wp_reset_query();
 	echo '</div>';
 	};
