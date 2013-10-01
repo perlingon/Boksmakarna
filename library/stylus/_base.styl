@@ -63,9 +63,27 @@ LAYOUT
 #main
 	clear both
 
+.home
+	#editorial
+		font-size .8em
+		clear both
+		.widget
+			padding 1.5em 0
+		.news
+			span
+				font-family sans-serif
+				text-transform uppercase
+				color grey
+				background background
+				font-size 80%
+				font-weight bold
+
 /*********************
 	  THE GRID
 *********************/
+.home
+	.grid-container
+		margin-top 2em
 .grid-container
 	clear both
 	display block
@@ -131,7 +149,7 @@ a, a:visited
 
 
 /******************************************************************
-H1, H2, H3, H4, H5 STYLES
+H1, H2, H3, H4, H5 STYLES AND PARAGRAPH
 ******************************************************************/
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 
@@ -139,6 +157,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	text-rendering optimizelegibility
 	font-weight 500
 	text-transform uppercase
+	-webkit-margin-before 0
+	-webkit-margin-after 0
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -177,7 +197,8 @@ h5,.h5
 	text-transform uppercase
 	letter-spacing 2px
 
-
+p
+	margin 0 0 0.5em 0
 /*********************
 HEADER STYLES
 *********************/
@@ -427,9 +448,6 @@ SLIDER
 				color darken(grey,50%)
 				padding-top 1em
 				hr
-					height 4px
-					border none
-					background url(../images/dot.png) repeat-x
 					width 70%
 				h2,h3
 					font-weight bold

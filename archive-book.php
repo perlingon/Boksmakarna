@@ -5,18 +5,6 @@
 				<div id="inner-content" class="wrap clearfix">
 
 						<div id="main" class="eightcol first clearfix" role="main">
-							<div class="sorting"></div>
-							<div class="sorting"></div>
-							<div class="sorting">
-							<h4>Sortera på:</h4>
-							<ul class="sort-by">
-							<li class="active"><a href="#date">Datum</a></li>
-							<li><a href="#title" id="sort-book" class="title">Titel</a></li>
-							</ul>
-							<ul class="sort-order">
-							<li><a href="#">Stigande</a></li>
-							</ul>
-							</div>
 							<?php 
 							$titles = new WP_Query('post_type='.$post_type.'&posts_per_page=-1&orderby=title');
 		
@@ -55,6 +43,16 @@
 							 }
 							 
 							?>
+							<div class="sorting">
+								<ul>Sortera på:</ul>
+								<ul class="sort-by">
+									<li class="active"><a href="#date">Datum</a></li>
+									<li><a href="#title" id="sort-book" class="title">Titel</a></li>
+								</ul>
+								<ul class="sort-order">
+									<li><a href="#">Stigande</a></li>
+								</ul>
+							</div>
 							<div class="grid-container">
 							<?php if (have_posts()) : while (have_posts()) : the_post();
 								$count++;

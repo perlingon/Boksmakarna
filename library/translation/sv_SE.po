@@ -12,12 +12,14 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;_n\n"
 "X-Poedit-Basepath: /home/fulgor/GIT/bones\n"
-"Last-Translator: Mathias Hellquist <mathias.hellquist@gmail.com>\n"
+"Last-Translator: Per Jonasson <per@webable.se>\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: /home/fulgor/GIT/bones\n"
 
 #: comments.php:12
 msgid "This post is password protected. Enter the password to view comments."
-msgstr "Detta inlägg är lösenordsskyddat. Skriv in lösenordet för att se kommentarer."
+msgstr ""
+"Detta inlägg är lösenordsskyddat. Skriv in lösenordet för att se kommentarer."
 
 #: comments.php:23
 msgid "Response"
@@ -80,8 +82,7 @@ msgstr "Logga ut"
 msgid "Name"
 msgstr "Namn"
 
-#: comments.php:93
-#: comments.php:98
+#: comments.php:93 comments.php:98
 msgid "(required)"
 msgstr "(obligatorisk)"
 
@@ -126,32 +127,25 @@ msgstr "Du kan använda dessa taggar"
 msgid "Page %s"
 msgstr "Sida %s"
 
-#: taxonomy-custom_cat.php:22
-#: archive.php:9
+#: taxonomy-custom_cat.php:22 archive.php:9
 msgid "Posts Categorized:"
 msgstr "Kategoriserade inlägg:"
 
-#: taxonomy-custom_cat.php:32
-#: embed-post_meta.php:1
-#: single-custom_type.php:30
+#: taxonomy-custom_cat.php:32 embed-post_meta.php:1 single-custom_type.php:30
 msgid "Posted"
 msgstr "Skriven"
 
-#: taxonomy-custom_cat.php:32
-#: embed-post_meta.php:1
-#: single-custom_type.php:30
+#: taxonomy-custom_cat.php:32 embed-post_meta.php:1 single-custom_type.php:30
 msgid "by"
 msgstr "av"
 
-#: taxonomy-custom_cat.php:32
-#: embed-post_meta.php:1
-#: single-custom_type.php:30
+#: taxonomy-custom_cat.php:32 embed-post_meta.php:1 single-custom_type.php:30
 msgid "filed under"
 msgstr "sorterad under"
 
 #: taxonomy-custom_cat.php:41
 msgid "Read more"
-msgstr "Läs mera"
+msgstr "Läs mer"
 
 #: functions.php:103
 msgid "(Edit)"
@@ -174,7 +168,8 @@ msgid "Epic 404 - Article Not Found"
 msgstr "Episk 404 - Sidan kan inte hittas"
 
 #: 404.php:17
-msgid "The article you were looking for was not found, but maybe try looking again!"
+msgid ""
+"The article you were looking for was not found, but maybe try looking again!"
 msgstr "Inlägget du letade efter kan inte hittas. Försök igen!"
 
 #: search.php:7
@@ -189,8 +184,7 @@ msgstr "Läs mera på"
 msgid "Posts Tagged:"
 msgstr "Taggade inlägg"
 
-#: archive.php:17
-#: author.php:8
+#: archive.php:17 author.php:8
 msgid "Posts By:"
 msgstr "Inlägg av:"
 
@@ -377,4 +371,3 @@ msgstr "Lägg till ny egen tagg"
 #: library/custom-post-type.php:103
 msgid "New Custom Tag Name"
 msgstr "Nytt namn på egen tagg"
-

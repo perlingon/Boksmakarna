@@ -172,6 +172,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+hr {
+  height: 4px;
+  border: none;
+  clear: both;
+  background: url("../images/dot.png") repeat-x;
+  margin: 0 auto;
+  max-width: 930px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 1.3), screen and (min--moz-device-pixel-ratio: 1.3), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-device-pixel-ratio: 1.3), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
+  hr {
+    background-image: url("../images/dot@2x.png");
+    -webkit-background-size: 11px 3px;
+    -moz-background-size: 11px 3px;
+    -o-background-size: 11px 3px;
+    -webkit-background-size: 11px 3px;
+    -moz-background-size: 11px 3px;
+    background-size: 11px 3px;
+  }
+}
 #menu-main {
   margin: 0;
   z-index: 10;
@@ -322,13 +341,74 @@ table {
     background-size: 200px 200px;
   }
 }
+#tabs .columns {
+  height: 430px;
+}
+#tabs .columns .column {
+  padding: 0 15px 0 0;
+  font-size: 90%;
+}
+.ui-tabs {
+  position: relative;
+}
+.ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: 0.2em 0.2em 0;
+  font-family: 'Arial';
+  font-size: 70%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.ui-tabs .ui-tabs-nav li {
+  list-style: none;
+  float: right;
+  position: relative;
+  top: 0;
+  margin: 1px 0 0 0.5em;
+  border-bottom-width: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: 0.3em 0.8em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
+  text-decoration: none;
+  color: #868686;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+  text-decoration: underline;
+  background: #e9e9e9;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+.ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+  cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a,
+.ui-tabs .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+  cursor: pointer;
+  outline: 0;
+}
+.ui-tabs .ui-tabs-panel {
+  display: block;
+  border-width: 0;
+  padding: 1em 0;
+  background: none;
+  clear: both;
+}
 .sorting {
   font-family: 'Arial';
   font-size: 70%;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: right;
-  min-height: 1px;
+  min-height: 1em;
+  padding: 1em 0;
 }
 .sorting h4 {
   margin: 1em 0 0.5em;
@@ -346,13 +426,23 @@ table {
   -webkit-padding-start: 0;
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
+  float: left;
+  color: #868686;
 }
 .sorting ul li {
   margin-bottom: 0.5em;
+  float: left;
 }
 .sorting .sort-by .active a {
-  color: #ff8433;
-  background: #fff;
+  color: #000;
+}
+.sorting .sort-order {
+  clear: both;
+  font-size: 80%;
+}
+.sorting .sort-order a {
+  color: #868686;
+  padding: 0;
 }
 .no-js select.chosen-select {
   display: block;
@@ -912,6 +1002,24 @@ body {
 #main {
   clear: both;
 }
+.home #editorial {
+  font-size: 0.8em;
+  clear: both;
+}
+.home #editorial .widget {
+  padding: 1.5em 0;
+}
+.home #editorial .news span {
+  font-family: 'Arial';
+  text-transform: uppercase;
+  color: #868686;
+  background: #f7f7f7;
+  font-size: 80%;
+  font-weight: bold;
+}
+.home .grid-container {
+  margin-top: 2em;
+}
 .grid-container {
   clear: both;
   display: block;
@@ -994,6 +1102,8 @@ h5,
   text-rendering: optimizelegibility;
   font-weight: 500;
   text-transform: uppercase;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
 /*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -1039,6 +1149,9 @@ h5,
   line-height: 2.09em;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+p {
+  margin: 0 0 0.5em 0;
 }
 .post-wrapper {
   clear: both;
@@ -1235,9 +1348,6 @@ font-weight bold ul .next-link,
   padding-top: 1em;
 }
 #slider .rsContent .info .content hr {
-  height: 4px;
-  border: none;
-  background: url("../images/dot.png") repeat-x;
   width: 70%;
 }
 #slider .rsContent .info .content h2,
@@ -1375,6 +1485,11 @@ tweeners.
     top: 30%;
     left: 5%;
   }
+  .single .player,
+  .archive .player {
+    margin: 0 auto;
+    max-width: 930px;
+  }
   .single .media,
   .archive .media {
     display: inline;
@@ -1400,10 +1515,8 @@ tweeners.
     *width: 290px -correction;
     *margin: 0 15px -correction;
   }
-  .home #push-spaces {
-    clear: both;
-  }
-  .home #push-spaces .widget {
+  .home #editorial .widget {
+    position: relative;
     display: inline;
     float: left;
     overflow: hidden;
@@ -1411,6 +1524,39 @@ tweeners.
     margin: 0 15px;
     *width: 290px -correction;
     *margin: 0 15px -correction;
+  }
+  .home #editorial .news hr {
+    display: none;
+  }
+  .home #editorial .news .widget {
+    overflow: visible !important;
+  }
+  .home #editorial .news .widget .separator {
+    position: absolute;
+    background: #f7f7f7;
+    display: block;
+    width: 30px;
+    height: 140%;
+    top: -15%;
+    left: -30px;
+    z-index: 1;
+  }
+  .home #editorial .news .widget span.headline,
+  .home #editorial .news .widget span.link {
+    position: absolute;
+  }
+  .home #editorial .news .widget span.headline {
+    top: -1.5em;
+    left: 0;
+    padding: 0.5em 0.5em 0.5em 0;
+  }
+  .home #editorial .news .widget span.link {
+    bottom: -1.2em;
+    right: 0;
+    padding: 0.5em 0 0.5em 0.5em;
+  }
+  .home #editorial .news .widget span.link a {
+    color: #868686;
   }
   footer #inner-footer {
     max-width: 960px;

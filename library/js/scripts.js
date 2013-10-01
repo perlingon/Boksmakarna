@@ -30,9 +30,15 @@ if (!window.getComputedStyle) {
 
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
+
+    var $win = $(window),
+        $container = $('.grid-container'),
+        $imgs = $("img.lazyload");
+
     //LAZY LOAD
-    $("img.lazyload").lazyload({ 
-    effect : "fadeIn"
+    $imgs.lazyload({ 
+    effect : "fadeIn",
+    failure_limit : Math.max($imgs.length - 1, 0)
     });
 
     //RESPONSIVE NAV
@@ -48,6 +54,7 @@ jQuery(document).ready(function($) {
         open: function(){},   // Function: Open callback
         close: function(){}   // Function: Close callback
       });
+    
     //CHOSEN AND ISOTOPE FILTERING
     $(".chosen-select").chosen().change(function() {
         var select_parent = '';
@@ -71,12 +78,13 @@ jQuery(document).ready(function($) {
     });
 
     //ISOTOPE CONFIG
-    var $container = $('.grid-container');
-
     $container.isotope({
       // options
       itemSelector : '.grid-item',
       layoutMode : 'fitRows',
+      onLayout: function() {
+        $win.trigger("scroll");
+      },
 
       getSortData : {
                         title : function ( $elem ) {
@@ -196,7 +204,62 @@ jQuery(document).ready(function($) {
                 return false;
     });
 
+//BOOK PLAYER (>481)
     
+     //tabs
+    $('#tabs .columns').columnize({
+          columns  : 3,
+          doneFunc : function(){
+                        $( "#tabs" ).tabs({
+                            active: 1,
+                            show: function(event, ui) {
+                                    var lastOpenedPanel = $(this).data("lastOpenedPanel");
+                                    if (!$(this).data("topPositionTab")) {
+                                        $(this).data("topPositionTab", $(ui.panel).position().top);
+                                    }
+                                    $(ui.panel).hide().fadeIn(250);
+                                    if (lastOpenedPanel) {
+                                        lastOpenedPanel.toggleClass("ui-tabs-hide").css("position", "absolute").css("top", "0").fadeOut(250, function() {
+                                            $(this).css("position", "");
+                                        });
+                                    }
+                                    $(this).data("lastOpenedPanel", $(ui.panel));
+                                }
+                        });
+                        $('.excerpt-read-more').click(function(){
+                            $( "#tabs" ).tabs({active:0});
+                            return false;
+                        });
+        }
+     });
+
+    //playlist-nav
+    $('.playlist-nav a').click(function(event){
+        event.preventDefault();
+        var selector = $(this).attr('href').slice(1);
+        var aLink = $('.playlist.main li.'+selector+' a');
+        
+        $('.playlist-nav a').removeClass('active');
+        $(this).addClass('active');
+
+        $('.playlist.main li').hide();
+        $('.playlist.main li#'+ selector).show();
+
+        soundManager.pauseAll();
+    });
+
+    $('.playlist-nav .active').toggle(
+            function(){
+                soundManager.pauseAll();
+            },
+
+            function(){
+                soundManager.resumeAll();
+            }
+        );
+
+
+
     /* getting viewport width */
     var responsive_viewport = $(window).width();
     

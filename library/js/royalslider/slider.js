@@ -20,17 +20,13 @@ jQuery(document).ready(function($) {
     addActiveClass: true,
     autoPlay: {
             enabled: true,
-            pauseOnHover: true
+            pauseOnHover: true,
+            delay: 5000
         },
-    delay: 5000,
     loopRewind: true,
     transitionType:'fade',
     transitionSpeed: 1000,
-    globalCaption: false,
-    deeplinking: {
-      enabled: true,
-      change: false
-    }
+    globalCaption: false
   }).fadeIn(800);
 
   /*$('#slider').stop(true).fadeIn({

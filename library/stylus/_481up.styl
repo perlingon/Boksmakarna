@@ -63,9 +63,11 @@ SLIDER
 		.info .content
 			top 30%
 			left 5%
-
 .single,
 .archive
+	.player
+		margin 0 auto
+		max-width ((max-width)-(30px))
 	.media
 		column(8)
 		img
@@ -74,10 +76,38 @@ SLIDER
 	article
 		column(4)
 .home
-	#push-spaces
-		clear both
+	#editorial
 		.widget
+			position relative
 			column(4)
+		.news
+			hr
+				display none
+			.widget
+				overflow visible !important
+				.separator
+					position absolute
+					background background
+					display block
+					width gutter-width
+					height 140%
+					top -15%
+					left -(gutter-width)
+					z-index 1
+				span.headline,
+				span.link
+					position absolute
+				span.headline
+					top -1.5em
+					left 0
+					padding .5em .5em .5em 0
+				span.link
+					bottom -1.2em
+					right 0
+					padding .5em 0 .5em .5em
+					a
+						color grey
+
 footer
 	#inner-footer
 		max-width max-width

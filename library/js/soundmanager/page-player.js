@@ -15,6 +15,7 @@
 /*jslint white: false, onevar: true, undef: true, nomen: false, eqeqeq: true, plusplus: false, bitwise: true, newcap: true, immed: true */
 /*global soundManager, window, document, navigator, setTimeout, attachEvent, Metadata, PP_CONFIG */
 
+
 var pagePlayer = null;
 
 function PagePlayer() {
@@ -56,6 +57,18 @@ function PagePlayer() {
     sPlaying: 'sm2_playing',
     sPaused: 'sm2_paused'
   };
+
+  var elementExists = function(element) {
+    while (element) {
+        if (element == document) {
+            return true;
+        }
+        element = element.parentNode;
+    }
+    return false;
+  }
+
+  var mainplayer = document.getElementById("main-player");
 
   this.sounds = [];
   this.soundsByObject = [];
@@ -334,6 +347,9 @@ function PagePlayer() {
       this._data.className = pl.css.sPlaying;
       pl.addClass(this._data.oLI,this._data.className);
       self.setPageTitle(this._data.originalTitle);
+      if (elementExists(mainplayer)) {
+        document.getElementById("main-player").children[1].style.display="none";
+      };
     },
 
     stop: function() {
@@ -362,6 +378,9 @@ function PagePlayer() {
       pl.removeClass(this._data.oLI,this._data.className);
       this._data.className = pl.css.sPlaying;
       pl.addClass(this._data.oLI,this._data.className);
+      if (elementExists(mainplayer)) {
+        document.getElementById("main-player").children[1].style.display="none";
+      };
     },
 
     finish: function() {
@@ -371,6 +390,9 @@ function PagePlayer() {
       // play next if applicable
       if (self.config.playNext) {
         pl.playNext(this);
+        if (elementExists(mainplayer)) {
+          document.getElementById("episode-1").style.display="none";
+        };
       } else {
         self.setPageTitle();
         self.resetPageIcon();

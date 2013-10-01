@@ -3,7 +3,33 @@
 			<div id="content">
 
 				<div id="inner-content" class="wrap clearfix">
-
+						<hr />
+						<div id="editorial">
+							<div class="push-spaces">
+								<?php dynamic_sidebar( 'push_spaces' ); ?>
+							</div>
+							<div class="news">
+								<hr />
+								<div class="widget">
+									<div class="separator"></div>
+									<span class="headline">Aktuellt</span>
+									<?php 
+										$news = new WP_Query('posts_per_page=1&orderby=date&status=published');
+										if ($news->have_posts()) {
+											while ( $news->have_posts() ) {
+												$news->the_post();
+												echo '<a href="'.get_permalink().'"><h4 class="widgettitle">'.get_the_title().'</h4></a>';
+												echo '<div class="textwidget">'.get_the_excerpt().'</div>';
+												echo '<span>'.get_the_date('Y.m.d').'</span>';
+											}
+										}
+										wp_reset_query();
+									?>
+									<span class="link"><a href="/nyheter">Fler nyheter</a></span>
+								</div>
+							</div>
+						</div>
+						<hr />
 						<div id="main" class="eightcol first clearfix" role="main">
 
 						<div class="grid-container">

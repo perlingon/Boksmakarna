@@ -1,10 +1,3 @@
-/*
-
- SoundManager 2  "page as playlist" example
- ------------------------------------------
- http //schillmania.com/projects/soundmanager2/
-
-*/
 .spectrum-container {
   display: none;
 }
@@ -72,6 +65,30 @@ ul.playlist.init {
   margin-bottom: 0;
   padding: 0;
   background: none;
+}
+ul.playlist.main,
+ul.playlist-nav {
+  display: none;
+}
+ul.playlist-nav {
+  list-style-type: none;
+  font-family: "Arial";
+  font-size: 80%;
+  padding: 0;
+}
+ul.playlist-nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-left: 20px;
+  background: url("../../images/icon_play.gif") center left no-repeat;
+}
+ul.playlist-nav a.active {
+  color: #8d8d8d;
+  background: url("../../images/icon_pause.gif") center left no-repeat;
+}
+ul.playlist-nav li {
+  margin: 0.5em 0;
 }
 ul.playlist.init li {
   min-height: 50px;
@@ -235,8 +252,6 @@ ul.playlist li.sm2_paused .timing,
 ul.playlist.use-peak li.sm2_paused .peak {
   border-color: #ccc;
 }
-/* peak data */
-/* ul.playlist ... */
 ul.playlist.use-peak li .peak {
   display: none;
   zoom: 1;
@@ -275,4 +290,24 @@ ul.playlist li .peak .r {
 }
 #control-template {
   display: none;
+}
+@media only screen and (min-width: 481px) {
+  ul.playlist.main {
+    display: block;
+  }
+  ul.playlist.main li {
+    display: none;
+  }
+  ul.playlist.main li.sm2_paused {
+    display: block;
+  }
+  ul.playlist.main li.sm2_playing {
+    display: block !important;
+  }
+  ul.playlist.small {
+    display: none;
+  }
+  ul.playlist-nav {
+    display: block;
+  }
 }

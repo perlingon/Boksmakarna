@@ -42,7 +42,7 @@ require_once( 'library/admin.php' ); // this comes turned off by default
 4. library/translation/translation.php
 	- adding support for other languages
 */
-// require_once( 'library/translation/translation.php' ); // this comes turned off by default
+require_once( 'library/translation/translation.php' ); // this comes turned off by default
 
 //Grid archive function
 require_once( 'library/grid-archive.php' );
@@ -122,19 +122,27 @@ function additional_libraries() {
   	wp_enqueue_style( 'sm2-player' );
   	wp_enqueue_style( 'flashblock' );
   	}
-  	//Royal Slider
-  	wp_register_script( 'jquery easing', get_template_directory_uri() . '/library/js/libs/jquery.easing-1.3.js', array( 'jquery' ), '', false );
-	wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/royalslider/jquery.royalslider.min.js', array( 'jquery' ), '', false );
-	wp_register_script( 'slider', get_template_directory_uri() . '/library/js/royalslider/slider.js', array( 'jquery' ), '', false );
-  	wp_register_style( 'royalslider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
-  	wp_register_style( 'royalslider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
+  	if (is_single()) {
+  		wp_register_script( 'jquery-ui', get_template_directory_uri() . '/library/js/libs/jquery-ui-1.10.3.custom.min.js', array( 'jquery' ), '', false );
+  		wp_register_script( 'js-columnizer', get_template_directory_uri() . '/library/js/libs/jquery.columnizer.js', array( 'jquery' ), '', false );
+  		wp_enqueue_script( 'jquery-ui' );
+  		wp_enqueue_script( 'js-columnizer' );
+  	}
+
 	if (is_home()) {
+		//Royal Slider
+  		wp_register_script( 'jquery easing', get_template_directory_uri() . '/library/js/libs/jquery.easing-1.3.js', array( 'jquery' ), '', false );
+		wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/royalslider/jquery.royalslider.min.js', array( 'jquery' ), '', false );
+		wp_register_script( 'slider', get_template_directory_uri() . '/library/js/royalslider/slider.js', array( 'jquery' ), '', false );
+  		wp_register_style( 'royalslider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
+  		wp_register_style( 'royalslider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
 		wp_enqueue_script( 'jquery easing' );
   		wp_enqueue_script( 'royalslider' );
   		wp_enqueue_script( 'slider' );
 		wp_enqueue_style( 'royalslider' );
 		wp_enqueue_style( 'royalslider-skin' );
     }
+
   }
 }
 

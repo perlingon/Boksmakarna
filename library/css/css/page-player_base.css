@@ -1,8 +1,8 @@
 /*
 
- SoundManager 2: "page as playlist" example
+ SoundManager 2  "page as playlist" example
  ------------------------------------------
- http://schillmania.com/projects/soundmanager2/
+ http //schillmania.com/projects/soundmanager2/
 
 */
 .spectrum-container {
@@ -42,61 +42,105 @@ ul.use-spectrum .spectrum-box .spectrum {
 }
 ul.playlist {
   list-style-type: none;
-  margin: 0px;
+  margin: 0;
+  margin-bottom: 2em;
   padding: 0px;
+  padding: 0.5em;
+  border-radius: 4px;
+  background: #f1f1f1;
 }
 ul.playlist li {
 /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
   position: relative;
+  margin: 1em 0;
   display: block;
   width: auto;
-  font-size: 2em;
+  font-size: 1em;
   color: #666;
-  padding: 0.25em 0.5em 0.25em 0.5em;
   border: none;
   letter-spacing: -1px;
-/* ZOMG WEB X.0. ;) */
-  background-color: #f9f9f9;
+/* ZOMG WEB X.0. ) */
   -webkit-transition-property: hover;
   -webkit-transition: background-color 0.15s ease-in-out;
-  -moz-transition: background-color 0.15s linear 0s;
-/* firefox 4 */
+}
+ul.playlist li -moz-transition background-color 0.15slinear 0s/* firefox 4 */ {
   -o-transition-property: background-color;
 /* opera 10.5 */
   -o-transition-duration: 0.15s;
+}
+ul.playlist.init {
+  margin-bottom: 0;
+  padding: 0;
+  background: none;
+}
+ul.playlist.main,
+ul.playlist-nav {
+  display: none;
+}
+ul.playlist-nav {
+  list-style-type: none;
+  font-family: "Arial";
+  font-size: 80%;
+  padding: 0;
+}
+ul.playlist-nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-left: 20px;
+  background: url("../../images/icon_play.gif") center left no-repeat;
+}
+ul.playlist-nav a.active {
+  color: #8d8d8d;
+  background: url("../../images/icon_pause.gif") center left no-repeat;
+}
+ul.playlist-nav li {
+  margin: 0.5em 0;
+}
+ul.playlist.init li {
+  min-height: 50px;
+}
+ul.playlist.init li a i {
+  display: block;
 }
 ul.playlist li a {
   display: block;
   text-decoration: none;
   font-weight: normal;
   color: #000;
-  font-size: 120%;
+  font-size: 70%;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: "Arial";
+  text-transform: uppercase;
   outline: none;
   position: relative;
   z-index: 2;
 }
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_paused,
-ul.playlist li.sm2_playing a {
-  color: #fff;
-  border-radius: 3px;
+ul.playlist li a i {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  margin-top: 2px;
+  background: #636363;
+  border-radius: 20px;
+  float: left;
 }
-ul.playlist li:hover {
-  background-color: #eee;
+ul.playlist li.sm2_playing,
+ul.playlist li.sm2_paused {
+  min-height: 50px;
+}
+ul.playlist li.sm2_playing i,
+ul.playlist li.sm2_paused i {
+  display: block;
 }
 ul.playlist li:hover a {
   color: #333;
 }
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_playing:hover {
-  background-color: #69c;
-}
-ul.playlist li.sm2_paused {
-  background-color: #999;
-}
-ul.playlist li.sm2_playing:hover a,
-ul.playlist li.sm2_paused a {
-  color: #fff;
+ul.playlist li.sm2_playing i,
+ul.playlist li.sm2_playing:hover i {
+  background: #3c3c3c;
 }
 ul.playlist li .controls {
   display: none;
@@ -122,33 +166,25 @@ ul.playlist.use-peak li .peak {
   display: none;
 /* IE 7 */
 }
-ul.playlist li.sm2_paused .controls {
-  background-color: #666;
-}
 ul.playlist li:hover .controls .statusbar {
   position: relative;
-  cursor: ew-resize;
-  cursor: -moz-grab;
-  cursor: grab;
+  cursor: pointer;
 }
 ul.playlist li.sm2_paused .controls .statusbar {
-  background-color: #ccc;
+  background-color: #e2e2e2;
 }
 ul.playlist li .controls {
-  position: relative;
-  margin-top: 0.25em;
   margin-bottom: 0.25em;
-  background-color: #9cf;
+  margin-left: 37px;
 }
 ul.playlist li .controls .statusbar {
   position: relative;
-  height: 0.5em;
-  background-color: #cdf;
-  border: 2px solid #fff;
-  border-radius: 2px;
+  height: 0.8em;
+  background-color: #d8d8d8;
   overflow: hidden;
   cursor: -moz-grab;
   cursor: grab;
+  left: -8px;
 }
 ul.playlist li .controls.dragging .statusbar {
   cursor: -moz-grabbing;
@@ -160,19 +196,22 @@ ul.playlist li .controls .statusbar .annotation {
   position: absolute;
   left: 0px;
   top: 0px;
-  height: 0.5em;
+  height: 0.8em;
 }
 ul.playlist li .controls .statusbar .position {
-  background-color: #369;
-  border-right: 3px solid #369;
-  border-radius: 3px;
+  background-color: #3c3c3c;
+  border-right: 3px solid #3c3c3c;
 }
 ul.playlist li.sm2_paused .controls .statusbar .position {
-  background-color: #666;
-  border-color: #666;
+  background-color: #636363;
+  border-color: #636363;
 }
 ul.playlist li .controls .statusbar .loading {
-  background-color: #eee;
+  background-color: #9e9e9e;
+  height: 0.4em;
+}
+ul.playlist li.sm2_paused .controls .statusbar .loading {
+  background-color: #b1b1b1;
 }
 ul.playlist li .controls .statusbar .position,
 ul.playlist li .controls .statusbar .loading {
@@ -188,15 +227,12 @@ ul.playlist li .timing {
   display: none;
   text-align: right;
   right: 1em;
-  top: 1em;
+  top: 0;
   width: auto;
   height: 1em;
-  padding: 3px 5px;
-  background-color: #58b;
-  border: 1px solid #9cf;
-  border-radius: 4px;
+  padding: 2px 0;
   letter-spacing: 0px;
-  font: 44% monaco, "VT-100", "lucida console", courier, system;
+  font-size: 0.8em;
   line-height: 1em;
   vertical-align: middle;
 }
@@ -217,11 +253,10 @@ ul.playlist li.sm2_paused .timing {
 }
 ul.playlist li.sm2_paused .timing .sm2_position {
   text-decoration: blink;
-/* hee hee. first actual appropriate use? :D */
+/* hee hee. first actual appropriate use?  D */
 }
 ul.playlist li.sm2_paused .timing,
 ul.playlist.use-peak li.sm2_paused .peak {
-  background-color: #888;
   border-color: #ccc;
 }
 /* peak data */

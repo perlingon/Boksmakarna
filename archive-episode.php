@@ -6,7 +6,6 @@
 
 						<div id="main" class="eightcol first clearfix" role="main">
 
-						<!---<h1 class="archive-title h2"><?php post_type_archive_title(); ?></h1>-->
 							<?php if (have_posts()) : while (have_posts()) : the_post();?>
 							<div class="post-wrapper">
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
@@ -34,7 +33,7 @@
 
 							<div class="media">
 								<?php the_post_thumbnail('featured'); ?>
-							</div>
+							
 
 							<div class="player">
 								<ul class="playlist init">
@@ -42,6 +41,8 @@
 									  <li><a href="<?php the_field('mp3_source'); ?>"><i></i><?php the_title(); ?></a></li>
 								</ul>
 							</div>
+							</div>
+							<hr />
 						</div>
 							<?php endwhile; ?>
 

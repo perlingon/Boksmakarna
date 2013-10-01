@@ -75,3 +75,8 @@
 				}
 			?>
 	<div class="center">
+			<?php 
+				if (!is_home()) {
+					echo '<hr />';
+				}
+			?>
