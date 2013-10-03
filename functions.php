@@ -99,48 +99,35 @@ add_action( 'wp_enqueue_scripts', 'additional_libraries', 999 );
 function additional_libraries() {
   global $wp_styles; // call global $wp_styles variable to add conditional wrapper around ie stylesheet the WordPress way
   if (!is_admin()) {
-  	wp_register_script( 'isotope', get_template_directory_uri() . '/library/js/libs/jquery.isotope.min.js', array( 'jquery' ), '', false );
-  	wp_register_script( 'chosen', get_template_directory_uri() . '/library/js/libs/chosen.jquery.js', array( 'jquery' ), '', false );
-	wp_register_script( 'responsive-nav', get_template_directory_uri() . '/library/js/libs/responsive-nav.min.js', array( 'jquery' ), '', false );
-	wp_register_script( 'jquery BBQ', get_template_directory_uri() . '/library/js/libs/jquery.ba-bbq.min.js', array( 'jquery' ), '', false );
-	wp_register_script( 'lazyload', get_template_directory_uri() . '/library/js/libs/jquery.lazyload.min.js', array( 'jquery' ), '', false );
+  	wp_register_script( 'main', get_template_directory_uri() . '/library/js/compressed/_main.min.js', array( 'jquery' ), '', false );
+  	wp_enqueue_script( 'main' );
 
-  	wp_enqueue_script( 'isotope' );
-  	wp_enqueue_script( 'chosen' );
-  	wp_enqueue_script( 'responsive-nav' );
-  	wp_enqueue_script( 'jquery BBQ' );
-  	wp_enqueue_script( 'lazyload' );
-
-  	//Sound Manager
-  	if (is_single() || is_archive()) {
-  	wp_register_script( 'sm2', get_template_directory_uri() . '/library/js/soundmanager/soundmanager2.js', '', '', false );
-  	wp_register_script( 'sm2-player', get_template_directory_uri() . '/library/js/soundmanager/page-player.js', '', '', false );
-  	wp_register_style( 'sm2-player', get_stylesheet_directory_uri() . '/library/css/soundmanager/page-player.css', array(), '', 'all' );
-  	wp_register_style( 'flashblock', get_stylesheet_directory_uri() . '/library/css/soundmanager/flashblock.css', array(), '', 'all' );
-  	wp_enqueue_script( 'sm2' );
-  	wp_enqueue_script( 'sm2-player' );
-  	wp_enqueue_style( 'sm2-player' );
-  	wp_enqueue_style( 'flashblock' );
-  	}
   	if (is_single()) {
-  		wp_register_script( 'jquery-ui', get_template_directory_uri() . '/library/js/libs/jquery-ui-1.10.3.custom.min.js', array( 'jquery' ), '', false );
-  		wp_register_script( 'js-columnizer', get_template_directory_uri() . '/library/js/libs/jquery.columnizer.js', array( 'jquery' ), '', false );
-  		wp_enqueue_script( 'jquery-ui' );
-  		wp_enqueue_script( 'js-columnizer' );
+  		wp_register_script( 'single', get_template_directory_uri() . '/library/js/compressed/_single.min.js', array( 'jquery' ), '', false );
+  		wp_enqueue_script( 'single' );
   	}
+
+  	if ( is_singular( array( 'book', 'episode' ) ) || is_post_type_archive(array( 'book', 'episode' )) ) {
+	  	wp_register_script( 'soundmanager', get_template_directory_uri() . '/library/js/compressed/_soundmanager.min.js', array( 'jquery' ), '', false );
+	  	wp_enqueue_script( 'soundmanager' );
+
+	  	//Sound Manager Styles
+	  	wp_register_style( 'sm2-player', get_stylesheet_directory_uri() . '/library/css/soundmanager/page-player.css', array(), '', 'all' );
+	  	wp_register_style( 'flashblock', get_stylesheet_directory_uri() . '/library/css/soundmanager/flashblock.css', array(), '', 'all' );
+	  	wp_enqueue_style( 'sm2-player' );
+	  	wp_enqueue_style( 'flashblock' );
+  	}
+
 
 	if (is_home()) {
-		//Royal Slider
-  		wp_register_script( 'jquery easing', get_template_directory_uri() . '/library/js/libs/jquery.easing-1.3.js', array( 'jquery' ), '', false );
-		wp_register_script( 'royalslider', get_template_directory_uri() . '/library/js/royalslider/jquery.royalslider.min.js', array( 'jquery' ), '', false );
-		wp_register_script( 'slider', get_template_directory_uri() . '/library/js/royalslider/slider.js', array( 'jquery' ), '', false );
-  		wp_register_style( 'royalslider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
-  		wp_register_style( 'royalslider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
-		wp_enqueue_script( 'jquery easing' );
-  		wp_enqueue_script( 'royalslider' );
-  		wp_enqueue_script( 'slider' );
-		wp_enqueue_style( 'royalslider' );
-		wp_enqueue_style( 'royalslider-skin' );
+		wp_register_script( 'home', get_template_directory_uri() . '/library/js/compressed/_home.min.js', array( 'jquery' ), '', false );
+  		wp_enqueue_script( 'home' );
+
+		//Royal Slider Styles
+  		wp_register_style( 'slider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
+  		wp_register_style( 'slider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
+		wp_enqueue_style( 'slider' );
+		wp_enqueue_style( 'slider-skin' );
     }
 
   }

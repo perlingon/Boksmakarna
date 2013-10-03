@@ -19,13 +19,23 @@ import the mixins file so SASS can understand the variables.
 */
 
 /* import mixins */
-@import "mixins";
+@import "nib"
 
-@import "grid";
-@import "481up";
-@import "768up";
-@import "1030up";
 
+// IMPORTING STYLES
+@import "_variables.styl"
+@import "_grid.styl"
+@import "_base.styl"
+
+//IMPORT MEDIA STUFF
+@import "_321up.styl"
+@import "_481up.styl"
+@import "_768up.styl"
+@import "_1030up.styl"
+@import "_1240up.styl"
+
+//PLAYER
+@import "../css/soundmanager/page-player_481up.styl"
 /* 
 you can call the larger styles if you want, but there's really no need 
 */
@@ -38,6 +48,10 @@ about using prefixes, although it's best practice. For more info
 on using Modernizr classes, check out this link:
 http://www.modernizr.com/docs/
 ******************************************************************/
+html,
+body,
+.center
+	min-width max-width !important
 
 /*
 For example, you can use something like:

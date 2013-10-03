@@ -139,6 +139,10 @@
 									$count = 0;
 									wp_reset_query();
 									?>
+									<div class="sharing">
+										<img src="http://placehold.it/120x70/" />
+									</div>
+									
 									</div>
 									<div id="read-more">
 										<section class="entry-content">

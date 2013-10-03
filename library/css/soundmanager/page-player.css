@@ -72,14 +72,12 @@ ul.playlist-nav {
 }
 ul.playlist-nav {
   list-style-type: none;
-  font-family: "Arial";
+  font-family: "TrendSansOne";
   font-size: 80%;
   padding: 0;
 }
 ul.playlist-nav a {
   text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
   padding-left: 20px;
   background: url("../../images/icon_play.gif") center left no-repeat;
 }
@@ -99,13 +97,10 @@ ul.playlist.init li a i {
 ul.playlist li a {
   display: block;
   text-decoration: none;
-  font-weight: normal;
   color: #000;
   font-size: 70%;
-  font-weight: bold;
   letter-spacing: 1px;
-  font-family: "Arial";
-  text-transform: uppercase;
+  font-family: "TrendSansOne";
   outline: none;
   position: relative;
   z-index: 2;
@@ -297,12 +292,10 @@ ul.playlist li .peak .r {
   }
   ul.playlist.main li {
     display: none;
-  }
-  ul.playlist.main li.sm2_paused {
-    display: block;
-  }
-  ul.playlist.main li.sm2_playing {
-    display: block !important;
+/*&.sm2_paused
+			display block
+		&.sm2_playing
+			display block!important*/
   }
   ul.playlist.small {
     display: none;
