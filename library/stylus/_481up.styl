@@ -11,6 +11,8 @@ so you still want to keep it pretty light and simply expand
 upon your base.styl styles.
 
 ******************************************************************/
+body
+	padding-top 0
 .border
 	display none
 .header
@@ -32,12 +34,61 @@ upon your base.styl styles.
 	column(4)
 .chosen-container
 	overflow visible!important
-.grid-item
-	min-height 500px
 
 .sorting
 	column(4)
 
+/*********************
+POSTS &: CONTENT STYLES
+*********************/
+
+.single-post,
+.page
+	.archive-list
+		ul
+			column(3)
+			margin 0 (gutter-width/2.8)
+
+
+/*********************
+MENU
+*********************/
+.js #menu-main
+	position relative
+	overflow visible
+	left 200px
+	top 9.5em
+
+.js #menu-main.closed
+	max-height none
+
+#nav-toggle 
+	display none
+#menu-main li
+	width auto
+	*width 24.9% /* IE7 Hack */
+	_width 19% /* IE6 Hack */
+
+#menu-main 
+	a 
+		margin 0
+		padding .85em
+		float left
+		text-align center
+		border-bottom: 0
+		//border-right: 1px solid white
+		background none
+		color grey
+		font-size .7em
+		&:hover
+			//background white
+			color black
+#menu-main li.current-menu-item
+	background none
+	a
+		color black 
+#menu-main ul ul a
+	display none
 /*********************
 SLIDER
 *********************/
@@ -63,8 +114,9 @@ SLIDER
 		.info .content
 			top 30%
 			left 5%
-.single,
-.archive
+.single-book,
+.single-episode,
+.post-type-archive-episode
 	.player
 		margin 0 auto
 		max-width ((max-width)-(30px))

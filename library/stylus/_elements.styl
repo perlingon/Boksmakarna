@@ -8,17 +8,10 @@ hr
   background url(../images/dot.png) repeat-x
   margin 0 auto
   max-width ((max-width)-(30px))
-@media screen and (-webkit-min-device-pixel-ratio: 1.3), screen and (min--moz-device-pixel-ratio: 1.3), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-device-pixel-ratio: 1.3), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)
-  hr
-    background-image url(../images/dot@2x.png)
-    -webkit-background-size 11px 3px
-    -moz-background-size 11px 3px
-    -o-background-size 11px 3px
-    background-size 11px 3px
 
 // NAV
-
 // NAV BASIC STYLING
+
 .center
   //padding-top 4.5em
 
@@ -53,22 +46,6 @@ hr
 #menu-main.opened
   max-height 9999px
 
-
-@media screen and (min-width: 481px)
-  .center
-    padding-top 0
-  .js #menu-main
-    position relative
-    overflow visible
-    left 200px
-    top 9.5em
-
-  .js #menu-main.closed
-    max-height none
-
-  #nav-toggle 
-    display none
-
 #menu-main,
 #menu-main *
   -moz-box-sizing border-box
@@ -84,15 +61,7 @@ hr
 
 #menu-main li
   float left
-  width 100%
-
-
-@media screen and (min-width: 481px) 
-  #menu-main li
-    width auto
-    *width 24.9% /* IE7 Hack */
-    _width 19% /* IE6 Hack */
-  
+  width 100%  
 
 
 #menu-main a 
@@ -106,38 +75,9 @@ hr
   font-size .8em
   font-family sans-serif
 
-
-@media screen and (min-width: 481px) 
-  #menu-main 
-    a 
-      margin 0
-      padding .85em
-      float left
-      text-align center
-      border-bottom: 0
-      //border-right: 1px solid white
-      background none
-      color grey
-      font-size .7em
-      &:hover
-        //background white
-        color black
-  #menu-main li.current-menu-item
-    background none
-    a
-      color black 
-
-
 #menu-main ul ul a
   background #ca3716
   padding-left 2em
-
-
-@media screen and (min-width: 40em)
-  #menu-main ul ul a
-    display none
-
-
 
 #nav-toggle
   -webkit-touch-callout none
@@ -157,15 +97,6 @@ hr
   text-decoration none
   font sans-serif
   color black
-
-
-@media screen and (-webkit-min-device-pixel-ratio: 1.3), screen and (min--moz-device-pixel-ratio: 1.3), screen and (-o-min-device-pixel-ratio: 2 / 1), screen and (min-device-pixel-ratio: 1.3), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)
-  #nav-toggle 
-    background-image url(../images/hamburger-retina.gif)
-    -webkit-background-size 200px 200px
-    -moz-background-size 200px 200px
-    -o-background-size 200px 200px
-    background-size 200px 200px
   
 //TABS
 #tabs .columns
@@ -226,6 +157,8 @@ hr
   font-size 70%
   min-height 1em
   padding 1em 0
+  width 100%
+  clear both
   h4
     margin 1em 0 .5em
     padding 0

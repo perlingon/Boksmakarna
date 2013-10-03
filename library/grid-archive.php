@@ -77,13 +77,13 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 				echo '<a href="'.get_permalink().'">';
 				lazyload_thumbnail('grid-block');
 				echo "</a>";
-				echo '<h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+				echo '<h4><a href="'.get_permalink().'">'.get_the_title().'</a></h4>';
 				echo '<ul class="tags">';
 				foreach ( $writers as $writer ) {echo '<li><a href="#" class="writer-tag" data-filter=".'.$writer->slug.'">'.$writer->name.'</a></li>';}
 				foreach ( $genres as $genre ) {echo '<li><a href="#" class="genre-tag" data-filter=".'.$genre->slug.'">'.$genre->name.'</a></li>';}
 				echo '</ul>';
 				echo '<p>'.get_field('short_description').'</p>';
-				echo '<em class="date">'.get_the_date('Ymd').'</em>';
+				echo '<div class="timestamp">'.get_the_time('U').'</div>';
 				echo '</div>';
 
 			} else if ($post_type == 'episode') {

@@ -89,6 +89,7 @@ body {
   line-height: 1.5;
   color: #393a39;
   background: #f7f7f7;
+  padding-top: 3.7em;
 }
 .center {
   width: 96%;
@@ -100,6 +101,7 @@ body {
   width: 100%;
   background: #ff8433;
   position: fixed;
+  top: 0;
   z-index: 9999;
   display: block;
 }
@@ -154,6 +156,7 @@ body {
   border-bottom: 4px solid #e7e7e7;
   margin-bottom: 1em;
   display: block;
+  font-size: 0.8em;
 }
 .grid-container .grid-item img {
   width: 100%;
@@ -179,9 +182,9 @@ body {
 }
 .grid-container .grid-item p {
   clear: both;
-  font-size: 0.8em;
+  padding-bottom: 1em;
 }
-.grid-container .grid-item .date {
+.grid-container .grid-item .timestamp {
   display: none;
 }
 a,
@@ -246,7 +249,7 @@ h5 a,
 }
 h1,
 .h1 {
-  font-size: 1.45em;
+  font-size: 1.7em;
   line-height: 1.2em;
 }
 h2,
@@ -257,7 +260,7 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 h4,
 .h4 {
@@ -272,12 +275,61 @@ h5,
 p {
   margin: 0 0 0.5em 0;
 }
+.single-post .column,
+.page .column {
+  padding: 0 15px;
+}
+.single-post .archive-list hr,
+.page .archive-list hr,
+.single-post position relative hr,
+.page position relative hr {
+  background: #868686;
+}
+.single-post .archive-list .list-wrapper,
+.page .archive-list .list-wrapper,
+.single-post position relative .list-wrapper,
+.page position relative .list-wrapper {
+  background: #eee;
+  clear: both;
+}
+.single-post .archive-list .list-wrapper div.separator,
+.page .archive-list .list-wrapper div.separator,
+.single-post position relative .list-wrapper div.separator,
+.page position relative .list-wrapper div.separator {
+  clear: both;
+  display: block;
+}
+.single-post .archive-list .list-wrapper ul,
+.page .archive-list .list-wrapper ul,
+.single-post position relative .list-wrapper ul,
+.page position relative .list-wrapper ul {
+  font-family: 'TrendSansOne';
+  font-size: 80%;
+  list-style-type: none;
+  padding: 0;
+  padding-bottom: 2em;
+}
+.single-post .archive-list .list-wrapper ul li,
+.page .archive-list .list-wrapper ul li,
+.single-post position relative .list-wrapper ul li,
+.page position relative .list-wrapper ul li {
+  padding: 0.4em 0;
+}
+.single-post .archive-list .list-wrapper ul a,
+.page .archive-list .list-wrapper ul a,
+.single-post position relative .list-wrapper ul a,
+.page position relative .list-wrapper ul a {
+  text-decoration: none;
+}
 .post-wrapper {
   clear: both;
   margin-bottom: 10px;
 }
 .post-wrapper .player {
   clear: both;
+}
+#content {
+  margin-top: 1em;
 }
 #content .attachment-featured {
   width: 100%;
@@ -315,6 +367,7 @@ dt
 }
 .entry-content p {
   font-size: 0.8em;
+  margin-bottom: 1em;
 }
 .entry-content dd {
   margin-left: 0;
@@ -516,6 +569,9 @@ font-weight bold ul .next-link,
   font-size: 80%;
   text-align: center;
 }
+body {
+  padding-top: 0;
+}
 .border {
   display: none;
 }
@@ -548,9 +604,6 @@ font-weight bold ul .next-link,
 .chosen-container {
   overflow: visible !important;
 }
-.grid-item {
-  min-height: 500px;
-}
 .sorting {
   display: inline;
   float: left;
@@ -559,6 +612,58 @@ font-weight bold ul .next-link,
   margin: 0 15px;
   *width: 290px -correction;
   *margin: 0 15px -correction;
+}
+.single-post .archive-list ul,
+.page .archive-list ul {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 210px;
+  margin: 0 15px;
+  *width: 210px -correction;
+  *margin: 0 15px -correction;
+  margin: 0 10.714285714285715px;
+}
+.js #menu-main {
+  position: relative;
+  overflow: visible;
+  left: 200px;
+  top: 9.5em;
+}
+.js #menu-main.closed {
+  max-height: none;
+}
+#nav-toggle {
+  display: none;
+}
+#menu-main li {
+  width: auto;
+  *width: 24.9%;
+/* IE7 Hack */
+  _width: 19%;
+/* IE6 Hack */
+}
+#menu-main a {
+  margin: 0;
+  padding: 0.85em;
+  float: left;
+  text-align: center;
+  border-bottom: 0;
+  background: none;
+  color: #868686;
+  font-size: 0.7em;
+}
+#menu-main a:hover {
+  color: #000;
+}
+#menu-main li.current-menu-item {
+  background: none;
+}
+#menu-main li.current-menu-item a {
+  color: #000;
+}
+#menu-main ul ul a {
+  display: none;
 }
 .slider-holder {
   height: 390px;
@@ -587,13 +692,15 @@ font-weight bold ul .next-link,
   top: 30%;
   left: 5%;
 }
-.single .player,
-.archive .player {
+.single-book .player,
+.single-episode .player,
+.post-type-archive-episode .player {
   margin: 0 auto;
   max-width: 930px;
 }
-.single .media,
-.archive .media {
+.single-book .media,
+.single-episode .media,
+.post-type-archive-episode .media {
   display: inline;
   float: left;
   overflow: hidden;
@@ -602,22 +709,27 @@ font-weight bold ul .next-link,
   *width: 610px -correction;
   *margin: 0 15px -correction;
 }
-.single .media .playlist,
-.archive .media .playlist,
-.single .media .sharing,
-.archive .media .sharing {
+.single-book .media .playlist,
+.single-episode .media .playlist,
+.post-type-archive-episode .media .playlist,
+.single-book .media .sharing,
+.single-episode .media .sharing,
+.post-type-archive-episode .media .sharing {
   float: left;
 }
-.single .media .playlist,
-.archive .media .playlist {
+.single-book .media .playlist,
+.single-episode .media .playlist,
+.post-type-archive-episode .media .playlist {
   width: 80%;
 }
-.single .media .sharing,
-.archive .media .sharing {
+.single-book .media .sharing,
+.single-episode .media .sharing,
+.post-type-archive-episode .media .sharing {
   width: 20%;
 }
-.single article,
-.archive article {
+.single-book article,
+.single-episode article,
+.post-type-archive-episode article {
   display: inline;
   float: left;
   overflow: hidden;
@@ -680,6 +792,28 @@ footer #inner-footer >div {
   width: 290px;
   margin: 0 15px;
   *width: 290px -correction;
+  *margin: 0 15px -correction;
+}
+.single-post article header,
+.page article header,
+.single-post article footer,
+.page article footer {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 930px;
+  margin: 0 15px;
+  *width: 930px -correction;
+  *margin: 0 15px -correction;
+}
+.single-post .archive-list,
+.page .archive-list {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 930px;
+  margin: 0 15px;
+  *width: 930px -correction;
   *margin: 0 15px -correction;
 }
 ul.playlist.main {

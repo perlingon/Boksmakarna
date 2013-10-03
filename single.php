@@ -14,7 +14,7 @@
 
 									<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 									<p class="byline vcard"><?php
-										printf( __( 'Posted <time class="updated" datetime="%1$s" pubdate>%2$s</time> by <span class="author">%3$s</span> <span class="amp">&amp;</span> filed under %4$s.', 'bonestheme' ), get_the_time( 'Y-m-j' ), get_the_time( get_option('date_format')), bones_get_the_author_posts_link(), get_the_category_list(', ') );
+										printf( __( '<time class="updated" datetime="%1$s" pubdate>%2$s</time>', 'bonestheme' ), get_the_time( 'Y.m.d' ), get_the_time( get_option('date_format')), bones_get_the_author_posts_link(), get_the_category_list(', ') );
 									?></p>
 
 								</header> <!-- end article header -->
@@ -53,6 +53,32 @@
 					</div> <!-- end #main -->
 
 				</div> <!-- end #inner-content -->
+
+				<div class="archive-list">
+						<h4>Artiklar</h4>
+						<hr />
+						<div class="list-wrapper">
+							<div>
+						<?php $posts = new WP_Query('showposts=12&orderby=date&order=desc');?>
+
+
+							<?php foreach(new WP_Query_Columns($posts, 3) as $column => $column_count) : ?>
+							<?php 
+							    	if($column % 4 == 0){
+									    echo '</div><div class="separator">';
+									}
+							?>
+							    <ul>
+
+							        <?php while ($column_count--) : $posts->the_post(); ?>
+							        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+							        <?php endwhile; ?>
+							    </ul>
+							<?php endforeach; ?>
+						<?php wp_reset_query();?>
+					</div><div style="clear:both"></div>
+				</div>
+				</div>
 
 			</div> <!-- end #content -->
 

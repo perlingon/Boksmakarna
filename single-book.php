@@ -17,6 +17,8 @@
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
+									AUTHOR,
+									GENRES
 									<p><?php the_excerpt(); ?></p>
 									 <?php
 									 	$slug = get_the_slug();

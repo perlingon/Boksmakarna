@@ -73,8 +73,10 @@ jQuery(document).ready(function($) {
 
         //$(".textwidget").html(all_filters);
 
-        if (all_filters === '') {$container.isotope({ filter: '*' });}
-        else{$container.isotope({ filter: all_filters });}
+        if (all_filters === '') {$container.isotope({ filter: '*' });
+        }else{
+            $container.isotope({ filter: all_filters });
+        }
     });
 
     //ISOTOPE CONFIG
@@ -97,42 +99,24 @@ jQuery(document).ready(function($) {
                           return $elem.find('.genre-tag').text();
                         },
                         date : function ( $elem ) {
-                            return parseInt( $elem.find('.date').text(), 10 );
+                            return parseInt( $elem.find('.timestamp').text(), 10 );
                           }
         }
     });
 
-    $('.sort-by a').not( "#sort-book" ).click(function() {
-                
-                //Set vars
-                if ($('.sort-order a').first().hasClass('asc')) {var sort_order = true;} else {var sort_order = false;};
-                var sortName = $(this).attr('href').slice(1);
+    var sortby = $('.sort-by a').eq(0);
 
-                //Make only this link active
-                $('.sort-by li').removeClass('active');
-                $(this).parent().addClass('active');
+    var sortorder = $('.sort-order a').eq(0);
 
-                //Sort
-                $container.isotope({ sortBy : sortName, sortAscending : sort_order });
-                    //Add to hash
-                    var hashvalue = $.param({ sortBy: sortName });
-                    $.bbq.pushState( hashvalue );
+    var asc_term = ["Äldst > Nyast","A > Ö"];
+    var desc_term = ["Nyast > Äldst","Ö > A"];
 
-                //ignore default link behaviour
-                return false;
-            }
-    );
-
-    $('.title,.writer,.genre').click(function(){
-        //Cycle trough classes when clicking                             
-        this.className = {genre : 'title', title: 'writer', writer: 'genre'}[this.className];
-
+    sortby.click(function(){
+        
+        //Cycle trough classes when clicking         
+        this.className = {date : 'title', title: 'writer', writer: 'genre', genre: 'date'}[this.className];
         //Set vars
-        if ($('.sort-order a').first().hasClass('asc')) {var sort_order = true;} else {var sort_order = false;};
-
-        //Make only this link active
-        $('.sort-by li').removeClass('active');
-        $(this).parent().addClass('active');
+        if (sortorder.hasClass('asc')) {var sort_order = true;} else {var sort_order = false;};
 
         //Conditional Sorting
         if ($(this).hasClass('title')) {
@@ -162,27 +146,56 @@ jQuery(document).ready(function($) {
                 var hashvalue = $.param({ sortBy: sortName });
                 $.bbq.pushState( hashvalue );
         };
+        if ($(this).hasClass('date')) {
+                sortName = 'date';
+                $container.isotope({ sortBy : sortName, sortAscending : sort_order });
+                $(this).html('Datum');
+                $(this).attr('href','#'+sortName);
+                //Add to hash
+                var hashvalue = $.param({ sortBy: sortName });
+                $.bbq.pushState( hashvalue );
+
+                //sort-order terms
+                sortorder.parent().removeClass('abc');
+                sortorder.parent().addClass('date');
+                if ( sortorder.hasClass("asc") ) {sortorder.html(asc_term[0]);}else{sortorder.html(desc_term[0]);};
+        }else{
+                //sort-order terms
+                sortorder.parent().removeClass('date');
+                sortorder.parent().addClass('abc');
+                if ( sortorder.hasClass("asc") ) {sortorder.html(asc_term[1]);}else{sortorder.html(desc_term[1]);};
+        };
 
         //ignore default link behaviour
         return false;
     });
 
-
-    $('.sort-order a').toggle(function() {
-                var sortName = $('.sort-by li.active a').first().attr('href').slice(1);
+    $('body').on('click', '.sort-order a', function(){
+        if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off'){
+                $(this).attr('data-toggled','on');
+                var sortName = sortby.attr('href').slice(1);
                 $(this).removeClass('desc');
                 $(this).addClass('asc');
                 $container.isotope({ sortBy : sortName, sortAscending : true });
-                $(this).html('Fallande');
-            },
-               function () {
-                var sortName = $('.sort-by li.active a').first().attr('href').slice(1);
+                if (sortorder.parent().hasClass('date')) {
+                    $(this).html(asc_term[0]);
+                }else{
+                    $(this).html(asc_term[1]);
+                };
+        }
+        else if ($(this).attr('data-toggled') == 'on'){
+               $(this).attr('data-toggled','off');
+                var sortName = sortby.attr('href').slice(1);
                 $(this).removeClass('asc');
                 $(this).addClass('desc');
                 $container.isotope({ sortBy : sortName, sortAscending : false });
-                $(this).html('Stigande');
-               }
-    );
+                if (sortorder.parent().hasClass('date')) {
+                    $(this).html(desc_term[0]);
+                }else{
+                    $(this).html(desc_term[1]);
+                };
+        }
+    });
 
 
     $('.grid-item .tags a, .filter').click(function(){
@@ -204,10 +217,32 @@ jQuery(document).ready(function($) {
                 return false;
     });
 
-//BOOK PLAYER (>481)
+    responsive_viewport();
     
-     //tabs
-    if(typeof window.columnize == 'function') {
+    $(window).one('resize', function(){
+        //responsive_viewport();
+    });
+
+    function responsive_viewport(){
+
+
+    /* getting viewport width */
+    var responsive_viewport_width = $(window).width();
+
+    /* if is below 481px */
+    if (responsive_viewport_width < 481) {
+    
+    } /* end smallest screen */
+    
+    /* if is larger than 481px */
+    if (responsive_viewport_width > 481) {
+    if ($.fn.columnize) { 
+        $('.single-post .entry-content, .page-template-default .entry-content').columnize({ columns  : 3});
+    };
+
+    //BOOK PLAYER (>481)
+    //tabs
+    if ($.fn.columnize) { 
     $('#tabs .columns').columnize({
           columns  : 3,
           doneFunc : function(){
@@ -230,6 +265,9 @@ jQuery(document).ready(function($) {
                         $('.excerpt-read-more').click(function(){
                             $( "#tabs" ).tabs({active:0});
                             return false;
+                        });
+                        $('.playlist-nav a').click(function(){
+                            $( "#tabs" ).tabs({active:1});
                         });
         }
      });
@@ -266,39 +304,21 @@ jQuery(document).ready(function($) {
                   }
         }
     });
-
-
-
-    /* getting viewport width */
-    var responsive_viewport = $(window).width();
-    
-    /* if is below 481px */
-    if (responsive_viewport < 481) {
-    
-    } /* end smallest screen */
-    
-    /* if is larger than 481px */
-    if (responsive_viewport > 481) {
         
     } /* end larger than 481px */
     
     /* if is above or equal to 768px */
-    if (responsive_viewport >= 768) {
+    if (responsive_viewport_width >= 768) {
     
-        /* load gravatars */
-        $('.comment img[data-gravatar]').each(function(){
-            $(this).attr('src',$(this).attr('data-gravatar'));
-        });
         
     }
     
     /* off the bat large screen actions */
-    if (responsive_viewport > 1030) {
+    if (responsive_viewport_width > 1030) {
         
     }
-    
+}
 	
-	// add all your scripts here
 	
  
 }); /* end of as page load scripts */
