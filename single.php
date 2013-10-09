@@ -25,7 +25,7 @@
 
 								<footer class="article-footer">
 									<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
-
+									<?php echo do_shortcode('[ssba]'); ?>
 								</footer> <!-- end article footer -->
 
 								<?php comments_template(); ?>

@@ -9,18 +9,40 @@
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
-
+								<div class="info-wrapper">
 								<header class="article-header">
 
 									<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
-									
+									<div class="taxonomies">
+										<?php
+											
+											$writers = get_the_terms( $post->ID , 'writer' );
+											if ( $writers && ! is_wp_error( $writers ) ) : 
+												$writer_links = array();
+
+												foreach ( $writers as $writer ) {
+													$writer_links[] = '<a href="'.get_post_type_archive_link('book').'#filter=.'.$writer->slug.'" >'.$writer->name.'</a>';
+												}
+																	
+												$list = join( ", ", $writer_links );
+												echo '<div class="writers">'.$list.'</div>';
+
+											endif;
+
+											?>
+									</div>
+									<div class="cover"><?php the_post_thumbnail('featured'); ?></div>
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
-									AUTHOR,
-									GENRES
-									<p><?php the_excerpt(); ?></p>
-									 <?php
+									<?php 
+
+									the_excerpt();
+
+									if( has_term( 'yes', 'upcoming' ) ) {
+									    echo 'kommer snart...';
+									}else{
+
 									 	$slug = get_the_slug();
 									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__not_in=35');
 									 	$interview = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__in=35');
@@ -59,7 +81,7 @@
 													while ( $episodes->have_posts() ) {
 															$episodes->the_post();
 															$count++;
-															echo '<li><a href="#episode-'.$count.'"><i></i>' . get_the_title() . '</a></li>';
+															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . get_the_title() . '</span></a></li>';
 													}
 													$count = 0;
 													$ep2 = 'Tisdag<br />';
@@ -83,7 +105,7 @@
 														echo $ep5;
 													}
 													//wp_reset_query();
-													echo '</ul><hr />';
+													echo '</ul>';
 
 												}else{
 													echo '<i>Inga avsnitt.</i>';
@@ -101,7 +123,22 @@
 													echo '<i>Ingen intervju.</i>';
 												}
 												wp_reset_query();*/
-																			 
+												if ($interview->have_posts()) {
+													echo '<div class="interview">';
+													while ( $interview->have_posts() ) {
+															$interview->the_post();
+															echo '<a href="'.get_permalink().'">';
+															echo '<div class="label">Lyssna</div><h4>'.get_the_title().'</h4>';
+															echo '</a>';
+													}
+													
+													echo '</div>';
+													echo '<div style="clear:both"></div>';
+												}else{
+													echo '<i>Ingen intervju.</i>';
+												}
+												wp_reset_query();
+											}								 
 									?>
 									<div id="sm2-container">
   										<!-- SM2 flash goes here -->
@@ -114,19 +151,65 @@
 								</footer> <!-- end article footer -->
 
 								<?php comments_template(); ?>
-								<img class="offer" src="http://placehold.it/300x120/" />
+								</div>
+								<?php if (get_field('offer')) {
+										while (has_sub_field('offer')) {
+								?>
+								
+								<div class="offer infobox">
+									<?php if (get_sub_field('link')) {?>
+											<a href="<?php the_sub_field('link'); ?>" target="_blank" title="<?php the_sub_field('headline'); ?>">
+	 								<?php } ?>
+	 								<h4>>> <?php the_sub_field('headline'); ?></h4>
+									<div class="thumb">
+										<?php 
+										$partner = get_sub_field('partner');
+ 
+										if( $partner ): 
+										 
+											// override $post
+											$post = $partner;
+											setup_postdata( $post ); 
+										 	the_post_thumbnail('full');
+
+											wp_reset_postdata();
+											endif; ?>
+									</div>
+									<div class="info">
+									<div class="description">
+										<?php the_sub_field('description'); ?>
+									</div>
+									</div>
+									<?php if (get_sub_field('link')) { echo '</a>';} ?>
+									<br style="clear:both" />
+								</div>
+								<?php } };?>
+								
 							</article> <!-- end article -->
 
 							<div class="media">
+								<?php
+								$genres = get_the_terms( $post->ID , 'genre' );
+											if ( $genres && ! is_wp_error( $genres ) ) : 
+												$genre_links = array();
 
+												foreach ( $genres as $genre ) {
+													$genre_links[] = '<a href="'.get_post_type_archive_link('book').'#filter=.'.$genre->slug.'" >'.$genre->name.'</a>';
+												}
+																	
+												$list = join( "/", $genre_links );
+												echo '<div class="genres">'.$list.'</div>';
+
+											endif;
+								?>
 								<div id="tabs">
 								  <ul>
 								    <li><a href="#read-more"><span>Läs Mer</span></a></li>
-								    <li><a href="#media"><span>Lyssna</span></a></li>
+								    <li><a href="#listen"><span>Lyssna</span></a></li>
 								  </ul>
-								  	<div id="media">							  
+								  	<div id="listen">							  
 									<?php the_post_thumbnail('featured');
-
+									if( !has_term( 'yes', 'upcoming' ) ) {
 									if ($episodes->have_posts()) {
 														echo '<ul id="main-player" class="playlist init main">';
 														while ( $episodes->have_posts() ) {
@@ -140,11 +223,11 @@
 									}
 									$count = 0;
 									wp_reset_query();
+									}
 									?>
 									<div class="sharing">
-										<img src="http://placehold.it/120x70/" />
+									<?php echo do_shortcode('[ssba]'); ?>
 									</div>
-									
 									</div>
 									<div id="read-more">
 										<section class="entry-content">
@@ -175,6 +258,7 @@
 						<?php endif; ?>
 
 					</div> <!-- end #main -->
+					<hr />
 					<div style="clear:both"></div>
 					<?php grid_archive(false,'book','3'); ?>
 				</div> <!-- end #inner-content -->

@@ -9,4 +9,100 @@ and other resources. You'll also notice the grid starts to
 come into play. Have fun!
 
 ******************************************************************/
+.single-book
+	article
+		p
+			font-size 0.75em
+	.cover
+		display none
+	.genres
+		clear both
+		position absolute
+		top 0
+		z-index 999
+		color grey
+		a
+			color grey
+			text-decoration none
+			font-size 70%
+			font-family sans-serif
 
+.single-book,
+.single-episode,
+.post-type-archive-episode
+	.info-wrapper
+		height 23.5em
+	.infobox
+		height 8em
+	.player
+		margin 0 auto
+		max-width ((max-width)-(30px))
+	.media
+		column(8)
+		display none
+		position relative
+		#listen
+			.attachment-featured
+				margin-bottom .3em
+			.playlist,
+			.sharing
+				float left
+			.playlist
+				width 75%
+			.sharing
+				width 25%
+				#ssba
+					padding-left 10%
+					.share-button
+						min-width 30px
+						width 30%!important
+						max-width 40px!important
+						img
+							width 100%!important
+							height auto
+
+	article
+		column(4)
+
+
+/*********************
+MENU
+*********************/
+.js #menu-main
+	position absolute!important
+	overflow visible
+	left 200px
+	top 9.5em
+	width auto!important
+	clip auto
+
+.js #menu-main.closed
+	max-height none
+
+#nav-toggle 
+	display none
+#menu-main li
+	width auto
+	*width 24.9% /* IE7 Hack */
+	_width 19% /* IE6 Hack */
+
+#menu-main 
+	a 
+		margin 0
+		padding .85em
+		float left
+		text-align center
+		border-bottom: 0
+		//border-right: 1px solid white
+		background none
+		color grey
+		font-size .7em
+		&:hover
+			//background white
+			color black
+#menu-main li.current-menu-item
+	background none
+	a
+		color black 
+#menu-main ul ul a
+	display none

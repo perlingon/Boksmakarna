@@ -40,12 +40,11 @@ ul.playlist {
   padding: 0px;
   padding: 0.5em;
   border-radius: 4px;
-  background: #f1f1f1;
 }
 ul.playlist li {
 /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
   position: relative;
-  margin: 1em 0;
+  margin: 0.45em 0;
   display: block;
   width: auto;
   font-size: 1em;
@@ -70,23 +69,52 @@ ul.playlist.main,
 ul.playlist-nav {
   display: none;
 }
+ul.playlist.small li {
+  font-size: 120%;
+  background: url("../../images/play.png") 0% 50% no-repeat;
+  padding-left: 20px;
+}
+ul.playlist.small li.sm2_playing,
+ul.playlist.small li.sm2_paused {
+  font-size: 90%;
+  background: none;
+  padding-left: 0;
+}
+ul.playlist.main li {
+  margin: 0;
+}
 ul.playlist-nav {
   list-style-type: none;
   font-family: "TrendSansOne";
   font-size: 80%;
   padding: 0;
 }
+ul.playlist-nav span {
+  padding: 3px 0 5px;
+}
 ul.playlist-nav a {
   text-decoration: none;
-  padding-left: 20px;
-  background: url("../../images/icon_play.gif") center left no-repeat;
 }
 ul.playlist-nav a.active {
-  color: #8d8d8d;
-  background: url("../../images/icon_pause.gif") center left no-repeat;
+  color: #808080;
+}
+ul.playlist-nav a.active i {
+  background-color: #808080;
+  background-position: center right;
 }
 ul.playlist-nav li {
-  margin: 0.5em 0;
+  margin: 0.2em 0;
+}
+ul.playlist-nav i {
+  width: 16px;
+  height: 11px;
+  margin-top: 5px;
+  display: inline-block;
+  *float: left;
+  background-color: #333;
+  background-image: url("../../images/playlist-nav.png");
+  background-position: center left;
+  background-repeat: no-repeat;
 }
 ul.playlist.init li {
   min-height: 50px;
@@ -111,7 +139,7 @@ ul.playlist li a i {
   height: 40px;
   margin-right: 5px;
   margin-top: 2px;
-  background: #636363;
+  background: #333;
   border-radius: 20px;
   float: left;
 }

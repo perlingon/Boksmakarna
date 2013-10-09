@@ -17,7 +17,8 @@
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
-									<?php the_content(); ?>
+									<?php the_content();
+									?>
 							</section> <!-- end article section -->
 
 								<footer class="article-footer">
@@ -25,9 +26,24 @@
 
 								</footer> <!-- end article footer -->
 
+								<?php if (get_field('content_row')) {
+										while (has_sub_field('content_row')) {
+								?>
+								<div class="content-row">
+									<h4><?php the_sub_field('headline'); ?></h4>
+									<hr />
+									<div class="content">
+										<?php the_sub_field('content'); ?>
+										<div style="clear:both"></div>
+									</div>
+
+								</div>
+								<?php } };?>
 								<?php comments_template(); ?>
 
 							</article> <!-- end article -->
+
+
 
 							<?php endwhile; else : ?>
 

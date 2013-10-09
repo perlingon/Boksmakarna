@@ -53,14 +53,13 @@ ul.playlist
  padding 0px
  padding .5em
  border-radius 4px
- background lighten(dark,93%)
 
 
 
 ul.playlist li 
  /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
  position relative
- margin 1em 0
+ margin .45em 0
  display block
  width auto
  font-size 1em
@@ -84,20 +83,47 @@ ul.playlist.main,
 ul.playlist-nav
 	display none
 
+ul.playlist.small
+	li
+		font-size 120%
+		background url(../../images/play.png) 0% 50% no-repeat
+		padding-left 20px
+	li.sm2_playing,
+	li.sm2_paused
+		font-size 90%
+		background none
+		padding-left 0
+
+ul.playlist.main li
+	margin 0
+
 ul.playlist-nav
 	list-style-type none
 	font-family sans-serif
 	font-size 80%
 	padding 0
+	span
+		padding: 3px 0 5px
 	a
 		text-decoration none
-		padding-left 20px
-		background url(../../images/icon_play.gif) center left no-repeat
 		&.active
-			color lighten(grey,10%)
-			background url(../../images/icon_pause.gif) center left no-repeat
+			color grey
+			i
+				background-color: grey
+				background-position: center right
+
 	li
-		margin .5em 0
+		margin .2em 0
+	i
+		width: 16px
+		height: 11px
+		margin-top:5px
+		display: inline-block
+		*float: left
+		background-color: #333
+		background-image: url("../../images/playlist-nav.png")
+		background-position: center left
+		background-repeat:no-repeat
 
 ul.playlist.init li
 	min-height 50px
@@ -121,7 +147,7 @@ ul.playlist li a
  	height 40px
  	margin-right 5px
  	margin-top 2px
- 	background lighten(dark,20%)
+ 	background #333
  	border-radius 20px
  	float left
 

@@ -58,20 +58,51 @@
 								$count++;
 								$writers = get_the_terms( $post->ID , 'writer' );
 								$genres = get_the_terms( $post->ID , 'genre' );
-								echo '<div id="block-'.$count.'" class="grid-item post '.get_the_slug();
+								echo '<div id="block-'.$count.'" class="grid-item post ';
+								if( has_term( 'yes', 'upcoming' ) ) {echo 'upcoming ';}
+								echo get_the_slug();
 								foreach ( $writers as $writer ) {echo ' '.$writer->slug;}
 								foreach ( $genres as $genre ) {echo ' '.$genre->slug;}
 								echo '">';
-								echo '<a href="'.get_permalink().'">';
+								if(!has_term( 'yes', 'upcoming' ) ) {echo '<a href="'.get_permalink().'">';}
+								if( has_term( 'yes', 'upcoming' ) ) {
+									echo '<div class="overlay">';
+									if (get_field('upcoming_date')) {
+										$date = DateTime::createFromFormat('Ymd', get_field('upcoming_date'));
+										echo 'Kommer '.$date->format('d.m.y');
+									}else{
+										echo 'Kommer snart...';
+									}
+									echo "</div>";
+								}
 								lazyload_thumbnail('grid-block');
-								echo "</a>";
+								if(!has_term( 'yes', 'upcoming' ) ) {echo '</a>';}
+								echo '<div class="belowimg">';
+								if(!has_term( 'yes', 'upcoming' ) ) {
 								echo '<h4><a href="'.get_permalink().'">'.get_the_title().'</a></h4>';
-								echo '<ul class="tags">';
-								foreach ( $writers as $writer ) {echo '<li><a href="#" class="writer-tag" data-filter=".'.$writer->slug.'">'.$writer->name.'</a></li>';}
-								foreach ( $genres as $genre ) {echo '<li><a href="#" class="genre-tag" data-filter=".'.$genre->slug.'">'.$genre->name.'</a></li>';}
-								echo '</ul>';
+								echo '<div class="label"><a href="'.get_permalink().'">Lyssna</a></div>';
+								}else{
+								echo '<h4>'.get_the_title().'</h4>';
+								}
+								if ( $writers && ! is_wp_error( $writers ) ) : 
+									$writer_links = array();
+									foreach ( $writers as $writer ) {
+										$writer_links[] = '<a href="#" class="writer-tag" data-filter=".'.$writer->slug.'">'.$writer->name.'</a>';
+									}
+									$list = join( ", ", $writer_links );
+									echo '<div class="tags writer-tags">'.$list.'</div>';
+								endif;
 								echo '<p>'.get_field('short_description').'</p>';
 								echo '<div class="timestamp">'.get_the_time('U').'</div>';
+								if ( $genres && ! is_wp_error( $genres ) ) : 
+									$genre_links = array();
+									foreach ( $genres as $genre ) {
+										$genre_links[] = '<a href="#" class="genre-tag" data-filter=".'.$genre->slug.'">'.$genre->name.'</a>';
+									}
+									$list = join( " / ", $genre_links );
+									echo '<div class="tags genre-tags">'.$list.'</div>';
+								endif;
+								echo '</div>';
 								echo '</div>';
 								endwhile;
 								$count=0;

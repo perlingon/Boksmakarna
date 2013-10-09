@@ -42,6 +42,7 @@
 	<body <?php body_class(); ?>>
 
 		<div class="border"></div>
+		<a href="#container" id="scrolltop-btn" style="position:fixed"></a>
 		<div id="container">
 
 			<header class="header" role="banner">

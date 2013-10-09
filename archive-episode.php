@@ -26,7 +26,7 @@
 								</section> <!-- end article section -->
 
 								<footer class="article-footer">
-
+									<?php echo do_shortcode('[ssba url='.get_permalink().']'); ?>
 								</footer> <!-- end article footer -->
 
 							</article> <!-- end article -->

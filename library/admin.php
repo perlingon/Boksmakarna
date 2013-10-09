@@ -123,7 +123,7 @@ you like.
 function admin_theme_style() {
     wp_enqueue_style('admin-theme',get_template_directory_uri() . '/library/css/admin.css' );
     wp_enqueue_script( 'jquery-ui-draggable', get_template_directory_uri() . '/library/js/libs/jquery-ui-1.10.3.custom.min.js' );
-    wp_enqueue_script( 'admin-js', get_template_directory_uri() . '/library/js/admin.js' );
+    wp_enqueue_script( 'admin-js', get_template_directory_uri() . '/library/js/compressed/_admin.min.js' );
 }
 add_action('admin_enqueue_scripts', 'admin_theme_style');
 

@@ -24,11 +24,12 @@
 									$tags = wp_get_post_tags( $post->ID, array( 'fields' => 'name' ) );
 								    $episode_title = implode(" ", $tags);
 								    echo $episode_title;
-									the_content(); ?>
+									the_content();
+									echo do_shortcode('[ssba]');
+									 ?>
 								</section> <!-- end article section -->
-								<img src="http://placehold.it/300x100" />
 								<footer class="article-footer">
-									<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
+						
 
 								</footer> <!-- end article footer -->
 								<?php comments_template(); ?>
@@ -36,7 +37,7 @@
 							</article> <!-- end article -->
 
 							<div class="media">
-								<?php the_post_thumbnail('cover'); ?>
+								<?php the_post_thumbnail('featured'); ?>
 							</div>
 
 						<?php endwhile; ?>
@@ -58,6 +59,7 @@
 						<?php endif; ?>
 
 					</div> <!-- end #main -->
+					<hr />
 					<?php grid_archive(false,'episode'); ?>
 				</div> <!-- end #inner-content -->
 

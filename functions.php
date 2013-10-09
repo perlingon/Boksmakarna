@@ -47,16 +47,25 @@ require_once( 'library/translation/translation.php' ); // this comes turned off 
 //Grid archive function
 require_once( 'library/grid-archive.php' );
 
+//Columns
+require_once( 'library/columns.php' );
+
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
 add_image_size( 'admin-thumb', 60, 60, true );
 add_image_size( 'grid-block', 250, 200, true );
 add_image_size( 'cover', 620, 400, true );
-add_image_size( 'big-slide', 960, 390, true );
-add_image_size( 'preview-slide', 500, 240, true );
+
 add_image_size( 'featured', 680, 380, true );
-add_image_size( 'logo', 180, false );
+add_image_size( 'logo', 180, true );
+
+//Slides
+add_image_size( 'big-slide', 960, 390, true );
+add_image_size( 'small-slide', 480, 320, true );
+add_image_size( 'preview-slide', 500, 240, true );
+
+
 
 /************* LAZY LOAD IMAGE TEMPLATE *************/
 function lazyload_thumbnail($size){
@@ -91,6 +100,16 @@ function set_episode_title( $data , $postarr ) {
 }
 //add_filter( 'wp_insert_post_data' , 'set_episode_title' , '10', 2 );
 
+function insertSocial($content) {
+        if(is_singular('episode') || is_archive('episode') || is_singular('book')) {
+                $content.= '<div class="socialboxes">';
+                $content.= '<a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>';
+                $content .= '<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:110px; height:30px;"></iframe>';
+                $content.= '</div>';
+        }
+        return $content;
+}
+//add_filter ('the_content', 'insertSocial');
 
 
 
@@ -191,7 +210,7 @@ function modify_query( $query ) {
 
 	if ( is_post_type_archive('episode') && !is_admin() && is_main_query() ) {
 	        set_query_var( 'tag', 'fredagsintervju' );
-	        set_query_var( 'posts_per_page', 2 );
+	        set_query_var( 'posts_per_page', 10 );
 	    }
 	if ( is_post_type_archive('book') && !is_admin() && is_main_query() ) {
 	        set_query_var( 'posts_per_page', -1 );
@@ -216,6 +235,31 @@ function get_the_slug(){
   return $slug;
 }
 
+/************* GALLERY SHORTCODE MOD *****************/
+remove_shortcode('gallery');
+add_shortcode('gallery', 'custom_size_gallery');
+
+function custom_size_gallery($attr) {
+    // Change size here - medium, large, full
+    $attr['size'] = 'large';
+    return gallery_shortcode($attr);
+}
+
+/************* GFORM SPINNER EXCHANGE *************/
+add_filter( 'gform_ajax_spinner_url', 'custom_gforms_spinner' );
+/**
+ * Changes the default Gravity Forms AJAX spinner.
+ *
+ * @since 1.0.0
+ *
+ * @param string $src The default spinner URL
+ * @return string $src The new spinner URL
+ */
+function custom_gforms_spinner( $src ) {
+ 
+    return get_stylesheet_directory_uri() . '/library/images/377.gif';
+    
+}
 
 /************* SEARCH FORM LAYOUT *****************/
 
@@ -229,113 +273,4 @@ function bones_wpsearch($form) {
 	return $form;
 } // don't remove this bracket!
 
-/**
- * get_columns_array
- *
- * Columns for the loop, single function interface (limited) 
- *
- * Copyright (c) 2011 hakre <http://hakre.wordpress.com/>, some rights reserved
- *
- * USAGE:
- *
- *   foreach(get_columns_array($post_count) as $column_count) :
- *     // column starts here
- *     while ($column_count--) : $the_query->the_post();
- *         // output your post
- *     endwhile;
- *     // column ends here
- *   endforeach;
- * 
- * @author hakre <http://hakre.wordpress.com/>
- * @see http://wordpress.stackexchange.com/q/9308/178
- */
-function get_columns_array($totalCount, $columnSize) {
-	$columns = array();
-	$totalCount = (int) max(0, $totalCount);
-	if (!$count)
-		return $columns;	
-	$columnSize = (int) max(0, $columnSize);
-	if (!$columnSize)
-		return $columns;
-	($floor = (int) ($totalCount / $columnSize))
-                && $columns = array_fill(0, $floor, $columnSize)
-                ;
-	($remainder = $totalCount % $columnSize)
-		&& $columns[] = $remainder
-		;
-	return $columns;
-}
- 
-/**
- * WP_Query_Columns
- *
- * Columns for the loop. 
- *
- * Copyright (c) 2011 hakre <http://hakre.wordpress.com/>, some rights reserved 
- * 
- * @author hakre <http://hakre.wordpress.com/>
- * @see http://wordpress.stackexchange.com/q/9308/178
- */
-class WP_Query_Columns implements Countable, IteratorAggregate {
-	/**
-	 * column size
-	 * @var int
-	 */
-	private $size;
-	private $index = 0;
-	private $query;
-	public function __construct(WP_Query $query, $size = 10) {
-		$this->query = $query;
-		$this->size = (int) max(0, $size);
-	}
-	/**
-	 * @return WP_Query
-	 */
-	public function query() {
-		return $this->query;
-	}
-	private function fragmentCount($fragmentSize, $totalSize) {
-		$total = (int) $totalSize;
-		$size = (int) max(0, $fragmentSize);
-		if (!$total || !$size)
-			return 0;
-		$count = (int) ($total / $size);
-		$count * $size != $total && $count++;				
-		return $count;
-	}
-	private function fragmentSize($index, $fragmentSize, $totalSize) {
-		$index = (int) max(0, $index);
-		if (!$index)
-			return 0;
-		$count = $this->fragmentCount($fragmentSize, $totalSize);
-		if ($index > $count)
-			return 0;
-		return $index === $count ? ($totalSize - ($count-1) * $fragmentSize) : $fragmentSize;			
-	}
-	public function columnSize($index) {
-		return $this->fragmentSize($index, $this->size, $this->query->post_count);
-	}
-	/**
-	 * @see Countable::count()
-	 * @return int number of columns
-	 */
-	public function count() {
-		return $this->fragmentCount($this->size, $this->query->post_count);
-	}
-	/**
-	 * @return array
-	 */
-	public function columns() {
-		$count = $this->count();
-		$array = $count ? range(1, $count) : array();
-		return array_map(array($this, 'columnSize'), $array);
-	}
-	/**
-	 * @see IteratorAggregate::getIterator()
-	 * @return traversable columns
-	 */
-	public function getIterator() {
-		return new ArrayIterator($this->columns());
-	}
-}
 ?>

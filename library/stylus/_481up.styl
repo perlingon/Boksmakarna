@@ -32,8 +32,13 @@ body
 .chosen-container,
 .grid-item
 	column(4)
+	min-width 210px
+.grid-item
+	min-height 440px
 .chosen-container
+	column(4)
 	overflow visible!important
+	min-width 210px
 
 .sorting
 	column(4)
@@ -48,64 +53,34 @@ POSTS &: CONTENT STYLES
 		ul
 			column(3)
 			margin 0 (gutter-width/2.8)
+	.two-col
+		column(6)
 
-
-/*********************
-MENU
-*********************/
-.js #menu-main
-	position relative
-	overflow visible
-	left 200px
-	top 9.5em
-
-.js #menu-main.closed
-	max-height none
-
-#nav-toggle 
-	display none
-#menu-main li
-	width auto
-	*width 24.9% /* IE7 Hack */
-	_width 19% /* IE6 Hack */
-
-#menu-main 
-	a 
-		margin 0
-		padding .85em
-		float left
-		text-align center
-		border-bottom: 0
-		//border-right: 1px solid white
-		background none
-		color grey
-		font-size .7em
-		&:hover
-			//background white
-			color black
-#menu-main li.current-menu-item
-	background none
-	a
-		color black 
-#menu-main ul ul a
-	display none
 /*********************
 SLIDER
 *********************/
 .slider-holder
 		height 390px
 		margin-bottom -390px
+.slider-timer
+	display none
 #slider
 	height 390px
+	font-size 100%
 	.rsContent
 		.info
+			overflow hidden
+			margin 0 auto
 			height 390px
 			margin-top -390px
 			max-width max-width
 			.content
+				background transparent
+				position absolute
 				text-align center
 				width 50%
 				height 40%
+				box-shadow none
 		img.big
 			display block
 		img.small
@@ -114,23 +89,6 @@ SLIDER
 		.info .content
 			top 30%
 			left 5%
-.single-book,
-.single-episode,
-.post-type-archive-episode
-	.player
-		margin 0 auto
-		max-width ((max-width)-(30px))
-	.media
-		column(8)
-		.playlist,
-		.sharing
-			float left
-		.playlist
-			width 80%
-		.sharing
-			width 20%
-	article
-		column(4)
 .home
 	#editorial
 		.widget

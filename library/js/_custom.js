@@ -35,6 +35,27 @@ jQuery(document).ready(function($) {
         $container = $('.grid-container'),
         $imgs = $("img.lazyload");
 
+    //LOCAL SCROLL
+    function scrollfx(){
+        var scrollTop = $(window).scrollTop();
+        if(scrollTop>500){
+                      $('#scrolltop-btn').fadeIn(200);
+            }
+        else { 
+            $('#scrolltop-btn').fadeOut(200);
+         }
+    }
+    window.onscroll = scrollfx;
+    
+    $('.scroll').each(function() {
+    thisHref = $(this).find('a').prop('href');
+    thisTitle = $(this).find('a').attr('title');
+    $(this).find('a').prop('href', thisHref + thisTitle);     
+    });
+    
+    $.localScroll({ hash:true, axis:'y' });
+    $.localScroll.hash();
+
     //LAZY LOAD
     $imgs.lazyload({ 
     effect : "fadeIn",
@@ -90,15 +111,19 @@ jQuery(document).ready(function($) {
 
       getSortData : {
                         title : function ( $elem ) {
+                          var name = 'Titel';
                           return $elem.find('h3').text();
                         },
                         writer : function ( $elem ) {
+                          var name = 'Författare';
                           return $elem.find('.writer-tag').text();
                         },
                         genre : function ( $elem ) {
+                          var name = 'Genre';
                           return $elem.find('.genre-tag').text();
                         },
                         date : function ( $elem ) {
+                            var name = 'Datum';
                             return parseInt( $elem.find('.timestamp').text(), 10 );
                           }
         }
@@ -195,13 +220,15 @@ jQuery(document).ready(function($) {
                     $(this).html(desc_term[1]);
                 };
         }
+        //ignore default link behaviour
+        return false;
     });
 
 
     $('.grid-item .tags a, .filter').click(function(){
                 //Set vars
                 var selector = $(this).attr('data-filter');
-                var sortName = $('.sort-by li.active a').first().attr('href').slice(1);
+                var sortName = $('.sort-by li a').first().attr('href').slice(1);
                 if ($('.sort-order a').first().hasClass('asc')) {var sort_order = true;} else {var sort_order = false;};
 
                 //Filter
@@ -215,38 +242,71 @@ jQuery(document).ready(function($) {
 
                 //ignore default link behaviour
                 return false;
+
     });
 
-    responsive_viewport();
-    
-    $(window).one('resize', function(){
-        //responsive_viewport();
-    });
+
+    $(window).bind( 'hashchange', function( event ){
+      // get options object from hash
+      var hashOptions = $.deparam.fragment();
+      // apply options from hash
+        $container.isotope( hashOptions );
+        if (event.fragment == '') {
+            $container.isotope({ filter: '*' });
+        }else{
+            $container.isotope( hashOptions );
+            if (hashOptions.sortBy) {
+                var sortName = hashOptions.sortBy;
+                if (hashOptions.sortBy =='title') {var sortLabel = 'Titel'};
+                if (hashOptions.sortBy =='writer') {var sortLabel = 'Författare'};
+                if (hashOptions.sortBy =='genre') {var sortLabel = 'Genre'};
+                if (hashOptions.sortBy =='date') {var sortLabel = 'Datum'};
+                sortby.removeClass();
+                sortby.addClass(sortName);
+                sortby.attr('href','#'+sortName);
+                sortby.html(sortLabel);
+            };
+
+        };
+      
+    })
+      // trigger hashchange to capture any hash data on init
+      .trigger('hashchange');
+
 
     function responsive_viewport(){
 
-
     /* getting viewport width */
     var responsive_viewport_width = $(window).width();
+    console.log('width: '+responsive_viewport_width);
 
-    /* if is below 481px */
-    if (responsive_viewport_width < 481) {
+    var els = $('.single-post .entry-content, .page-template-default .entry-content, #tabs .columns');
     
+    /* if is below 481px */
+    if (responsive_viewport_width < 768) {
+        $( ".media" ).hide();
+        if (els.hasClass('columnized')) { 
+            $('.column').each(function(){
+               $(this).fadeOut(200, function(){
+                    $(this).children().unwrap();
+                    $(this).fadeIn(200);
+               })
+            });
+            els.find('br').remove();
+
+        }
     } /* end smallest screen */
     
     /* if is larger than 481px */
-    if (responsive_viewport_width > 481) {
-    if ($.fn.columnize) { 
-        $('.single-post .entry-content, .page-template-default .entry-content').columnize({ columns  : 3});
-    };
-
-    //BOOK PLAYER (>481)
-    //tabs
-    if ($.fn.columnize) { 
-    $('#tabs .columns').columnize({
-          columns  : 3,
-          doneFunc : function(){
-                        $( "#tabs" ).tabs({
+    if (responsive_viewport_width > 768) {
+    $( ".media" ).show();
+    if ($.fn.columnize) {
+            if (!els.hasClass('columnized')) {
+            els.columnize({
+                columns  : 3,
+                doneFunc : function(){
+                    els.addClass('columnized');
+                    $( "#tabs" ).tabs({
                             active: 1,
                             show: function(event, ui) {
                                     var lastOpenedPanel = $(this).data("lastOpenedPanel");
@@ -261,21 +321,26 @@ jQuery(document).ready(function($) {
                                     }
                                     $(this).data("lastOpenedPanel", $(ui.panel));
                                 }
-                        });
-                        $('.excerpt-read-more').click(function(){
-                            $( "#tabs" ).tabs({active:0});
-                            return false;
-                        });
-                        $('.playlist-nav a').click(function(){
-                            $( "#tabs" ).tabs({active:1});
-                        });
-        }
-     });
-    }
+                    });
+                        
+                    $('.excerpt-read-more').click(function(){
+                        $( "#tabs" ).tabs({active:0});
+                        return false;
+                    });
+                    $('.playlist-nav a').click(function(event){
+                        event.preventDefault();
+                        $( "#tabs" ).tabs({active:1});
+                        return false;
+                    });
+                }
+            });
+        };
+    };
+   
     //playlist-nav
     $('.playlist-nav a').click(function(event){
         event.preventDefault();
-        var selector = $(this).attr('href').slice(1);
+        var selector = $(this).attr('data');
         var aLink = $('.playlist.main li.'+selector+' a');
         
         $('.playlist-nav a').removeClass('active');
@@ -283,16 +348,19 @@ jQuery(document).ready(function($) {
 
         $('.playlist.main li').hide();
         $('.playlist.main li#'+ selector).show();
-        
+        return false;
     });
 
-    $('body').on('click', '.playlist-nav a.active', function(){
+    $('body').on('click', '.playlist-nav a.active', function(event){
+        event.preventDefault();
         if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off'){
             /* currently it's not been toggled, or it's been toggled to the 'off' state,
                so now toggle to the 'on' state: */
                $(this).attr('data-toggled','on');
                   if (soundManager.supported()) {
                     soundManager.pauseAll();
+                    $(this).removeClass('playing');
+                    $(this).addClass('paused');
                   }
         }
         else if ($(this).attr('data-toggled') == 'on'){
@@ -301,8 +369,11 @@ jQuery(document).ready(function($) {
                $(this).attr('data-toggled','off');
                   if (soundManager.supported()) {
                     soundManager.resumeAll();
+                    $(this).removeClass('paused');
+                    $(this).addClass('playing');
                   }
         }
+        return false;
     });
         
     } /* end larger than 481px */
@@ -318,6 +389,12 @@ jQuery(document).ready(function($) {
         
     }
 }
+
+    responsive_viewport();
+    
+    $(window).resize(_.debounce(function(){
+        responsive_viewport();
+    }, 500));
 	
 	
  

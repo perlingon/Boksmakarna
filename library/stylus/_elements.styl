@@ -8,96 +8,110 @@ hr
   background url(../images/dot.png) repeat-x
   margin 0 auto
   max-width ((max-width)-(30px))
-
-// NAV
-// NAV BASIC STYLING
-
-.center
-  //padding-top 4.5em
-
-#menu-main
-  margin 0
-  z-index 10
-#menu-main ul
-  margin 0
-  padding 0
-  width 100%
+#scrolltop-btn
+  position fixed
+  bottom 0
+  right 5%
   display block
-  list-style none
-
-#menu-main li
+  z-index 9999
+  background black
+  box-shadow 0 0 3px rgba(0,0,0,0.2)
+  border-radius 3px 3px 0 0
+  width 48px
+  height 32px
+#infscr-loading
   width 100%
-  display block
+  text-align center
+  img
+    width 50px
+    height auto
+#ssba
+  position relative
+  img
+    padding 0!important
+  .share-button
+    float left
+    background url(../images/gradient.png) 0% 70% repeat-x
+    height 3em
+    margin 0 .1em
+    .ssba_sharecount
+      border none!important
+      border-radius 0!important
+      clear both
+      width 100%
+      text-align center
+      background transparent!important
+      color bread
+      font .6em serif!important
+      padding 2px!important
+      &:before,
+      &:after
+        content none!important
+//FORMS
+validation = bread
+validation-highlight = orange
+.gform_wrapper
+  padding-bottom 1em
+  label
+    font-family sans-serif
+    font-size 70%
+  span
+    label
+      font-size 50%!important
+      color grey
+  .gfield_required
+    display none
+  input,
+  textarea
+    font-size .8em!important
+    border-radius 8px
+    border none
+    background light-grey
+    padding .8em!important
+    color bread!important
+  .gform_button
+    font-family sans-serif!important
+    border none!important
+  .gform_ajax_spinner
+    height 16px
+    width auto
+  .gform_footer
+    margin-top 0!important
+  //VALIDATION
+  .validation_error
+      display none
+  .gfield_error
+    background url(../images/diagonal-noise.png)!important
+    border-top none!important
+    border-bottom none!important
+    margin-top 0!important
+    margin-bottom 0!important
+    padding 0!important
+    border-left 5px solid orange
+    label,
+    .validation_message
+      color validation!important
+    input,
+    textarea
+      border-color transparent!important
+      background-color validation-highlight
+    .validation_message
+      font-family sans-serif!important
+      font-size 70%
+      color lighten(validation,50%)!important
+      text-transform uppercase!important
+      padding .3em 0 .8em!important
+    label,
+    input,
+    textarea,
+    div,
+    .gfield_contains_required
+      margin-top 0 !important
+      margin-bottom 0 !important
+      font-weight normal!important
 
-#menu-main li.current-menu-item
-  background orange
-  a
-    color white
 
 
-.js #menu-main
-  clip rect(0 0 0 0)
-  max-height 0
-  position absolute
-  display block
-  overflow hidden
-  zoom 1
-
-#menu-main.opened
-  max-height 9999px
-
-#menu-main,
-#menu-main *
-  -moz-box-sizing border-box
-  -webkit-box-sizing border-box
-  box-sizing border-box
-
-
-#menu-main,
-#menu-main ul
-  list-style none
-  width 100%
-
-
-#menu-main li
-  float left
-  width 100%  
-
-
-#menu-main a 
-  color #fff
-  text-decoration none
-  width 100%
-  background orange
-  //border-bottom 1px solid lighten(orange,80%)
-  padding 0.7em 1em
-  float left
-  font-size .8em
-  font-family sans-serif
-
-#menu-main ul ul a
-  background #ca3716
-  padding-left 2em
-
-#nav-toggle
-  -webkit-touch-callout none
-  -webkit-user-select none
-  -moz-user-select none
-  -ms-user-select none
-  user-select none
-  width 90px
-  margin-top .5em
-  padding-top .8em
-  height 50px
-  float right
-  //text-indent -9999px
-  overflow hidden
-  background orange url(../images/hamburger.gif) no-repeat 30% 50%
-  text-align left
-  text-decoration none
-  font sans-serif
-  color black
-  
 //TABS
 #tabs .columns
   height 430px
@@ -147,7 +161,7 @@ hr
   .ui-tabs-panel
     display block
     border-width 0
-    padding 1em 0
+    padding .3em 0
     background none
     clear both
 
@@ -192,12 +206,11 @@ hr
 .no-js select.chosen-select
     display block
 select.chosen-select
-    display none
+    visibility hidden
 
 .chosen-container
-  width 100%
+  margin .4em 0
   position relative
-  display inline-block
   vertical-align middle
   font-family sans-serif
   zoom 1

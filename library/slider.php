@@ -1,7 +1,7 @@
 <?php 
 if( get_field('slides','option')){
       echo '<div class="slider-holder"></div>';
-			echo '<div id="slider" class="royalSlider rsBok" style="display:none">';
+			echo '<div id="slider" class="small-slider royalSlider rsBok" style="display:none">';
 			while( has_sub_field('slides','option') ):
 				if( get_sub_field('link','option')){
 					while(has_sub_field('link','option') ):
@@ -37,29 +37,37 @@ if( get_field('slides','option')){
 					
 					if( get_sub_field('images','option')){
   					while(has_sub_field('images','option') ):
+              $big_id = get_sub_field('big');
+              $small_id = get_sub_field('small');
+
+              $big_img = wp_get_attachment_image_src( $big_id, 'big-slide' );
+              
+              if (get_sub_field('small')) {
+                $small_img = wp_get_attachment_image_src( $small_id, 'small-slide' );
+              }else{
+                $small_img = wp_get_attachment_image_src( $big_id, 'small-slide' );
+              }
+              
+
   						if(get_sub_field('background','option')){
   							while(has_sub_field('background','option') ):
   								if (get_sub_field('image') && get_sub_field('color')) {
   									echo '<div class="rsContent '.$template.'" style="background:url('.get_sub_field('image').');background-color:'.get_sub_field('color').'">';
   								} elseif(get_sub_field('image')){
-  									echo '<div class="rsContent" style="background:url('.get_sub_field('image').')">';
+  									echo '<div class="rsContent '.$template.'" style="background:url('.get_sub_field('image').')">';
   								} else {
-  									echo '<div class="rsContent" style="background:'.get_sub_field('color').'">';
+  									echo '<div class="rsContent '.$template.'" style="background:'.get_sub_field('color').'">';
   								}
   							endwhile;
   						}else{
-  								echo '<div class="rsContent">';
+  								echo '<div class="rsContent '.$template.'">';
   						}
   						if ($veckans == 1) {
-  							echo '<div style="padding-left:200px"><img class="rsImg big" src="'.get_sub_field('big').'"></img></div>';
+  							echo '<div style="padding-left:200px"><img class="rsImg big" src="'.$big_img[0].'"></img></div>';
   						} else {
-  							echo '<img class="rsImg big" src="'.get_sub_field('big').'"></img>';
+  							echo '<img class="rsImg big" src="'.$big_img[0].'"></img>';
   						}
-  						if (get_sub_field('small')) {
-  							echo '<img class="small" src="'.get_sub_field('small').'"></img>';
-  						}else{
-  							echo '<img class="small" src="'.get_sub_field('big').'"></img>';
-  						}
+  						echo '<img class="small" src="'.$small_img[0].'"></img>';
   						
   					endwhile;
   					};
@@ -96,5 +104,6 @@ if( get_field('slides','option')){
 					};
 				endwhile;
 				echo '</div>';
+        echo '<div class="slider-timer"><div></div></div>';
 				};
 ?>

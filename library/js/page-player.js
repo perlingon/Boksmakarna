@@ -1102,7 +1102,8 @@ function PagePlayer() {
           jQuery(document).ready(function($) {
              $('.playlist-nav a').each(function(index){
                   
-                    $(this).click(function(){
+                    $(this).click(function(event){
+                        event.preventDefault();
                         pl.handleClick({target:pl.getByClassName('main', 'ul')[0].getElementsByTagName('a')[index]});
                     });
 
