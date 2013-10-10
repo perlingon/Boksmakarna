@@ -1304,6 +1304,9 @@ p {
   font: 'TrendSansOne';
   color: #000;
 }
+.single .grid-container {
+  display: none;
+}
 .single-post article header,
 .page article header,
 .single-post article footer,
@@ -1852,6 +1855,9 @@ tweeners.
     margin: 0 1.5625%;
     *width: 30.208333333333332% -correction;
     *margin: 0 1.5625% -correction;
+  }
+  .single .grid-container {
+    display: block;
   }
   .single-post .archive-list ul,
   .page .archive-list ul {
