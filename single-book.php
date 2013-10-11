@@ -128,7 +128,7 @@
 													while ( $interview->have_posts() ) {
 															$interview->the_post();
 															echo '<a href="'.get_permalink().'">';
-															echo '<div class="label">Lyssna</div><h4>'.get_the_title().'</h4>';
+															echo '<div><span class="icon"></span></div><h4>'.get_the_title().'</h4>';
 															echo '</a>';
 													}
 													
@@ -160,7 +160,7 @@
 									<?php if (get_sub_field('link')) {?>
 											<a href="<?php the_sub_field('link'); ?>" target="_blank" title="<?php the_sub_field('headline'); ?>">
 	 								<?php } ?>
-	 								<h4>>> <?php the_sub_field('headline'); ?></h4>
+	 								<h4><?php the_sub_field('headline'); ?></h4>
 									<div class="thumb">
 										<?php 
 										$partner = get_sub_field('partner');
@@ -197,13 +197,18 @@
 													$genre_links[] = '<a href="'.get_post_type_archive_link('book').'#filter=.'.$genre->slug.'" >'.$genre->name.'</a>';
 												}
 																	
-												$list = join( "/", $genre_links );
+												$list = join( ',', $genre_links );
 												echo '<div class="genres">'.$list.'</div>';
 
 											endif;
 								?>
 								<div id="tabs">
 								  <ul>
+								  	<?php if (get_field('offer')) {
+								  		while (has_sub_field('offer')) {
+								  		echo '<li><a href="'.get_sub_field('link').'"class="buy-button">Köp>></a></li>';
+								  		}
+								  	} ?>
 								    <li><a href="#read-more"><span>Läs Mer</span></a></li>
 								    <li><a href="#listen"><span>Lyssna</span></a></li>
 								  </ul>

@@ -92,7 +92,7 @@
 									$list = join( ", ", $writer_links );
 									echo '<div class="tags writer-tags">'.$list.'</div>';
 								endif;
-								echo '<p>'.get_field('short_description').'</p>';
+								echo '<p class="sweet-justice">'.get_field('short_description').'</p>';
 								echo '<div class="timestamp">'.get_the_time('U').'</div>';
 								if ( $genres && ! is_wp_error( $genres ) ) : 
 									$genre_links = array();

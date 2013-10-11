@@ -58,7 +58,7 @@ add_image_size( 'grid-block', 250, 200, true );
 add_image_size( 'cover', 620, 400, true );
 
 add_image_size( 'featured', 680, 380, true );
-add_image_size( 'logo', 180, true );
+add_image_size( 'logo', 99999,130, false );
 
 //Slides
 add_image_size( 'big-slide', 960, 390, true );
@@ -89,8 +89,8 @@ function set_episode_title( $data , $postarr ) {
   if($data['post_type'] == 'episode') {
   	//http://codex.wordpress.org/Plugin_API/Filter_Reference/wp_insert_post_data
     $tags = $postarr['tags_input'];
-    $episode_title = implode(" ", $tags);
-    $post_slug = sanitize_title_with_dashes ($episode_title,'','save');
+    $episode_title = join(" - ", $tags);
+    $post_slug = sanitize_title_with_dashes($episode_title,'','save');
     $post_slugsan = sanitize_title($post_slug);
 
     $data['post_title'] = $episode_title;
@@ -98,7 +98,7 @@ function set_episode_title( $data , $postarr ) {
   }
   return $data;
 }
-//add_filter( 'wp_insert_post_data' , 'set_episode_title' , '10', 2 );
+add_filter( 'wp_insert_post_data' , 'set_episode_title' , '10', 2 );
 
 function insertSocial($content) {
         if(is_singular('episode') || is_archive('episode') || is_singular('book')) {
@@ -121,6 +121,9 @@ function additional_libraries() {
   	wp_register_script( 'main', get_template_directory_uri() . '/library/js/compressed/_main.min.js', array( 'jquery' ), '', false );
   	wp_enqueue_script( 'main' );
 
+  	wp_register_script( 'footer', get_template_directory_uri() . '/library/js/compressed/_footer.min.js', array( 'jquery' ), '', true );
+  	wp_enqueue_script( 'footer' );
+
   	if (is_single() || is_page()) {
   		wp_register_script( 'single', get_template_directory_uri() . '/library/js/compressed/_single.min.js', array( 'jquery' ), '', false );
   		wp_enqueue_script( 'single' );
@@ -141,13 +144,14 @@ function additional_libraries() {
 	if (is_home()) {
 		wp_register_script( 'home', get_template_directory_uri() . '/library/js/compressed/_home.min.js', array( 'jquery' ), '', false );
   		wp_enqueue_script( 'home' );
-
+    }
+    if (is_home()||is_single()) {
 		//Royal Slider Styles
   		wp_register_style( 'slider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
   		wp_register_style( 'slider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
 		wp_enqueue_style( 'slider' );
 		wp_enqueue_style( 'slider-skin' );
-    }
+	}
 
   }
 }

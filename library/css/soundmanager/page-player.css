@@ -88,6 +88,7 @@ ul.playlist-nav {
   font-family: "TrendSansOne";
   font-size: 80%;
   padding: 0;
+  margin-bottom: 2.4em;
 }
 ul.playlist-nav span {
   padding: 3px 0 5px;
@@ -117,10 +118,18 @@ ul.playlist-nav i {
   background-repeat: no-repeat;
 }
 ul.playlist.init li {
-  min-height: 50px;
+  height: 1.7em;
+  margin-bottom: 1.7em;
+  border-bottom: 0.85em solid #e2e2e2;
 }
 ul.playlist.init li a i {
   display: block;
+}
+ul.playlist.init li.sm2_playing,
+ul.playlist.init li.sm2_paused {
+  height: auto;
+  border-bottom: none;
+  margin-bottom: 0;
 }
 ul.playlist li a {
   display: block;
@@ -139,7 +148,10 @@ ul.playlist li a i {
   height: 40px;
   margin-right: 5px;
   margin-top: 2px;
-  background: #333;
+  background-image: url("../../images/play-pause.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-color: #3c3c3c;
   border-radius: 20px;
   float: left;
 }
@@ -156,7 +168,10 @@ ul.playlist li:hover a {
 }
 ul.playlist li.sm2_playing i,
 ul.playlist li.sm2_playing:hover i {
-  background: #3c3c3c;
+  background-position: bottom center;
+}
+ul.playlist li.sm2_paused i {
+  background-color: #636363;
 }
 ul.playlist li .controls {
   display: none;
@@ -243,7 +258,7 @@ ul.playlist li .timing {
   display: none;
   text-align: right;
   right: 1em;
-  top: 0;
+  top: -2px;
   width: auto;
   height: 1em;
   padding: 2px 0;

@@ -1,8 +1,8 @@
- <?php
+<?php
 
 function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 
-	if ($post_type == 'book' AND $toolbar) {
+	if ($post_type == 'book' && $toolbar == true) {
 		
 		$titles = new WP_Query('post_type='.$post_type.'&posts_per_page='.$post_count.'&orderby=title');
 		
@@ -104,7 +104,7 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 									$list = join( ", ", $writer_links );
 									echo '<div class="tags writer-tags">'.$list.'</div>';
 								endif;
-								echo '<p>'.get_field('short_description').'</p>';
+								echo '<p class="sweet-justice">'.get_field('short_description').'</p>';
 								echo '<div class="timestamp">'.get_the_time('U').'</div>';
 								if ( $genres && ! is_wp_error( $genres ) ) : 
 									$genre_links = array();
@@ -122,7 +122,7 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 					echo '<div id="block-'.$count.'" class="grid-item">';
 					the_post_thumbnail('grid-block');
 					echo '<h3>'.get_the_title().'</h3>';
-					the_excerpt();
+					echo '<p class="sweet-justice">'.get_the_excerpt().'</p>';
 					echo '</div>';
 				}
 

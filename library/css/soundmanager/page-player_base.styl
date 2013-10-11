@@ -86,7 +86,7 @@ ul.playlist-nav
 ul.playlist.small
 	li
 		font-size 120%
-		background url(../../images/play.png) 0% 50% no-repeat
+		background url('../../images/play.png') 0% 50% no-repeat
 		padding-left 20px
 	li.sm2_playing,
 	li.sm2_paused
@@ -102,6 +102,7 @@ ul.playlist-nav
 	font-family sans-serif
 	font-size 80%
 	padding 0
+	margin-bottom 2.4em
 	span
 		padding: 3px 0 5px
 	a
@@ -126,10 +127,17 @@ ul.playlist-nav
 		background-repeat:no-repeat
 
 ul.playlist.init li
-	min-height 50px
+	height 1.7em
+	margin-bottom 1.7em
+	border-bottom 0.85em solid lighten(dark,85%)
 	a
 		i
 			display block 
+	&.sm2_playing,
+	&.sm2_paused
+		height auto
+		border-bottom none
+		margin-bottom 0
 
 ul.playlist li a 
  display block
@@ -147,7 +155,10 @@ ul.playlist li a
  	height 40px
  	margin-right 5px
  	margin-top 2px
- 	background #333
+ 	background-image url('../../images/play-pause.png')
+ 	background-repeat no-repeat
+ 	background-position top center
+ 	background-color dark
  	border-radius 20px
  	float left
 
@@ -175,11 +186,11 @@ ul.playlist li.sm2_playing,
 ul.playlist li.sm2_playing:hover 
  //background-color orange
  i
- 	background dark
+ 	background-position bottom center
 
 ul.playlist li.sm2_paused 
- //background-color lighten(dark,85%)
-
+ i
+ 	background-color lighten(dark,20%)
 ul.playlist li.sm2_playing:hover a,
 ul.playlist li.sm2_paused a 
  //color #fff
@@ -286,7 +297,7 @@ ul.playlist li .timing
  display none
  text-align right
  right 1em
- top 0
+ top -2px
  width auto
  height 1em
  padding 2px 0

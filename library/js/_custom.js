@@ -281,7 +281,8 @@ jQuery(document).ready(function($) {
     console.log('width: '+responsive_viewport_width);
 
     var els = $('.single-post .entry-content, .page-template-default .entry-content, #tabs .columns');
-    
+
+    $('.single .entry-content p,.archive .entry-content p').addClass('sweet-justice');
     /* if is below 481px */
     if (responsive_viewport_width < 768) {
         $( ".media" ).hide();
@@ -306,8 +307,10 @@ jQuery(document).ready(function($) {
                 columns  : 3,
                 doneFunc : function(){
                     els.addClass('columnized');
+                    els.find('p').removeClass('sweet-justice');
+                    els.find('p').addClass('sweet-justice');
                     $( "#tabs" ).tabs({
-                            active: 1,
+                            active: -1,
                             show: function(event, ui) {
                                     var lastOpenedPanel = $(this).data("lastOpenedPanel");
                                     if (!$(this).data("topPositionTab")) {
@@ -324,12 +327,12 @@ jQuery(document).ready(function($) {
                     });
                         
                     $('.excerpt-read-more').click(function(){
-                        $( "#tabs" ).tabs({active:0});
+                        $( "#tabs" ).tabs({active:-2});
                         return false;
                     });
                     $('.playlist-nav a').click(function(event){
                         event.preventDefault();
-                        $( "#tabs" ).tabs({active:1});
+                        $( "#tabs" ).tabs({active:-1});
                         return false;
                     });
                 }

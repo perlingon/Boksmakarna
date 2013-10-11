@@ -59,13 +59,13 @@
 						<hr />
 						<div class="list-wrapper">
 							<div>
-						<?php $posts = new WP_Query('showposts=12&orderby=date&order=desc');?>
+						<?php $posts = new WP_Query('showposts=50&orderby=date&order=desc');?>
 
 
 							<?php foreach(new WP_Query_Columns($posts, 3) as $column => $column_count) : ?>
 							<?php 
 							    	if($column % 4 == 0){
-									    echo '</div><div class="separator">';
+									    echo '</div><div class="rsContent separator">';
 									}
 							?>
 							    <ul>

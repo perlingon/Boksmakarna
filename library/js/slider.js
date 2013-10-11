@@ -93,6 +93,8 @@ jQuery(document).ready(function($) {
 }
 responsive_slider();
 
+$('.archive-list').royalSlider();
+
 //SLIDER EVENTS
 
 //slider.ev.on('rsAfterSlideChange', function() {slidertimer();});

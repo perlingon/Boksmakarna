@@ -19,7 +19,7 @@
 											while ( $news->have_posts() ) {
 												$news->the_post();
 												echo '<a href="'.get_permalink().'"><h4 class="widgettitle">'.get_the_title().'</h4></a>';
-												echo '<div class="textwidget">'.get_the_excerpt().'</div>';
+												echo '<div class="textwidget"><p class="sweet-justice">'.get_the_excerpt().'</p></div>';
 												echo '<span>'.get_the_date('Y.m.d').'</span>';
 											}
 										}
@@ -71,7 +71,7 @@
 									$list = join( ", ", $writer_links );
 									echo '<div class="tags writer-tags">'.$list.'</div>';
 								endif;
-								echo '<p>'.get_field('short_description').'</p>';
+								echo '<p class="sweet-justice">'.get_field('short_description').'</p>';
 								echo '<div class="timestamp">'.get_the_time('U').'</div>';
 								if ( $genres && ! is_wp_error( $genres ) ) : 
 									$genre_links = array();

@@ -217,29 +217,28 @@ hr {
   position: relative;
 }
 #ssba img {
-  padding: 0 !important;
+  padding: 0;
+  max-width: 36px;
 }
 #ssba .share-button {
   float: left;
   background: url("../images/gradient.png") 0% 70% repeat-x;
-  height: 3em;
-  margin: 0 0.1em;
+  margin: 0 0.3em;
+  min-height: 3em;
 }
 #ssba .share-button .ssba_sharecount {
-  border: none !important;
-  -webkit-border-radius: 0 !important;
-  border-radius: 0 !important;
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
   clear: both;
   width: 100%;
   text-align: center;
-  background: transparent !important;
-  color: #393a39;
-  font: 0.6em 'Courier' !important;
-  padding: 2px !important;
-}
-#ssba .share-button .ssba_sharecount:before,
-#ssba .share-button .ssba_sharecount:after {
-  content: none !important;
+  background: transparent;
+  color: #868686;
+  font: 0.8em 'Courier';
+  padding: 2px;
+  position: relative;
+  top: -7px;
 }
 .gform_wrapper {
   padding-bottom: 1em;
@@ -973,7 +972,7 @@ body:after {
 body {
   font-family: 'Courier';
   font-size: 100%;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #393a39;
   background: #f7f7f7;
   padding-top: 3.7em;
@@ -1022,10 +1021,22 @@ body {
   clear: both;
 }
 .home #editorial .widget {
-  padding: 1.5em 0;
+  padding: 1.7em 0 2.5em;
+}
+.home #editorial .widget h3 {
+  font-size: 1.6em;
+  padding-bottom: 0.3em;
+}
+.home #editorial .widget h4 {
+  font-size: 1.2em;
+  padding-bottom: 0.8em;
+}
+.home #editorial .news a {
+  text-decoration: none;
 }
 .home #editorial .news span {
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   color: #868686;
   background: #f7f7f7;
   font-size: 80%;
@@ -1054,28 +1065,27 @@ body {
   text-align: center;
   padding-top: 35%;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   z-index: 99;
 }
 .grid-container .grid-item img {
   width: 100%;
   height: auto;
 }
-.grid-container .grid-item h1,
-.grid-container .grid-item h2,
-.grid-container .grid-item h3 {
-  font-size: 1em;
-}
 .grid-container .grid-item h4 {
   max-width: 80%;
+  font-size: 110%;
 }
 .grid-container .grid-item .tags {
   clear: both;
-  font-size: 0.91em;
+  font-size: 0.85em;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   color: #868686;
 }
 .grid-container .grid-item .tags.writer-tags {
   padding-bottom: 0.2em;
+  max-width: 80%;
 }
 .grid-container .grid-item .tags.genre-tags {
   padding-bottom: 0.8em;
@@ -1085,10 +1095,12 @@ body {
 }
 .grid-container .grid-item .belowimg {
   position: relative;
+  margin-top: 0.6em;
 }
 .grid-container .grid-item .label {
   position: absolute;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   font-size: 70%;
   background: #e6e6e6;
   -webkit-border-radius: 1em;
@@ -1121,8 +1133,9 @@ body {
 }
 .grid-container .grid-item p {
   clear: both;
-  padding-bottom: 0.2em;
-  font-size: 92%;
+  padding: 0.7em 0;
+  font-size: 90%;
+  line-height: 1.3;
 }
 .grid-container .grid-item a {
   text-decoration: none;
@@ -1172,7 +1185,7 @@ h5,
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   text-transform: uppercase;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.08em;
 /*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -1278,6 +1291,7 @@ p {
   float: left;
   font-size: 0.8em;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
 }
 #menu-main ul ul a {
   background: #ca3716;
@@ -1372,6 +1386,7 @@ p {
 .single-post position relative .list-wrapper ul,
 .page position relative .list-wrapper ul {
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   font-size: 80%;
   list-style-type: none;
   padding: 0;
@@ -1420,18 +1435,46 @@ p {
   font-size: 1.5em;
   margin-bottom: 0.2em;
 }
+.single-book .buy-button {
+  background-color: #9e9e9e;
+  margin-left: 0.5em;
+  color: #f7f7f7 !important;
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  -ms-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+.single-book .buy-button:hover {
+  background-color: #ff8433;
+}
 .single-book .media {
   display: none;
 }
 .single-book .taxonomies .writers {
   font-size: 80%;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   color: #868686;
   margin-bottom: 0.5em;
 }
 .single-book .taxonomies .writers a {
   text-decoration: none;
   color: #868686;
+}
+.single-book .offer h4 {
+  font-size: 80%;
+  margin: 0.5em 0;
 }
 .single-book .offer .description {
   font-size: 85%;
@@ -1441,7 +1484,8 @@ p {
 .single-book .interview {
   margin-top: 1em;
   font-size: 90%;
-  text-align: center;
+  border-top: solid 2px #e6e6e6;
+  padding-top: 1.2em;
 }
 .single-book .interview a {
   text-decoration: none;
@@ -1455,36 +1499,48 @@ p {
   border-radius: 3px;
 }
 .single-book .interview h4 {
-  display: inline-block;
+  width: 80%;
+  line-height: 120%;
+  float: left;
 }
-.single-book .interview .label {
+.single-book .interview div {
+  width: 2.1em;
+  height: 4em;
+  margin-top: -0.3em;
+  float: left;
+}
+.single-book .interview div .icon {
+  background-image: url("../images/interview.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #e6e6e6;
   font-family: 'TrendSansOne';
-  font-size: 70%;
-  background: #e6e6e6;
+  text-transform: uppercase;
   display: inline-block;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
-  padding: 0.3em 1em;
+  height: 1.8em;
+  width: 1.8em;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
   -webkit-transition-property: color, background-color;
   -moz-transition-property: color, background-color;
   -o-transition-property: color, background-color;
   -ms-transition-property: color, background-color;
   transition-property: color, background-color;
-  -webkit-transition-duration: 0.5s, 0.5s;
-  -moz-transition-duration: 0.5s, 0.5s;
-  -o-transition-duration: 0.5s, 0.5s;
-  -ms-transition-duration: 0.5s, 0.5s;
-  transition-duration: 0.5s, 0.5s;
+  -webkit-transition-duration: 0.3s, 0.3s;
+  -moz-transition-duration: 0.3s, 0.3s;
+  -o-transition-duration: 0.3s, 0.3s;
+  -ms-transition-duration: 0.3s, 0.3s;
+  transition-duration: 0.3s, 0.3s;
   -webkit-transition-timing-function: linear, linear;
   -moz-transition-timing-function: linear, linear;
   -o-transition-timing-function: linear, linear;
   -ms-transition-timing-function: linear, linear;
   transition-timing-function: linear, linear;
 }
-.single-book .interview:hover .label {
-  background: #ff8433;
+.single-book .interview:hover div .icon {
+  background-color: #ff8433;
 }
-.single-book .interview:hover .label a {
+.single-book .interview:hover div .icon a {
   color: #fff;
 }
 .single-book .infobox {
@@ -1701,6 +1757,7 @@ font-weight bold ul .next-link,
   position: relative;
   overflow: hidden;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
 }
 #slider .rsContent .info .content {
   background: #ff8433;
@@ -1732,6 +1789,7 @@ font-weight bold ul .next-link,
   color: #868686;
   background: #f0f2f1;
   font-family: 'TrendSansOne';
+  text-transform: uppercase;
   padding: 1.5em 0;
   margin-top: 1.5em;
   width: 100%;
@@ -1999,16 +2057,12 @@ you can add resource intensive styles.
     text-decoration: none;
     font-size: 70%;
     font-family: 'TrendSansOne';
+    text-transform: uppercase;
   }
   .single-book .info-wrapper,
   .single-episode .info-wrapper,
   .post-type-archive-episode .info-wrapper {
-    height: 23.5em;
-  }
-  .single-book .infobox,
-  .single-episode .infobox,
-  .post-type-archive-episode .infobox {
-    height: 8em;
+    height: 23em;
   }
   .single-book .player,
   .single-episode .player,
@@ -2032,7 +2086,7 @@ you can add resource intensive styles.
   .single-book .media #listen .attachment-featured,
   .single-episode .media #listen .attachment-featured,
   .post-type-archive-episode .media #listen .attachment-featured {
-    margin-bottom: 0.3em;
+    margin-bottom: 1.4em;
   }
   .single-book .media #listen .playlist,
   .single-episode .media #listen .playlist,
@@ -2061,13 +2115,13 @@ you can add resource intensive styles.
   .single-episode .media #listen .sharing #ssba .share-button,
   .post-type-archive-episode .media #listen .sharing #ssba .share-button {
     min-width: 30px;
-    width: 30% !important;
-    max-width: 40px !important;
+    width: 30%;
+    max-width: 36px;
   }
   .single-book .media #listen .sharing #ssba .share-button img,
   .single-episode .media #listen .sharing #ssba .share-button img,
   .post-type-archive-episode .media #listen .sharing #ssba .share-button img {
-    width: 100% !important;
+    width: 100%;
     height: auto;
   }
   .single-book article,
@@ -2172,6 +2226,15 @@ query for retina AND a certain size if you want. Go Nuts.
     -webkit-background-size: 16px 16px;
     -moz-background-size: 16px 16px;
     background-size: 16px 16px;
+  }
+  ul.playlist a i {
+    background-image: url("../images/play-pause@2x.png");
+    -webkit-background-size: 40px 40px;
+    -moz-background-size: 40px 40px;
+    -o-background-size: 40px 40px;
+    -webkit-background-size: 40px 40px;
+    -moz-background-size: 40px 40px;
+    background-size: 40px 40px;
   }
 }
 /*
