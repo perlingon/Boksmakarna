@@ -40,7 +40,7 @@
 									the_excerpt();
 
 									if( has_term( 'yes', 'upcoming' ) ) {
-									    echo 'kommer snart...';
+									    echo 'Avsnitt kommer snart...';
 									}else{
 
 									 	$slug = get_the_slug();
@@ -176,7 +176,8 @@
 													echo '<i>Ingen intervju.</i>';
 												}
 												wp_reset_query();
-											}								 
+											}
+
 									?>
 									<div id="sm2-container">
   										<!-- SM2 flash goes here -->
