@@ -15,8 +15,8 @@ jQuery(document).ready(function($) {
         arrowsNavAutoHide: true,
         imageAlignCenter: true,
         autoScaleSlider: true, 
-        autoScaleSliderWidth: 480,     
-        autoScaleSliderHeight: 320,
+        autoScaleSliderWidth: 960,     
+        autoScaleSliderHeight: 390,
         controlNavigation: 'bullets',
         thumbsFitInViewport: false,
         fadeinLoadedSlide: false,
@@ -33,7 +33,6 @@ jQuery(document).ready(function($) {
         globalCaption: false
       }).fadeIn(800);
     }
-    var slider = $("#slider").data('royalSlider');
 
     function slidertimer(){
         $( ".slider-timer div" ).css('width','0');
@@ -53,7 +52,7 @@ jQuery(document).ready(function($) {
     console.log('slider window width: '+responsive_viewport_width);
 
     /* if larger than 960 */
-    if (responsive_viewport_width > 960) {
+    if (responsive_viewport_width > 1030) {
         var transtype = 'fade';
         var arrows = true;
         var speed = 1000;
@@ -66,8 +65,6 @@ jQuery(document).ready(function($) {
     }else if(responsive_viewport_width < 480){
         var transtype = 'move';
         var arrows = false;
-        var autowidth = 480;
-        var autoheight = 320;
         var speed = 500;
         var delay = 5000;
         $('#slider').removeClass('big-slider');
@@ -76,10 +73,7 @@ jQuery(document).ready(function($) {
         initSlider('#slider');
     }else{
         var transtype = 'move';
-        var arrows = true;
-        var autoscale = true;
-        var autowidth = 960;
-        var autoheight = 390;
+        var arrows = false;
         var speed = 700;
         var delay = 5000;
         $('#slider').removeClass('big-slider');
@@ -89,17 +83,18 @@ jQuery(document).ready(function($) {
     }
     slidertimer();
 
+    //SLIDER EVENTS
+    var slider = $("#slider").data('royalSlider');
+    slider.ev.on('rsAfterSlideChange', function() {slidertimer();});
+    slider.ev.on('rsDragStart', function(event) {$( ".slider-timer div" ).fadeOut(200);$( ".slider-timer" ).css('background','transparent');});
+    $( ".rsArrow,.rsNav" ).on('click', function() {$( ".slider-timer div" ).fadeOut(200);$( ".slider-timer" ).css('background','transparent');});
 
 }
 responsive_slider();
 
 $('.archive-list').royalSlider();
 
-//SLIDER EVENTS
 
-//slider.ev.on('rsAfterSlideChange', function() {slidertimer();});
-//slider.ev.on('rsDragStart', function(event) {$( ".slider-timer" ).fadeOut(200);});
-//$( ".rsArrow,.rsNav" ).on('click', function() {$( ".slider-timer" ).fadeOut(200);});
 
 $(window).resize(_.debounce(function(){
     responsive_slider();

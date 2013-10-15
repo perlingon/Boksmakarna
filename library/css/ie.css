@@ -95,6 +95,12 @@ body {
   width: 96%;
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 0.5em;
+}
+.home .center {
+  margin-top: 2em;
+  z-index: 99;
+  position: relative;
 }
 .border {
   height: 0.5em;
@@ -111,6 +117,9 @@ body {
   width: 100%;
   top: 0;
   background: #fff;
+  opacity: 0.93;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=93)";
+  filter: alpha(opacity=93);
 }
 .header nav ul {
   padding: 0;
@@ -124,8 +133,9 @@ body {
 .header .social-box {
   position: absolute;
   right: 0;
-  top: 1em;
+  top: 1.6em;
   display: none;
+  z-index: 1;
 }
 #main {
   clear: both;
@@ -169,6 +179,7 @@ body {
   margin-bottom: 1em;
   display: block;
   font-size: 0.8em;
+  min-height: 440px;
 }
 .grid-container .grid-item .overlay {
   *background: url("../images/opacity.png");
@@ -467,9 +478,15 @@ p {
   *width: 96.875% -correction;
   *margin: 0 1.5625% -correction;
 }
-.single-post .content-row h4,
-.page .content-row h4 {
-  padding-left: 15px;
+.page .entry-content {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 96.875%;
+  margin: 0 1.5625%;
+  *width: 96.875% -correction;
+  *margin: 0 1.5625% -correction;
+  padding: 1em 0 1.5em;
 }
 .single-post .column,
 .page .column {
@@ -531,9 +548,12 @@ p {
 }
 .single-post .content-row h4,
 .page .content-row h4 {
-  font-size: 80%;
+  font-size: 90%;
+}
+.single-post .content-row h4.content-row-headline,
+.page .content-row h4.content-row-headline {
   position: absolute;
-  top: -9px;
+  top: -7px;
   padding-right: 0.5em;
   background: #f7f7f7;
 }
@@ -542,7 +562,8 @@ p {
   display: block;
   padding: 2em 0;
 }
-.single-book article .entry-content p {
+.single-book article .entry-content p,
+.single-book article .content-row-content p {
   padding: 1em 0;
 }
 .single-book h1 {
@@ -594,6 +615,7 @@ p {
   font-size: 85%;
   line-height: 110%;
   color: #868686;
+  text-align: left;
 }
 .single-book .interview {
   margin-top: 1em;
@@ -665,7 +687,6 @@ p {
 }
 .single-book .infobox .info {
   font-size: 80%;
-  padding: 0 0.5em;
 }
 .post-wrapper {
   clear: both;
@@ -675,7 +696,7 @@ p {
   clear: both;
 }
 #content {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 #content .attachment-featured {
   width: 100%;
@@ -700,7 +721,8 @@ p {
   color: #999;
 time
 }
-.entry-content {
+.entry-content,
+.content-row-content {
   ul: , ol, table, dl;
 dl
 dt
@@ -711,33 +733,46 @@ dt
 	but it's up to you. Feel free to change it up.
 	*/
 }
-.entry-content p {
+.entry-content p,
+.content-row-content p {
   font-size: 0.8em;
   margin-bottom: 1em;
 }
-.entry-content dd {
+.entry-content dd,
+.content-row-content dd {
   margin-left: 0;
   font-size: 0.9em;
   color: #787878;
   margin-bottom: 1.5em;
 }
-.entry-content img {
+.entry-content img,
+.content-row-content img {
   margin: 0 0 1.5em 0;
-  max-width: 100%;
   height: auto;
+  width: 100%;
+  clear: both;
 }
 .entry-content .alignleft,
+.content-row-content .alignleft,
 .entry-content img.alignleft,
+.content-row-content img.alignleft,
 .entry-content .alignright,
+.content-row-content .alignright,
 .entry-content img.alignright,
+.content-row-content img.alignright,
 .entry-content .aligncenter,
+.content-row-content .aligncenter,
 .entry-content img.aligncenter,
+.content-row-content img.aligncenter,
 .entry-content video,
-.entry-content object {
+.content-row-content video,
+.entry-content object,
+.content-row-content object {
   max-width: 100%;
   height: auto;
 }
-.entry-content pre {
+.entry-content pre,
+.content-row-content pre {
   background: #eee;
   border: 1px solid #cecece;
   padding: 10px;
@@ -836,12 +871,12 @@ font-weight bold ul .next-link,
   z-index: 0;
 }
 .slider-timer {
+  margin-top: 40%;
   width: 100%;
   height: 4px;
   background: #e6e6e6;
   position: relative;
-  top: -2.1em;
-  z-index: 999;
+  z-index: 9;
 }
 .slider-timer div {
   width: 0;
@@ -854,14 +889,21 @@ font-weight bold ul .next-link,
 }
 #slider {
   width: 100%;
-  font-size: 70%;
+  font-size: 80%;
   background: #f7f7f7;
-  margin-bottom: 3em;
-  max-height: 390px;
+  clear: both;
+  margin-bottom: 15%;
+  z-index: 0;
+  overflow: visible;
+}
+#slider .rsContent,
+#slider .rsSlide {
+  overflow: visible;
 }
 #slider .rsContent {
   width: 100%;
   background: #f7f7f7;
+  background-repeat: repeat;
 }
 #slider .rsContent .info {
   width: 100%;
@@ -869,18 +911,20 @@ font-weight bold ul .next-link,
   margin: 0 auto;
   margin-top: -320px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   font-family: 'TrendSansOne';
   text-transform: uppercase;
 }
 #slider .rsContent .info .content {
-  background: #ff8433;
+  background: #f0f2f1;
+  border-top: 1px solid #e6e6e6;
   text-align: center;
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: -12px;
   padding: 0.8em 0;
-  min-height: 6em;
+  max-height: 90px;
+  height: 90px;
   z-index: 999;
 }
 #slider .rsContent .info .content hr {
@@ -890,6 +934,17 @@ font-weight bold ul .next-link,
 #slider .rsContent .info .content h3 {
   margin: 0;
 }
+#slider .rsContent .info .content q {
+  font-family: 'TrendSansFive-Italic';
+  font-size: 170%;
+  text-transform: uppercase;
+  line-height: 110%;
+  letter-spacing: -0.1em;
+  padding: 0.3em 10%;
+  display: none;
+  text-align: center;
+  clear: both;
+}
 #slider .rsContent img.big {
   display: none;
 }
@@ -897,14 +952,13 @@ font-weight bold ul .next-link,
   display: block;
   width: 100%;
   height: auto;
+  padding-bottom: 60px;
 }
 .footer {
   clear: both;
   color: #868686;
   background: #f0f2f1;
-  font-family: 'TrendSansOne';
-  text-transform: uppercase;
-  padding: 1.5em 0;
+  padding: 1.5em 0.5em;
   margin-top: 1.5em;
   width: 100%;
 /* end .footer-links */
@@ -924,20 +978,29 @@ font-weight bold ul .next-link,
   -webkit-padding-start: 0;
   list-style-type: none;
   font-size: 80%;
+  font-family: 'TrendSansOne';
+  text-transform: uppercase;
+  font-size: 80%;
 }
 .footer #inner-footer ul li {
   margin: 0;
 }
-.footer #inner-footer h4 {
-  margin: 0;
+.footer #inner-footer p {
+  font-size: 75%;
+  margin: 0 0 0.3em;
 }
-.footer #inner-footer .textwidget {
-  font-size: 80%;
+.footer #inner-footer h4 {
+  margin: 0 0 0.3em;
+  clear: both;
 }
 .footer .copyright {
   clear: both;
-  font-size: 80%;
+  font-size: 60%;
+  padding: 1em 0;
   text-align: center;
+  font-family: 'TrendSansOne';
+  color: #aaa;
+  text-transform: uppercase;
 }
 body {
   padding-top: 0;
@@ -960,6 +1023,21 @@ body {
 }
 .header .social-box {
   display: block;
+}
+.center {
+  padding: 0;
+}
+.home .center {
+  margin-top: 0;
+}
+.content-row-content {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 96.875%;
+  margin: 0 1.5625%;
+  *width: 96.875% -correction;
+  *margin: 0 1.5625% -correction;
 }
 .chosen-container,
 .grid-item {
@@ -1019,6 +1097,48 @@ body {
   *width: 46.875% -correction;
   *margin: 0 1.5625% -correction;
 }
+.single-post .entry-content img,
+.page .entry-content img,
+.single-post .content-row-content img,
+.page .content-row-content img {
+  height: auto;
+  clear: none;
+}
+.single-post .entry-content img.alignleft,
+.page .entry-content img.alignleft,
+.single-post .content-row-content img.alignleft,
+.page .content-row-content img.alignleft {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 30.208333333333332%;
+  margin: 0 1.5625%;
+  *width: 30.208333333333332% -correction;
+  *margin: 0 1.5625% -correction;
+  float: left;
+  margin: 0 30px 1.5em 0;
+}
+.single-post .entry-content img.alignright,
+.page .entry-content img.alignright,
+.single-post .content-row-content img.alignright,
+.page .content-row-content img.alignright {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 30.208333333333332%;
+  margin: 0 1.5625%;
+  *width: 30.208333333333332% -correction;
+  *margin: 0 1.5625% -correction;
+  float: right;
+  margin: 0 0 1.5em 30px;
+}
+.single-post .entry-content img.aligncenter,
+.page .entry-content img.aligncenter,
+.single-post .content-row-content img.aligncenter,
+.page .content-row-content img.aligncenter {
+  margin: 0.5em auto;
+  clear: both;
+}
 .slider-holder {
   height: 390px;
   margin-bottom: -390px;
@@ -1027,15 +1147,14 @@ body {
   display: none;
 }
 #slider {
-  height: 390px;
   font-size: 100%;
+  margin-bottom: 3em;
 }
 #slider .rsContent .info {
   overflow: hidden;
   margin: 0 auto;
-  height: 390px;
-  margin-top: -390px;
-  max-width: 960px;
+  height: 220px;
+  margin-top: -220px;
 }
 #slider .rsContent .info .content {
   background: transparent;
@@ -1045,12 +1164,21 @@ body {
   height: 40%;
   -webkit-box-shadow: none;
   box-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  font-size: 75%;
+}
+#slider .rsContent .info .content q {
+  display: block;
+  font-size: 190%;
+  line-height: 105%;
 }
 #slider .rsContent img.big {
   display: block;
 }
 #slider .rsContent img.small {
   display: none;
+  padding-bottom: 0;
 }
 #slider .veckans .info .content {
   top: 30%;
@@ -1111,6 +1239,14 @@ footer #inner-footer >div {
   margin: 0 1.5625%;
   *width: 30.208333333333332% -correction;
   *margin: 0 1.5625% -correction;
+}
+footer #inner-footer .middle-widget {
+  text-align: center;
+}
+footer #inner-footer .middle-widget ul {
+  margin: 0 auto;
+  display: block;
+  width: 60%;
 }
 .single-book article p {
   font-size: 0.75em;
@@ -1251,6 +1387,30 @@ footer #inner-footer >div {
 #menu-main ul ul a {
   display: none;
 }
+#slider {
+  max-height: 390px;
+}
+#slider .rsContent .info {
+  height: 340px;
+  margin-top: -340px;
+  max-width: 960px;
+}
+#slider .rsContent .info .content {
+  font-size: 95%;
+}
+#slider .rsContent .info .content q {
+  font-size: 200%;
+}
+#slider .rsContent .info {
+  height: 390px;
+  margin-top: -390px;
+}
+#slider .rsContent .info .content {
+  font-size: 100%;
+}
+#slider .rsContent .info .content q {
+  font-size: 200%;
+}
 ul.playlist.main {
   display: block;
 }
@@ -1281,6 +1441,14 @@ html,
 body,
 .center {
   min-width: 960px !important;
+}
+ul.social-icons li a {
+  background-image: url("../images/social-icons-ie.png");
+  background-color: transparent;
+}
+ul.social-icons li a:hover,
+ul.social-icons li a:focus {
+  background-color: transparent;
 }
 /*
 For example, you can use something like:

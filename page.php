@@ -25,20 +25,25 @@
 
 								</footer> <!-- end article footer -->
 
-								<?php if (get_field('content_row')) {
-										while (has_sub_field('content_row')) {
-								?>
+								<?php if (get_field('content_row')) {?>
+								<section class="content-row-content clearfix" itemprop="articleBody">
+								<?php while (has_sub_field('content_row')) { ?>
+								
 								<div class="content-row">
-									<h4><?php the_sub_field('headline'); ?></h4>
+									<h4 class="content-row-headline"><?php the_sub_field('headline'); ?></h4>
 									<hr />
-									<div class="content">
+									<div class="content sweet-justice">
 										<?php the_sub_field('content'); ?>
 										<div style="clear:both"></div>
 									</div>
 
 								</div>
-								<?php } };?>
+								<?php } ?>
+								</section>
+								<?php };?>
 								<?php comments_template(); ?>
+							
+								
 
 							</article> <!-- end article -->
 

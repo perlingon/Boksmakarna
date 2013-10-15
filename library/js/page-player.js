@@ -674,6 +674,11 @@ function PagePlayer() {
           onload:self.events.onload
         });
 
+        /*//Track the Event
+        if (window._gaq) {
+        _gaq.push(["_trackEvent", "Episode Initiated", "Clicked", href, , false]); // create a custom event
+        }*/
+
         // append control template
         oControls = self.oControls.cloneNode(true);
         oLI = o.parentNode;

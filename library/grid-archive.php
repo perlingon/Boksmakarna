@@ -120,7 +120,7 @@ function grid_archive($toolbar = false, $post_type = 'book', $post_count = -1 ){
 			} else if ($post_type == 'episode') {
 				if (has_tag('fredagsintervju')) {
 					echo '<div id="block-'.$count.'" class="grid-item">';
-					the_post_thumbnail('grid-block');
+					the_post_thumbnail('featured');
 					echo '<h3>'.get_the_title().'</h3>';
 					echo '<p class="sweet-justice">'.get_the_excerpt().'</p>';
 					echo '</div>';

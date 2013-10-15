@@ -44,8 +44,8 @@
 									}else{
 
 									 	$slug = get_the_slug();
-									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__not_in=35');
-									 	$interview = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__in=35');
+									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__not_in=20');
+									 	$interview = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__in=20');
 									 			if ($episodes->have_posts()) {
 													echo '<ul class="playlist small">';
 													while ( $episodes->have_posts() ) {
@@ -54,25 +54,59 @@
 															echo '<li class="episode-'.$count.'"><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
 													}
 													$count = 0;
-													$ep2 = 'Tisdag<br />';
-													$ep3 = 'Onsdag<br />';
-													$ep4 = 'Torsdag<br />';
-													$ep5 = 'Fredag<br />';
+
+													$day = date('l');
+
+													$start = '<ul class="upcoming-episode">';
+													$ep2 = '<li>Avsnitt 2 kommer tisdag...</li>';
+													$ep3 = '<li>Avsnitt 3 kommer onsdag...</li>';
+													$ep4 = '<li>Avsnitt 4 kommer torsdag...</li>';
+													$ep5 = '<li>Avsnitt 5 kommer fredag...</li>';
+													$end = '</ul>';
+
+													if ($day == 'Tuesday') {
+														$ep2 = '<li>Avsnitt 2 kommer idag...</li>';
+														$ep3 = '<li>Avsnitt 3 kommer imorgon...</li>';
+													}
+
+													if ($day == 'Wednesday') {
+														$ep3 = '<li>Avsnitt 3 kommer idag...</li>';
+														$ep4 = '<li>Avsnitt 4 kommer imorgon...</li>';
+													}
+
+													if ($day == 'Thursday') {
+														$ep4 = '<li>Avsnitt 4 kommer idag...</li>';
+														$ep5 = '<li>Avsnitt 5 kommer imorgon...</li>';
+													}
+
+													if ($day == 'Friday') {
+														$ep5 = '<li>Avsnitt 5 kommer idag...</li>';
+													}
+
+													
 
 													if ($episodes->post_count == 1) {
+														echo $start;
 														echo $ep2;
 														echo $ep3;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 2){
+														echo $start;
 														echo $ep3;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 3){
+														echo $start;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 4){
+														echo $start;
 														echo $ep5;
+														echo $end;
 													}
 													wp_reset_query();
 													echo '</ul>';
@@ -84,25 +118,29 @@
 															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . get_the_title() . '</span></a></li>';
 													}
 													$count = 0;
-													$ep2 = 'Tisdag<br />';
-													$ep3 = 'Onsdag<br />';
-													$ep4 = 'Torsdag<br />';
-													$ep5 = 'Fredag<br />';
 
 													if ($episodes->post_count == 1) {
+														echo $start;
 														echo $ep2;
 														echo $ep3;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 2){
+														echo $start;
 														echo $ep3;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 3){
+														echo $start;
 														echo $ep4;
 														echo $ep5;
+														echo $end;
 													}elseif($episodes->post_count == 4){
+														echo $start;
 														echo $ep5;
+														echo $end;
 													}
 													//wp_reset_query();
 													echo '</ul>';
@@ -158,7 +196,7 @@
 								
 								<div class="offer infobox">
 									<?php if (get_sub_field('link')) {?>
-											<a href="<?php the_sub_field('link'); ?>" target="_blank" title="<?php the_sub_field('headline'); ?>">
+											<a class="buy-link" href="<?php the_sub_field('link'); ?>" target="_blank" title="<?php the_sub_field('headline'); ?>">
 	 								<?php } ?>
 	 								<h4><?php the_sub_field('headline'); ?></h4>
 									<div class="thumb">
@@ -204,11 +242,12 @@
 								?>
 								<div id="tabs">
 								  <ul>
-								  	<?php if (get_field('offer')) {
+								  	<?php
+								  	/* if (get_field('offer')) {
 								  		while (has_sub_field('offer')) {
 								  		echo '<li><a href="'.get_sub_field('link').'"class="buy-button">Köp>></a></li>';
 								  		}
-								  	} ?>
+								  	}*/ ?>
 								    <li><a href="#read-more"><span>Läs Mer</span></a></li>
 								    <li><a href="#listen"><span>Lyssna</span></a></li>
 								  </ul>

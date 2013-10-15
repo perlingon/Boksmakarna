@@ -28,7 +28,14 @@ body
 		top 2em
 	.social-box
 		display block
+.center
+	padding 0
+.home
+	.center
+		margin-top 0
 
+.content-row-content
+	column(12)
 .chosen-container,
 .grid-item
 	column(4)
@@ -58,6 +65,22 @@ POSTS &: CONTENT STYLES
 			margin 0 (gutter-width/2.8)
 	.two-col
 		column(6)
+	.entry-content,
+	.content-row-content
+		img
+			height auto
+			clear none
+			&.alignleft
+				column(4)
+				float left
+				margin 0 (gutter-width) 1.5em 0
+			&.alignright
+				column(4)
+				float right
+				margin 0 0 1.5em (gutter-width)
+			&.aligncenter
+				margin .5em auto
+				clear both
 
 /*********************
 SLIDER
@@ -68,15 +91,16 @@ SLIDER
 .slider-timer
 	display none
 #slider
-	height 390px
+	//height 320px
+	//max-height 320px
 	font-size 100%
+	margin-bottom 3em
 	.rsContent
 		.info
 			overflow hidden
 			margin 0 auto
-			height 390px
-			margin-top -390px
-			max-width max-width
+			height 220px
+			margin-top -220px
 			.content
 				background transparent
 				position absolute
@@ -84,10 +108,20 @@ SLIDER
 				width 50%
 				height 40%
 				box-shadow none
+				border-top none
+				border-bottom none
+				font-size 75%
+				q
+					display block
+					font-size 190%
+					line-height 105%
+
+
 		img.big
 			display block
 		img.small
 			display none
+			padding-bottom 0
 	.veckans
 		.info .content
 			top 30%
@@ -131,3 +165,10 @@ footer
 		margin 0 auto
 		>div
 			column(4)
+		.middle-widget
+			text-align center
+			ul
+				margin 0 auto
+				display block
+				width 60%
+

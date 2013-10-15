@@ -7,24 +7,70 @@ hr
   clear both
   background url(../images/dot.png) repeat-x
   margin 0 auto
-  max-width ((max-width)-(30px))
+  column(12)
+.partner-footer-logos
+  img
+    max-width 100%
+    height auto
 #scrolltop-btn
   position fixed
   bottom 0
   right 5%
   display block
   z-index 9999
-  background black
-  box-shadow 0 0 3px rgba(0,0,0,0.2)
-  border-radius 3px 3px 0 0
-  width 48px
-  height 32px
+  background-color grey
+  background-image url(../images/scroll-btn.png)
+  background-repeat no-repeat
+  box-shadow -1px 0 5px rgba(0,0,0,0.3)
+  border-radius 50% 50% 0 0
+  width 43px
+  height 39px
+  transition-property background-color
+  transition-duration 0.12s   
+  transition-timing-function linear
+  &:hover,
+  &:focus
+    background-color darken(grey,30%)
 #infscr-loading
   width 100%
   text-align center
   img
     width 50px
     height auto
+ul.social-icons
+  clear both
+  li
+    float left
+    display block
+    padding-right .5em
+    a
+      background-image url(../images/social-icons.png)
+      background-repeat none
+      background-color grey
+      border-radius 50%
+      width 35px
+      height 35px
+      display block
+      transition-property background-color
+      transition-duration 0.12s   
+      transition-timing-function linear
+
+      &.itunes-link
+        background-position 0% 50%
+      &.rss-link
+        background-position 25% 0%
+      &.facebook-link
+        background-position 50% 0%
+      &.twitter-link
+        background-position 75% 0%
+      &.instagram-link
+        background-position 100% 0%
+      &:hover,
+      &:focus
+        background-color darken(grey,30%)
+
+
+
 #ssba
   position relative
   img
@@ -35,6 +81,14 @@ hr
     background url(../images/gradient.png) 0% 70% repeat-x
     margin 0 .3em
     min-height 3em
+    a
+      position relative
+      transition-property top
+      transition-duration 0.1s   
+      transition-timing-function ease-in-out
+      &:hover,
+      &:focus
+        top -3px
     .ssba_sharecount
       border none
       border-radius 0
@@ -53,6 +107,7 @@ validation = bread
 validation-highlight = orange
 .gform_wrapper
   padding-bottom 1em
+  max-width 100%!important
   label
     font-family sans-serif
     font-size 70%
@@ -85,8 +140,8 @@ validation-highlight = orange
     background url(../images/diagonal-noise.png)!important
     border-top none!important
     border-bottom none!important
-    margin-top 0!important
-    margin-bottom 0!important
+    margin-top .5em!important
+    margin-bottom .5em!important
     padding 0!important
     border-left 5px solid orange
     label,

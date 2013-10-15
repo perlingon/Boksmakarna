@@ -40,9 +40,9 @@
 	</head>
 
 	<body <?php body_class(); ?>>
-
+		<div id="top-element"></div>
 		<div class="border"></div>
-		<a href="#container" id="scrolltop-btn" style="position:fixed"></a>
+		<a href="#top-element" id="scrolltop-btn" title="Scrolla till toppen"style="position:fixed"></a>
 		<div id="container">
 
 			<header class="header" role="banner">
@@ -62,7 +62,16 @@
 						$logo = wp_get_attachment_image_src( $attachment_id, $size );
 						echo '<a href="'.home_url().'" rel="nofollow"><img class="logo" src="'.$logo[0].'" alt="'.get_bloginfo('name').'" /></a>';
 					?>
-					<div class="social-box"><img src="http://placehold.it/200x80/" /></div>
+					<div class="social-box">
+						<ul class="social-icons">
+							<?php if (get_field('podcast_rss','option')) {
+								echo '<li><a class="rss-link" title="Prenumera via RSS" href="'.get_field('podcast_rss','option').'" target="_blank"></a></li>';
+							}
+							if (get_field('itunes_url','option')) {
+								echo '<li><a class="itunes-link" title="iTunes" href="'.get_field('itunes_url','option').'" target="_blank"></a></li>';
+							}?>
+						</ul>
+					</div>
 					<!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
 					
 

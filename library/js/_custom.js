@@ -35,10 +35,53 @@ jQuery(document).ready(function($) {
         $container = $('.grid-container'),
         $imgs = $("img.lazyload");
 
+    //GOOGLE EVENT TRACKING
+
+    $("#slider a").each(function() {
+        var href = $(this).attr("href");
+        var target = $(this).attr("target");
+        var text = $(this).text();
+        if (window._gaq) {
+        $(this).click(function(event) { // when someone clicks these links
+            event.preventDefault(); // don't open the link yet
+            _gaq.push(["_trackEvent", "Slider-Link-Clicks", "Clicked", href, , false]); // create a custom event
+            setTimeout(function() { // now wait 300 milliseconds...
+                window.open(href,(!target?"_self":target)); // ...and open the link as usual
+            },300);
+        });
+        }
+    });
+
+    $(".playlist a").each(function() {
+        var href = $(this).attr("href");
+        var target = $(this).attr("target");
+        var text = $(this).text();
+        if (window._gaq) {
+            _gaq.push(["_trackEvent", "Player Episodes", "Clicked", href, , false]); // create a custom event
+        };
+    });
+
+
+    $(".buy-link").each(function() {
+        var href = $(this).attr("href");
+        var target = $(this).attr("target");
+        var text = $(this).text();
+        if (window._gaq) {
+        $(this).click(function(event) { // when someone clicks these links
+            event.preventDefault(); // don't open the link yet
+            _gaq.push(["_trackEvent", "Buy Button", "Clicked", href, , false]); // create a custom event
+            setTimeout(function() { // now wait 300 milliseconds...
+                window.open(href,(!target?"_self":target)); // ...and open the link as usual
+            },300);
+        });
+        };
+    });
+
+
     //LOCAL SCROLL
     function scrollfx(){
         var scrollTop = $(window).scrollTop();
-        if(scrollTop>500){
+        if(scrollTop>600){
                       $('#scrolltop-btn').fadeIn(200);
             }
         else { 
@@ -280,9 +323,10 @@ jQuery(document).ready(function($) {
     var responsive_viewport_width = $(window).width();
     console.log('width: '+responsive_viewport_width);
 
-    var els = $('.single-post .entry-content, .page-template-default .entry-content, #tabs .columns');
+    //var els = $('.single-post .entry-content, .page-template-default .entry-content, #tabs .columns');
+    var els = $('.single-post .entry-content, #tabs .columns');
 
-    $('.single .entry-content p,.archive .entry-content p').addClass('sweet-justice');
+    $('.single .entry-content p,.archive .entry-content p,.page-template-default .entry-content').addClass('sweet-justice');
     /* if is below 481px */
     if (responsive_viewport_width < 768) {
         $( ".media" ).hide();
@@ -348,33 +392,18 @@ jQuery(document).ready(function($) {
         
         $('.playlist-nav a').removeClass('active');
         $(this).addClass('active');
+        $('.playlist-nav a.active').each(function(){
+            $(this).toggleClass('playing');
+        })
 
         $('.playlist.main li').hide();
         $('.playlist.main li#'+ selector).show();
-        return false;
-    });
 
-    $('body').on('click', '.playlist-nav a.active', function(event){
-        event.preventDefault();
-        if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off'){
-            /* currently it's not been toggled, or it's been toggled to the 'off' state,
-               so now toggle to the 'on' state: */
-               $(this).attr('data-toggled','on');
-                  if (soundManager.supported()) {
-                    soundManager.pauseAll();
-                    $(this).removeClass('playing');
-                    $(this).addClass('paused');
-                  }
-        }
-        else if ($(this).attr('data-toggled') == 'on'){
-            /* currently it has been toggled, and toggled to the 'on' state,
-               so now turn off: */
-               $(this).attr('data-toggled','off');
-                  if (soundManager.supported()) {
-                    soundManager.resumeAll();
-                    $(this).removeClass('paused');
-                    $(this).addClass('playing');
-                  }
+        var href = $(this).attr("href");
+        var target = $(this).attr("target");
+        var text = $(this).text();
+        if (window._gaq) {
+        _gaq.push(["_trackEvent", "Playlist NavMenu", "Clicked", href, , false]); // create a custom event
         }
         return false;
     });

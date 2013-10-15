@@ -50,19 +50,23 @@ require_once( 'library/grid-archive.php' );
 //Columns
 require_once( 'library/columns.php' );
 
+//Syndicated Title
+//require_once( 'library/syndicated-title-mod.php' ); 
+
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
-add_image_size( 'admin-thumb', 60, 60, true );
-add_image_size( 'grid-block', 250, 200, true );
-add_image_size( 'cover', 620, 400, true );
+add_image_size( 'grid-block', 500, 400, true );
 
-add_image_size( 'featured', 680, 380, true );
+add_image_size( 'featured', 680, 383, true );
 add_image_size( 'logo', 99999,130, false );
+
+add_image_size( 'admin-thumb', 60, 60, true );
 
 //Slides
 add_image_size( 'big-slide', 960, 390, true );
 add_image_size( 'small-slide', 480, 320, true );
+add_image_size( 'small-slide-image-only', 480, 390, true );
 add_image_size( 'preview-slide', 500, 240, true );
 
 
@@ -98,18 +102,8 @@ function set_episode_title( $data , $postarr ) {
   }
   return $data;
 }
-add_filter( 'wp_insert_post_data' , 'set_episode_title' , '10', 2 );
+//add_filter( 'wp_insert_post_data' , 'set_episode_title' , 10, 2 );
 
-function insertSocial($content) {
-        if(is_singular('episode') || is_archive('episode') || is_singular('book')) {
-                $content.= '<div class="socialboxes">';
-                $content.= '<a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>';
-                $content .= '<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink($post->ID)); ?>&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:110px; height:30px;"></iframe>';
-                $content.= '</div>';
-        }
-        return $content;
-}
-//add_filter ('the_content', 'insertSocial');
 
 
 
@@ -207,6 +201,50 @@ function bones_register_sidebars() {
 
 	*/
 } // don't remove this bracket!
+/************* ACTIVE SIDEBARS ********************/
+add_filter('widget_text', 'do_shortcode');
+
+function follow_us($atts) {
+	$html .= '<ul class="social-icons">';
+	if (get_field('podcast_rss','option')) {
+		$html .='<li><a class="rss-link" title="Prenumera via RSS" href="'.get_field('podcast_rss','option').'" target="_blank"></a></li>';
+	}
+	if (get_field('itunes_url','option')) {
+		$html .='<li><a class="itunes-link" title="iTunes" href="'.get_field('itunes_url','option').'" target="_blank"></a></li>';
+	}
+	if (get_field('facebook_url','option')) {
+		$html .='<li><a class="facebook-link" title="Följ oss på Facebook" href="'.get_field('facebook_url','option').'" target="_blank"></a></li>';
+	}
+	if (get_field('twitter_url','option')) {
+		$html .='<li><a class="twitter-link" title="Följ oss på Twitter" href="'.get_field('twitter_url','option').'" target="_blank"></a></li>';
+	}
+	if (get_field('instagram_url','option')) {
+		$html .='<li><a class="instagram-link" title="Följ oss på Instagram" href="'.get_field('instagram_url','option').'" target="_blank"></a></li>';
+}
+	$html .= '</ul>';
+	return $html;
+}
+add_shortcode('follow', 'follow_us');
+
+function get_partner_footer_logos($atts) {
+	$partners = new WP_Query('post_type=partner&posts_per_page=-1&footer=yes');
+	if ($partners->have_posts()) {
+		$html .= '<h4>Partners</h4>';
+		$html .= '<ul class="partner-footer-logos">';
+		while ( $partners->have_posts() ) {
+					$partners->the_post();
+					if (get_field('footer_logo')) {
+						$html .= '<li><a href="#"><img src="'.get_field('footer_logo').'" title="'.get_the_title().'" /></a>';
+					}
+			}
+		$html .= '</ul>';
+	}
+	wp_reset_query();
+	return $html;
+
+}
+add_shortcode('partners', 'get_partner_footer_logos');
+
 
 /************* ARCHIVE MOD ************************/
 

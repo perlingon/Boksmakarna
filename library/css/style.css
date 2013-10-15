@@ -16,6 +16,21 @@ Stylesheet: Main Stylesheet
   src: url("webfonts/287FF4_6_0.eot");
   src: url("webfonts/287FF4_6_0.eot?#iefix") format('embedded-opentype'), url("webfonts/287FF4_6_0.woff") format('woff'), url("webfonts/287FF4_6_0.ttf") format('truetype');
 }
+@font-face {
+  font-family: 'TrendSansFour';
+  src: url("webfonts/287FF4_4_0.eot");
+  src: url("webfonts/287FF4_4_0.eot?#iefix") format('embedded-opentype'), url("webfonts/287FF4_4_0.woff") format('woff'), url("webfonts/287FF4_4_0.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'TrendSansFive';
+  src: url("webfonts/287FF4_2_0.eot");
+  src: url("webfonts/287FF4_2_0.eot?#iefix") format('embedded-opentype'), url("webfonts/287FF4_2_0.woff") format('woff'), url("webfonts/287FF4_2_0.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'TrendSansFive-Italic';
+  src: url("webfonts/287FF4_1_0.eot");
+  src: url("webfonts/287FF4_1_0.eot?#iefix") format('embedded-opentype'), url("webfonts/287FF4_1_0.woff") format('woff'), url("webfonts/287FF4_1_0.ttf") format('truetype');
+}
 /* normalize.css v2.1.2 | MIT License | git.io/normalize */
 article,
 aside,
@@ -189,7 +204,10 @@ hr {
   clear: both;
   background: url("../images/dot.png") repeat-x;
   margin: 0 auto;
-  max-width: 930px;
+}
+.partner-footer-logos img {
+  max-width: 100%;
+  height: auto;
 }
 #scrolltop-btn {
   position: fixed;
@@ -197,13 +215,34 @@ hr {
   right: 5%;
   display: block;
   z-index: 9999;
-  background: #000;
-  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
-  box-shadow: 0 0 3px rgba(0,0,0,0.2);
-  -webkit-border-radius: 3px 3px 0 0;
-  border-radius: 3px 3px 0 0;
-  width: 48px;
-  height: 32px;
+  background-color: #868686;
+  background-image: url("../images/scroll-btn.png");
+  background-repeat: no-repeat;
+  -webkit-box-shadow: -1px 0 5px rgba(0,0,0,0.3);
+  box-shadow: -1px 0 5px rgba(0,0,0,0.3);
+  -webkit-border-radius: 50% 50% 0 0;
+  border-radius: 50% 50% 0 0;
+  width: 43px;
+  height: 39px;
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  -ms-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.12s;
+  -moz-transition-duration: 0.12s;
+  -o-transition-duration: 0.12s;
+  -ms-transition-duration: 0.12s;
+  transition-duration: 0.12s;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+#scrolltop-btn:hover,
+#scrolltop-btn:focus {
+  background-color: #5e5e5e;
 }
 #infscr-loading {
   width: 100%;
@@ -212,6 +251,58 @@ hr {
 #infscr-loading img {
   width: 50px;
   height: auto;
+}
+ul.social-icons {
+  clear: both;
+}
+ul.social-icons li {
+  float: left;
+  display: block;
+  padding-right: 0.5em;
+}
+ul.social-icons li a {
+  background-image: url("../images/social-icons.png");
+  background-repeat: none;
+  background-color: #868686;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: block;
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  -ms-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.12s;
+  -moz-transition-duration: 0.12s;
+  -o-transition-duration: 0.12s;
+  -ms-transition-duration: 0.12s;
+  transition-duration: 0.12s;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+ul.social-icons li a.itunes-link {
+  background-position: 0% 50%;
+}
+ul.social-icons li a.rss-link {
+  background-position: 25% 0%;
+}
+ul.social-icons li a.facebook-link {
+  background-position: 50% 0%;
+}
+ul.social-icons li a.twitter-link {
+  background-position: 75% 0%;
+}
+ul.social-icons li a.instagram-link {
+  background-position: 100% 0%;
+}
+ul.social-icons li a:hover,
+ul.social-icons li a:focus {
+  background-color: #5e5e5e;
 }
 #ssba {
   position: relative;
@@ -225,6 +316,28 @@ hr {
   background: url("../images/gradient.png") 0% 70% repeat-x;
   margin: 0 0.3em;
   min-height: 3em;
+}
+#ssba .share-button a {
+  position: relative;
+  -webkit-transition-property: top;
+  -moz-transition-property: top;
+  -o-transition-property: top;
+  -ms-transition-property: top;
+  transition-property: top;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  -ms-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  -ms-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+#ssba .share-button a:hover,
+#ssba .share-button a:focus {
+  top: -3px;
 }
 #ssba .share-button .ssba_sharecount {
   border: none;
@@ -242,6 +355,7 @@ hr {
 }
 .gform_wrapper {
   padding-bottom: 1em;
+  max-width: 100% !important;
 }
 .gform_wrapper label {
   font-family: 'TrendSansOne';
@@ -282,8 +396,8 @@ hr {
   background: url("../images/diagonal-noise.png") !important;
   border-top: none !important;
   border-bottom: none !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
   padding: 0 !important;
   border-left: 5px solid #ff8433;
 }
@@ -981,6 +1095,12 @@ body {
   width: 96%;
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 0.5em;
+}
+.home .center {
+  margin-top: 2em;
+  z-index: 99;
+  position: relative;
 }
 .border {
   height: 0.5em;
@@ -997,6 +1117,9 @@ body {
   width: 100%;
   top: 0;
   background: #fff;
+  opacity: 0.93;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=93)";
+  filter: alpha(opacity=93);
 }
 .header nav ul {
   padding: 0;
@@ -1010,8 +1133,9 @@ body {
 .header .social-box {
   position: absolute;
   right: 0;
-  top: 1em;
+  top: 1.6em;
   display: none;
+  z-index: 1;
 }
 #main {
   clear: both;
@@ -1055,6 +1179,7 @@ body {
   margin-bottom: 1em;
   display: block;
   font-size: 0.8em;
+  min-height: 440px;
 }
 .grid-container .grid-item .overlay {
   *background: url("../images/opacity.png");
@@ -1353,9 +1478,15 @@ p {
   *width: 96.875% -correction;
   *margin: 0 1.5625% -correction;
 }
-.single-post .content-row h4,
-.page .content-row h4 {
-  padding-left: 15px;
+.page .entry-content {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 96.875%;
+  margin: 0 1.5625%;
+  *width: 96.875% -correction;
+  *margin: 0 1.5625% -correction;
+  padding: 1em 0 1.5em;
 }
 .single-post .column,
 .page .column {
@@ -1417,9 +1548,12 @@ p {
 }
 .single-post .content-row h4,
 .page .content-row h4 {
-  font-size: 80%;
+  font-size: 90%;
+}
+.single-post .content-row h4.content-row-headline,
+.page .content-row h4.content-row-headline {
   position: absolute;
-  top: -9px;
+  top: -7px;
   padding-right: 0.5em;
   background: #f7f7f7;
 }
@@ -1428,7 +1562,8 @@ p {
   display: block;
   padding: 2em 0;
 }
-.single-book article .entry-content p {
+.single-book article .entry-content p,
+.single-book article .content-row-content p {
   padding: 1em 0;
 }
 .single-book h1 {
@@ -1480,6 +1615,7 @@ p {
   font-size: 85%;
   line-height: 110%;
   color: #868686;
+  text-align: left;
 }
 .single-book .interview {
   margin-top: 1em;
@@ -1551,7 +1687,6 @@ p {
 }
 .single-book .infobox .info {
   font-size: 80%;
-  padding: 0 0.5em;
 }
 .post-wrapper {
   clear: both;
@@ -1561,7 +1696,7 @@ p {
   clear: both;
 }
 #content {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 #content .attachment-featured {
   width: 100%;
@@ -1586,7 +1721,8 @@ p {
   color: #999;
 time
 }
-.entry-content {
+.entry-content,
+.content-row-content {
   ul: , ol, table, dl;
 dl
 dt
@@ -1597,33 +1733,46 @@ dt
 	but it's up to you. Feel free to change it up.
 	*/
 }
-.entry-content p {
+.entry-content p,
+.content-row-content p {
   font-size: 0.8em;
   margin-bottom: 1em;
 }
-.entry-content dd {
+.entry-content dd,
+.content-row-content dd {
   margin-left: 0;
   font-size: 0.9em;
   color: #787878;
   margin-bottom: 1.5em;
 }
-.entry-content img {
+.entry-content img,
+.content-row-content img {
   margin: 0 0 1.5em 0;
-  max-width: 100%;
   height: auto;
+  width: 100%;
+  clear: both;
 }
 .entry-content .alignleft,
+.content-row-content .alignleft,
 .entry-content img.alignleft,
+.content-row-content img.alignleft,
 .entry-content .alignright,
+.content-row-content .alignright,
 .entry-content img.alignright,
+.content-row-content img.alignright,
 .entry-content .aligncenter,
+.content-row-content .aligncenter,
 .entry-content img.aligncenter,
+.content-row-content img.aligncenter,
 .entry-content video,
-.entry-content object {
+.content-row-content video,
+.entry-content object,
+.content-row-content object {
   max-width: 100%;
   height: auto;
 }
-.entry-content pre {
+.entry-content pre,
+.content-row-content pre {
   background: #eee;
   border: 1px solid #cecece;
   padding: 10px;
@@ -1722,12 +1871,12 @@ font-weight bold ul .next-link,
   z-index: 0;
 }
 .slider-timer {
+  margin-top: 40%;
   width: 100%;
   height: 4px;
   background: #e6e6e6;
   position: relative;
-  top: -2.1em;
-  z-index: 999;
+  z-index: 9;
 }
 .slider-timer div {
   width: 0;
@@ -1740,14 +1889,21 @@ font-weight bold ul .next-link,
 }
 #slider {
   width: 100%;
-  font-size: 70%;
+  font-size: 80%;
   background: #f7f7f7;
-  margin-bottom: 3em;
-  max-height: 390px;
+  clear: both;
+  margin-bottom: 15%;
+  z-index: 0;
+  overflow: visible;
+}
+#slider .rsContent,
+#slider .rsSlide {
+  overflow: visible;
 }
 #slider .rsContent {
   width: 100%;
   background: #f7f7f7;
+  background-repeat: repeat;
 }
 #slider .rsContent .info {
   width: 100%;
@@ -1755,18 +1911,20 @@ font-weight bold ul .next-link,
   margin: 0 auto;
   margin-top: -320px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   font-family: 'TrendSansOne';
   text-transform: uppercase;
 }
 #slider .rsContent .info .content {
-  background: #ff8433;
+  background: #f0f2f1;
+  border-top: 1px solid #e6e6e6;
   text-align: center;
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: -12px;
   padding: 0.8em 0;
-  min-height: 6em;
+  max-height: 90px;
+  height: 90px;
   z-index: 999;
 }
 #slider .rsContent .info .content hr {
@@ -1776,6 +1934,17 @@ font-weight bold ul .next-link,
 #slider .rsContent .info .content h3 {
   margin: 0;
 }
+#slider .rsContent .info .content q {
+  font-family: 'TrendSansFive-Italic';
+  font-size: 170%;
+  text-transform: uppercase;
+  line-height: 110%;
+  letter-spacing: -0.1em;
+  padding: 0.3em 10%;
+  display: none;
+  text-align: center;
+  clear: both;
+}
 #slider .rsContent img.big {
   display: none;
 }
@@ -1783,14 +1952,13 @@ font-weight bold ul .next-link,
   display: block;
   width: 100%;
   height: auto;
+  padding-bottom: 60px;
 }
 .footer {
   clear: both;
   color: #868686;
   background: #f0f2f1;
-  font-family: 'TrendSansOne';
-  text-transform: uppercase;
-  padding: 1.5em 0;
+  padding: 1.5em 0.5em;
   margin-top: 1.5em;
   width: 100%;
 /* end .footer-links */
@@ -1810,20 +1978,29 @@ font-weight bold ul .next-link,
   -webkit-padding-start: 0;
   list-style-type: none;
   font-size: 80%;
+  font-family: 'TrendSansOne';
+  text-transform: uppercase;
+  font-size: 80%;
 }
 .footer #inner-footer ul li {
   margin: 0;
 }
-.footer #inner-footer h4 {
-  margin: 0;
+.footer #inner-footer p {
+  font-size: 75%;
+  margin: 0 0 0.3em;
 }
-.footer #inner-footer .textwidget {
-  font-size: 80%;
+.footer #inner-footer h4 {
+  margin: 0 0 0.3em;
+  clear: both;
 }
 .footer .copyright {
   clear: both;
-  font-size: 80%;
+  font-size: 60%;
+  padding: 1em 0;
   text-align: center;
+  font-family: 'TrendSansOne';
+  color: #aaa;
+  text-transform: uppercase;
 }
 /*
 LARGER MOBILE DEVICES
@@ -1838,26 +2015,29 @@ This is for devices like the Galaxy Note or something that's
 larger than an iPhone but smaller than a tablet. Let's call them
 tweeners.
 */
-@media only screen and (max-width: 480px) {
+@media all and (max-width: 480px) {
+  #slider .rsOverflow {
+    height: 200% !important;
+    border-bottom: 1px solid #e6e6e6;
+  }
   #slider .rsContent {
     background-color: #f7f7f7 !important;
   }
   #slider .rsContent .info .content {
-    color: #f7f7f7;
+    color: #333;
   }
   #slider .rsContent .info .content * {
-    color: #f7f7f7 !important;
+    color: #333 !important;
   }
   #slider .featured .info .content {
     top: auto !important;
-    bottom: 0 !important;
     left: 0 !important;
   }
   #slider .featured .info .content hr {
     display: none;
   }
 }
-@media only screen and (min-width: 481px) {
+@media all and (min-width: 481px) {
   body {
     padding-top: 0;
   }
@@ -1879,6 +2059,21 @@ tweeners.
   }
   .header .social-box {
     display: block;
+  }
+  .center {
+    padding: 0;
+  }
+  .home .center {
+    margin-top: 0;
+  }
+  .content-row-content {
+    display: inline;
+    float: left;
+    overflow: hidden;
+    width: 96.875%;
+    margin: 0 1.5625%;
+    *width: 96.875% -correction;
+    *margin: 0 1.5625% -correction;
   }
   .chosen-container,
   .grid-item {
@@ -1938,6 +2133,48 @@ tweeners.
     *width: 46.875% -correction;
     *margin: 0 1.5625% -correction;
   }
+  .single-post .entry-content img,
+  .page .entry-content img,
+  .single-post .content-row-content img,
+  .page .content-row-content img {
+    height: auto;
+    clear: none;
+  }
+  .single-post .entry-content img.alignleft,
+  .page .entry-content img.alignleft,
+  .single-post .content-row-content img.alignleft,
+  .page .content-row-content img.alignleft {
+    display: inline;
+    float: left;
+    overflow: hidden;
+    width: 30.208333333333332%;
+    margin: 0 1.5625%;
+    *width: 30.208333333333332% -correction;
+    *margin: 0 1.5625% -correction;
+    float: left;
+    margin: 0 30px 1.5em 0;
+  }
+  .single-post .entry-content img.alignright,
+  .page .entry-content img.alignright,
+  .single-post .content-row-content img.alignright,
+  .page .content-row-content img.alignright {
+    display: inline;
+    float: left;
+    overflow: hidden;
+    width: 30.208333333333332%;
+    margin: 0 1.5625%;
+    *width: 30.208333333333332% -correction;
+    *margin: 0 1.5625% -correction;
+    float: right;
+    margin: 0 0 1.5em 30px;
+  }
+  .single-post .entry-content img.aligncenter,
+  .page .entry-content img.aligncenter,
+  .single-post .content-row-content img.aligncenter,
+  .page .content-row-content img.aligncenter {
+    margin: 0.5em auto;
+    clear: both;
+  }
   .slider-holder {
     height: 390px;
     margin-bottom: -390px;
@@ -1946,15 +2183,14 @@ tweeners.
     display: none;
   }
   #slider {
-    height: 390px;
     font-size: 100%;
+    margin-bottom: 3em;
   }
   #slider .rsContent .info {
     overflow: hidden;
     margin: 0 auto;
-    height: 390px;
-    margin-top: -390px;
-    max-width: 960px;
+    height: 220px;
+    margin-top: -220px;
   }
   #slider .rsContent .info .content {
     background: transparent;
@@ -1964,12 +2200,21 @@ tweeners.
     height: 40%;
     -webkit-box-shadow: none;
     box-shadow: none;
+    border-top: none;
+    border-bottom: none;
+    font-size: 75%;
+  }
+  #slider .rsContent .info .content q {
+    display: block;
+    font-size: 190%;
+    line-height: 105%;
   }
   #slider .rsContent img.big {
     display: block;
   }
   #slider .rsContent img.small {
     display: none;
+    padding-bottom: 0;
   }
   #slider .veckans .info .content {
     top: 30%;
@@ -2030,6 +2275,14 @@ tweeners.
     margin: 0 1.5625%;
     *width: 30.208333333333332% -correction;
     *margin: 0 1.5625% -correction;
+  }
+  footer #inner-footer .middle-widget {
+    text-align: center;
+  }
+  footer #inner-footer .middle-widget ul {
+    margin: 0 auto;
+    display: block;
+    width: 60%;
   }
 }
 /*
@@ -2178,6 +2431,20 @@ you can add resource intensive styles.
   #menu-main ul ul a {
     display: none;
   }
+  #slider {
+    max-height: 390px;
+  }
+  #slider .rsContent .info {
+    height: 340px;
+    margin-top: -340px;
+    max-width: 960px;
+  }
+  #slider .rsContent .info .content {
+    font-size: 95%;
+  }
+  #slider .rsContent .info .content q {
+    font-size: 200%;
+  }
 }
 /*
 DESKTOP
@@ -2186,6 +2453,16 @@ in general anyone not viewing on a mobile device. Here's where
 you can add resource intensive styles.
 */
 @media only screen and (min-width: 1030px) {
+  #slider .rsContent .info {
+    height: 390px;
+    margin-top: -390px;
+  }
+  #slider .rsContent .info .content {
+    font-size: 100%;
+  }
+  #slider .rsContent .info .content q {
+    font-size: 200%;
+  }
 }
 /*
 LARGE VIEWING SIZE
@@ -2229,12 +2506,21 @@ query for retina AND a certain size if you want. Go Nuts.
   }
   ul.playlist a i {
     background-image: url("../images/play-pause@2x.png");
-    -webkit-background-size: 40px 40px;
-    -moz-background-size: 40px 40px;
-    -o-background-size: 40px 40px;
-    -webkit-background-size: 40px 40px;
-    -moz-background-size: 40px 40px;
-    background-size: 40px 40px;
+    -webkit-background-size: 40px 80px;
+    -moz-background-size: 40px 80px;
+    -o-background-size: 40px 80px;
+    -webkit-background-size: 40px 80px;
+    -moz-background-size: 40px 80px;
+    background-size: 40px 80px;
+  }
+  ul.social-icons li a {
+    background-image: url("../images/social-icons@2x.png");
+    -webkit-background-size: 175px 35px;
+    -moz-background-size: 175px 35px;
+    -o-background-size: 175px 35px;
+    -webkit-background-size: 175px 35px;
+    -moz-background-size: 175px 35px;
+    background-size: 175px 35px;
   }
 }
 /*

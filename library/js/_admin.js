@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 			content_position_field.hide();
 			var val = root.find( ".acf-radio-list input:checked" ).val();
 		  	if (val === 'Veckans Bok') {
-				content_row.fadeOut();
+		  		content_row.fadeIn();
 				content_position_field.fadeOut();
 				images.fadeIn();
 		  	};

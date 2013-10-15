@@ -83,6 +83,17 @@ ul.playlist.small li.sm2_paused {
 ul.playlist.main li {
   margin: 0;
 }
+ul.playlist ul.upcoming-episode,
+ul.playlist-nav ul.upcoming-episode {
+  margin-top: 1em;
+}
+ul.playlist ul.upcoming-episode li,
+ul.playlist-nav ul.upcoming-episode li {
+  padding-left: 16px;
+  font-size: 80%;
+  margin: 0.5em 0;
+  color: #808080;
+}
 ul.playlist-nav {
   list-style-type: none;
   font-family: "TrendSansOne";
@@ -101,6 +112,9 @@ ul.playlist-nav a.active {
 }
 ul.playlist-nav a.active i {
   background-color: #808080;
+  background-position: center left;
+}
+ul.playlist-nav a.playing i {
   background-position: center right;
 }
 ul.playlist-nav li {

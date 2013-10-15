@@ -97,6 +97,15 @@ ul.playlist.small
 ul.playlist.main li
 	margin 0
 
+ul.playlist,
+ul.playlist-nav
+	ul.upcoming-episode
+		margin-top 1em
+		li
+			padding-left 16px
+			font-size 80%
+			margin .5em 0
+			color grey
 ul.playlist-nav
 	list-style-type none
 	font-family sans-serif
@@ -111,7 +120,10 @@ ul.playlist-nav
 			color grey
 			i
 				background-color: grey
-				background-position: center right
+				background-position center left
+		&.playing
+			i
+				background-position center right
 
 	li
 		margin .2em 0

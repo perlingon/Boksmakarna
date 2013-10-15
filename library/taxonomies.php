@@ -73,13 +73,34 @@ function add_custom_taxonomies() {
         'show_tagcloud' => false,
     ));
 
+    /*************************************************************/
+    /*********** TAXONOMIES FOR EPISODES *************************/
+    /*************************************************************/
     register_taxonomy_for_object_type('category', 'episode');
     register_taxonomy_for_object_type('post_tag', 'episode');
 
+    /*************************************************************/
+    /*********** TAXONOMIES FOR PARTNERS *************************/
+    /*************************************************************/
+    register_taxonomy('footer', 'partner', array(
+        'hierarchical' => false,
+        'labels' => array( 'name' => _x( 'Footer', 'taxonomy general name', 'boksmakarna' ),
+        'singular_name' => _x( 'Footer', 'taxonomy singular name', 'boksmakarna' ),
+        'search_items' => __( 'Search Footer', 'boksmakarna' ),
+        'all_items' => __( 'All Footer', 'boksmakarna' ),
+        'edit_item' => __( 'Edit Footer', 'boksmakarna' ),
+        'update_item' => __( 'Update Footer', 'boksmakarna' ),
+        'add_new_item' => __( 'Add new Footer', 'boksmakarna' ),
+        'new_item_name' => __( 'New Footer', 'boksmakarna' ),
+        'menu_name' => __( 'Footer', 'boksmakarna' ), ),
+        'show_admin_column' => true,
+        'show_ui'           => false,
+        'show_tagcloud' => false,
+    ));
 }
 
 //------- Add Default Terms for Upcoming -----------//
-function tax_upcoming_terms(){
+function yesno_terms(){
     $terms = array(
         '0' => array( 'name' => 'Yes', 'short' => 'yes' ),
         '1' => array( 'name' => 'No', 'short' => 'no' ),
@@ -89,14 +110,24 @@ function tax_upcoming_terms(){
 
 function tax_upcoming_default_terms(){
     // see if we already have populated any terms
-    $term = get_terms( 'upcoming', array( 'hide_empty' => false ) );
+    $upcoming = get_terms( 'upcoming', array( 'hide_empty' => false ) );
+    $footer = get_terms( 'footer', array( 'hide_empty' => false ) );
 
     // if no terms then lets add our terms
-    if( empty( $term ) ){
-        $terms = tax_upcoming_terms();
+    if( empty( $upcoming ) ){
+        $terms = yesno_terms();
         foreach( $terms as $term ){
             if( !term_exists( $term['name'], 'upcoming' ) ){
                 wp_insert_term( $term['name'], 'upcoming', array( 'slug' => $term['short'] ) );
+            }
+        }
+    }
+
+    if( empty( $footer ) ){
+        $terms = yesno_terms();
+        foreach( $terms as $term ){
+            if( !term_exists( $term['name'], 'footer' ) ){
+                wp_insert_term( $term['name'], 'footer', array( 'slug' => $term['short'] ) );
             }
         }
     }
@@ -106,6 +137,19 @@ function set_default_object_terms( $post_id, $post ) {
     if ( 'book' === $post->post_type ) {
         $defaults = array(
             'upcoming' => array( 'No' )
+            );
+        $taxonomies = get_object_taxonomies( $post->post_type );
+        foreach ( (array) $taxonomies as $taxonomy ) {
+            $terms = wp_get_post_terms( $post_id, $taxonomy );
+            if ( empty( $terms ) && array_key_exists( $taxonomy, $defaults ) ) {
+                wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+            }
+        }
+    }
+
+    if ( 'partner' === $post->post_type ) {
+        $defaults = array(
+            'footer' => array( 'No' )
             );
         $taxonomies = get_object_taxonomies( $post->post_type );
         foreach ( (array) $taxonomies as $taxonomy ) {
