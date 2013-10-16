@@ -20,11 +20,16 @@
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix" itemprop="articleBody">
-									<?php the_content(); ?>
+									<?php
+										$content = get_the_content();
+										echo wpautop($content);
+									 ?>
+									 <div class="navigation">
+									<?php previous_post_link('%link', 'Nästa Artikel >'); ?>
+									</div>
 								</section> <!-- end article section -->
 
 								<footer class="article-footer">
-									<?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
 									<?php echo do_shortcode('[ssba]'); ?>
 								</footer> <!-- end article footer -->
 
@@ -58,27 +63,39 @@
 						<h4>Artiklar</h4>
 						<hr />
 						<div class="list-wrapper">
+							<div class="archive-slider">
 							<div>
-						<?php $posts = new WP_Query('showposts=50&orderby=date&order=desc');?>
+						<?php $posts = new WP_Query('showposts=-1&orderby=date&order=desc');
+						
+						if ($posts->post_count < 5) {
+							$items = 1;
+						}else if($posts->post_count < 9){
+							$items = 2;
+						}else{
+							$items = 3;
+						}
+						?>
 
 
-							<?php foreach(new WP_Query_Columns($posts, 3) as $column => $column_count) : ?>
+							<?php foreach(new WP_Query_Columns($posts, $items) as $column => $column_count) : ?>
 							<?php 
 							    	if($column % 4 == 0){
 									    echo '</div><div class="rsContent separator">';
 									}
 							?>
 							    <ul>
-
 							        <?php while ($column_count--) : $posts->the_post(); ?>
 							        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 							        <?php endwhile; ?>
 							    </ul>
 							<?php endforeach; ?>
 						<?php wp_reset_query();?>
-					</div><div style="clear:both"></div>
+					</div></div>
+					<div style="clear:both"></div>
+					</div>
+				
 				</div>
-				</div>
+				<div style="clear:both"></div>
 
 			</div> <!-- end #content -->
 

@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
     var navigation = responsiveNav("#menu-main", {
         animate: true,        // Boolean: Use CSS3 transitions, true or false
         transition: 400,      // Integer: Speed of the transition, in milliseconds
-        label: "Meny",        // String: Label for the navigation toggle
+        label: "<p>oksmakarna</p>",        // String: Label for the navigation toggle
         insert: "after",      // String: Insert the toggle before or after the navigation
         customToggle: "",     // Selector: Specify the ID of a custom toggle
         openPos: "relative",  // String: Position of the opened nav, relative or static
@@ -321,12 +321,12 @@ jQuery(document).ready(function($) {
 
     /* getting viewport width */
     var responsive_viewport_width = $(window).width();
-    console.log('width: '+responsive_viewport_width);
+    //console.log('width: '+responsive_viewport_width);
 
     //var els = $('.single-post .entry-content, .page-template-default .entry-content, #tabs .columns');
     var els = $('.single-post .entry-content, #tabs .columns');
 
-    $('.single .entry-content p,.archive .entry-content p,.page-template-default .entry-content').addClass('sweet-justice');
+    $('.single .entry-content,.archive .entry-content,.page-template-default .entry-content').addClass('sweet-justice');
     /* if is below 481px */
     if (responsive_viewport_width < 768) {
         $( ".media" ).hide();
@@ -335,7 +335,7 @@ jQuery(document).ready(function($) {
                $(this).fadeOut(200, function(){
                     $(this).children().unwrap();
                     $(this).fadeIn(200);
-               })
+               });
             });
             els.find('br').remove();
 
@@ -345,6 +345,10 @@ jQuery(document).ready(function($) {
     /* if is larger than 481px */
     if (responsive_viewport_width > 768) {
     $( ".media" ).show();
+
+    //Conditional check for lte IE9
+    if(document.addEventListener  ){
+    //You have IE9 or higher
     if ($.fn.columnize) {
             if (!els.hasClass('columnized')) {
             els.columnize({
@@ -379,10 +383,38 @@ jQuery(document).ready(function($) {
                         $( "#tabs" ).tabs({active:-1});
                         return false;
                     });
-                }
-            });
+                    }
+                });
+            };
         };
-    };
+    }else{
+        $( "#tabs" ).tabs({
+                            active: -1,
+                            show: function(event, ui) {
+                                    var lastOpenedPanel = $(this).data("lastOpenedPanel");
+                                    if (!$(this).data("topPositionTab")) {
+                                        $(this).data("topPositionTab", $(ui.panel).position().top);
+                                    }
+                                    $(ui.panel).hide().fadeIn(250);
+                                    if (lastOpenedPanel) {
+                                        lastOpenedPanel.toggleClass("ui-tabs-hide").css("position", "absolute").css("top", "0").fadeOut(250, function() {
+                                            $(this).css("position", "");
+                                        });
+                                    }
+                                    $(this).data("lastOpenedPanel", $(ui.panel));
+                                }
+                    });
+                        
+                    $('.excerpt-read-more').click(function(){
+                        $( "#tabs" ).tabs({active:-2});
+                        return false;
+                    });
+                    $('.playlist-nav a').click(function(event){
+                        event.preventDefault();
+                        $( "#tabs" ).tabs({active:-1});
+                        return false;
+                    });
+    }
    
     //playlist-nav
     $('.playlist-nav a').click(function(event){

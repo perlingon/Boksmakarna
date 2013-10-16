@@ -142,15 +142,18 @@ function additional_libraries() {
     if (is_home()||is_single()) {
 		//Royal Slider Styles
   		wp_register_style( 'slider', get_stylesheet_directory_uri() . '/library/css/royalslider/royalslider.css', array(), '', 'all' );
-  		wp_register_style( 'slider-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
+  		wp_register_style( 'slider-home-skin', get_stylesheet_directory_uri() . '/library/css/royalslider/skins/boksmakarna/rs-bok.css', array(), '', 'all' );
 		wp_enqueue_style( 'slider' );
-		wp_enqueue_style( 'slider-skin' );
+		wp_enqueue_style( 'slider-home-skin' );
 	}
 
   }
 }
 
-
+function facebook_script() {
+    echo '<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "facebook-jssdk"));</script>';
+}
+add_action('wp_footer', 'facebook_script');
 
 /************* ACTIVE SIDEBARS ********************/
 
@@ -262,9 +265,13 @@ function modify_query( $query ) {
 	        set_query_var( 'post_type', 'book' );
 	        set_query_var( 'posts_per_page', 3 );
 	    }
+	if ( is_archive() && is_main_query() ) {
+	        set_query_var( 'posts_per_page', 20 );
+	    }
 }
 
 add_action( "pre_get_posts", "modify_query" );
+
 
 
 /************* POST SLUG FUNCTION *****************/
@@ -276,6 +283,7 @@ function get_the_slug(){
   do_action('after_slug', $slug);
   return $slug;
 }
+
 
 /************* GALLERY SHORTCODE MOD *****************/
 remove_shortcode('gallery');

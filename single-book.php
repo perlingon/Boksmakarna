@@ -37,7 +37,7 @@
 								<section class="entry-content clearfix" itemprop="articleBody">
 									<?php 
 
-									the_excerpt();
+									echo '<p>'.excerpt(14).'</p>';
 
 									if( has_term( 'yes', 'upcoming' ) ) {
 									    echo 'Avsnitt kommer snart...';
@@ -58,29 +58,29 @@
 													$day = date('l');
 
 													$start = '<ul class="upcoming-episode">';
-													$ep2 = '<li>Avsnitt 2 kommer tisdag...</li>';
-													$ep3 = '<li>Avsnitt 3 kommer onsdag...</li>';
-													$ep4 = '<li>Avsnitt 4 kommer torsdag...</li>';
-													$ep5 = '<li>Avsnitt 5 kommer fredag...</li>';
+													$ep2 = '<li>Avsnitt 2 kommer tisdag</li>';
+													$ep3 = '<li>Avsnitt 3 kommer onsdag</li>';
+													$ep4 = '<li>Avsnitt 4 kommer torsdag</li>';
+													$ep5 = '<li>Avsnitt 5 kommer fredag</li>';
 													$end = '</ul>';
 
 													if ($day == 'Tuesday') {
-														$ep2 = '<li>Avsnitt 2 kommer idag...</li>';
-														$ep3 = '<li>Avsnitt 3 kommer imorgon...</li>';
+														$ep2 = '<li>Avsnitt 2 kommer idag</li>';
+														$ep3 = '<li>Avsnitt 3 kommer imorgon</li>';
 													}
 
 													if ($day == 'Wednesday') {
-														$ep3 = '<li>Avsnitt 3 kommer idag...</li>';
-														$ep4 = '<li>Avsnitt 4 kommer imorgon...</li>';
+														$ep3 = '<li>Avsnitt 3 kommer idag</li>';
+														$ep4 = '<li>Avsnitt 4 kommer imorgon</li>';
 													}
 
 													if ($day == 'Thursday') {
-														$ep4 = '<li>Avsnitt 4 kommer idag...</li>';
-														$ep5 = '<li>Avsnitt 5 kommer imorgon...</li>';
+														$ep4 = '<li>Avsnitt 4 kommer idag</li>';
+														$ep5 = '<li>Avsnitt 5 kommer imorgon</li>';
 													}
 
 													if ($day == 'Friday') {
-														$ep5 = '<li>Avsnitt 5 kommer idag...</li>';
+														$ep5 = '<li>Avsnitt 5 kommer idag</li>';
 													}
 
 													
@@ -114,8 +114,20 @@
 													echo '<ul class="playlist-nav">';
 													while ( $episodes->have_posts() ) {
 															$episodes->the_post();
+
+															$posttags = get_the_tags();
+															if ( $posttags && ! is_wp_error( $posttags ) ) : 
+																$tags = array();
+																foreach ( $posttags as $posttag ) {
+																	if ($posttag->term_id !== '20') {
+																		$tags[] = $posttag->name;
+																	}
+																}		
+																$episode_tag_title = join( ' ', $tags );
+															endif;
+
 															$count++;
-															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . get_the_title() . '</span></a></li>';
+															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . $episode_tag_title . '</span></a></li>';
 													}
 													$count = 0;
 
@@ -149,24 +161,22 @@
 													echo '<i>Inga avsnitt.</i>';
 												}
 												wp_reset_query();
-												/*if ($interview->have_posts()) {
-													echo '<ul class="playlist">';
-													while ( $interview->have_posts() ) {
-															$interview->the_post();
-															echo '<li><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
-													}
-													//wp_reset_query();
-													echo '</ul>';
-												}else{
-													echo '<i>Ingen intervju.</i>';
-												}
-												wp_reset_query();*/
 												if ($interview->have_posts()) {
 													echo '<div class="interview">';
 													while ( $interview->have_posts() ) {
 															$interview->the_post();
+															$posttags = get_the_tags();
+															if ( $posttags && ! is_wp_error( $posttags ) ) : 
+																$tags = array();
+																foreach ( $posttags as $posttag ) {
+																	if ($posttag->term_id !== '20') {
+																		$tags[] = $posttag->name;
+																	}
+																}		
+																$tag_title = join( ' & ', $tags );
+															endif;
 															echo '<a href="'.get_permalink().'">';
-															echo '<div><span class="icon"></span></div><h4>'.get_the_title().'</h4>';
+															echo '<div><span class="icon"></span></div><h4>Fredagsintervju - '.$tag_title.'</h4>';
 															echo '</a>';
 													}
 													

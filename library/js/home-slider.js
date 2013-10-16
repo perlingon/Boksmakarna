@@ -1,12 +1,17 @@
 jQuery(document).ready(function($) {
     
+    //Conditional check for lte IE9
+    if(document.addEventListener  ){
+                //You have IE9 or higher
+
    function responsive_slider(){
 
     /*Functions*/
     function initSlider(selector){
         //SLIDER
         $(selector).royalSlider({
-        arrowsNav: arrows,
+        arrowsNav: true,
+        arrowsNavHideOnTouch: true,
         loop: false,
         keyboardNavEnabled: true,
         controlsInside: false,
@@ -54,7 +59,6 @@ jQuery(document).ready(function($) {
     /* if larger than 960 */
     if (responsive_viewport_width > 1030) {
         var transtype = 'fade';
-        var arrows = true;
         var speed = 1000;
         var delay = 5000;
         // change scale mode
@@ -64,7 +68,6 @@ jQuery(document).ready(function($) {
         initSlider('#slider');
     }else if(responsive_viewport_width < 480){
         var transtype = 'move';
-        var arrows = false;
         var speed = 500;
         var delay = 5000;
         $('#slider').removeClass('big-slider');
@@ -73,7 +76,6 @@ jQuery(document).ready(function($) {
         initSlider('#slider');
     }else{
         var transtype = 'move';
-        var arrows = false;
         var speed = 700;
         var delay = 5000;
         $('#slider').removeClass('big-slider');
@@ -99,5 +101,36 @@ $('.archive-list').royalSlider();
 $(window).resize(_.debounce(function(){
     responsive_slider();
 }, 500));
+
+}else{
+    $('#slider').royalSlider({
+        arrowsNav: true,
+        arrowsNavHideOnTouch: true,
+        loop: false,
+        keyboardNavEnabled: true,
+        controlsInside: false,
+        imageScaleMode: 'fit-if-smaller',
+        imageScalePadding: 0,
+        arrowsNavAutoHide: true,
+        imageAlignCenter: true,
+        autoScaleSlider: true, 
+        autoScaleSliderWidth: 960,     
+        autoScaleSliderHeight: 390,
+        controlNavigation: 'bullets',
+        thumbsFitInViewport: false,
+        fadeinLoadedSlide: false,
+        addActiveClass: true,
+        autoPlay: {
+                enabled: true,
+                pauseOnHover: true,
+                delay: 5000,
+                stopAtAction: true
+            },
+        loopRewind: true,
+        transitionType: 'fade',
+        transitionSpeed: 1000,
+        globalCaption: false
+      }).fadeIn(800);
+}
     
 });

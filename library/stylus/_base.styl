@@ -14,6 +14,10 @@ and will be used across all viewports.
 /*********************
 GENERAL STYLES
 *********************/
+html,body
+	margin 0
+	padding 0
+	height 100%
 
 body 
 	font-family paragraph
@@ -22,19 +26,20 @@ body
 	color bread
 	background background
 
-	//add space for menu
-	padding-top 3.7em
-
 
 /*********************
 LAYOUT
 *********************/
+#container
+	padding-top 3.7em
+	min-height 100%
+	position relative
 
 .center
 	width 96%
 	max-width max-width
 	margin 0 auto
-	padding 0 .5em
+	padding 0 .5em 15em
 .home
 	.center
 		margin-top 2em
@@ -216,6 +221,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	-webkit-margin-after 0
 	text-transform uppercase
 	letter-spacing -.08em
+	clear both
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -234,13 +240,13 @@ h1,.h1
 
 
 h2,.h2 
-	font-size 1.45em
+	font-size 1.48em
 	line-height 1.2em
 	margin-bottom 0.375em
 
 
 h3,.h3 
-	font-size 1.4em
+	font-size 1.3em
 
 
 h4,.h4 
@@ -262,7 +268,6 @@ HEADER STYLES
 /*********************
 NAVIGATION STYLES
 *********************/
-
 #menu-main
 	margin 0
 	z-index 10
@@ -321,6 +326,7 @@ NAVIGATION STYLES
 	padding 0.7em 1em
 	float left
 	font-size .8em
+	letter-spacing -0.08em
 	font-family sans-serif
 	text-transform uppercase
 
@@ -334,26 +340,58 @@ NAVIGATION STYLES
 	-moz-user-select none
 	-ms-user-select none
 	user-select none
-	width 90px
+	width 100%
 	margin-top .5em
 	padding-top .8em
 	height 50px
 	float right
 	//text-indent -9999px
-	overflow hidden
-	background orange url(../images/hamburger.gif) no-repeat 30% 50%
+	overflow visible
+	background url(../images/hamburger.gif) no-repeat 96% 50%
 	text-align left
 	text-decoration none
-	font sans-serif
-	color black
+	font-family sans-serif
+	text-transform uppercase
+	color orange
+	font-size 80%
+	position relative
+	p
+		position absolute
+		height 20px
+		z-index 90
+		display block
+		float left
+		left 2%
+		top 15px
+		padding-left 1.5em
+		padding-top 3px
+		line-height auto
+		font-size 110%
+		color orange
+		background url(../images/logo-icon.png) no-repeat 0 0
 
 
 /*********************
 POSTS &: CONTENT STYLES
 *********************/
+.post-type-archive-episode,
+.single-episode
+	article
+		h4
+			color lighten(grey,20%)
+	#main hr
+			margin .9em 0 2.9em
+	#ssba
+		margin .5em 0 1em
+		width 100%
+		border-bottom 4px solid light-grey
+		height 6.5em
 .single
 	.grid-container
 		display none
+.single-post
+	#ssba
+		float right
 .single-post,
 .page
 	article
@@ -372,30 +410,120 @@ POSTS &: CONTENT STYLES
 		padding 1em 0 1.5em
 
 .single-post,
-.page
+.page,
+.archive
+	.navigation
+		float left
+		a
+			font-family sans-serif
+			text-transform uppercase
+			letter-spacing -0.08em
+			text-decoration none
+			display block
+			clear both
+			font-size 68%
+			padding .5em 0 0
 	.column
 		padding 0 (gutter-width/2)
 	.archive-list
-	position relative
+		position relative
+		margin 1em 0
+		padding-top 1em
+		width 82%
 		hr
 			background grey
+			margin-bottom 1em
+		h4
+			background background
+			padding .5em .5em .5em 0
+			position absolute
+			top .25em
+			left 0
+			font-size 80%
+			//color grey
+		.archive-slider
+			width 100%
+			position relative
+			height 420px
+			.rsArrow
+				position absolute
+				top -2.6em
+				.rsArrowIcn
+					width 16px
+					height 16px
+					top 0
+					left 0
+					position absolute	
+					cursor pointer	
+					background-image url(../images/updown.png)
+					background-repeat no-repeat
+					background-color #333
+					z-index 10
+				&.rsArrowRight
+					right 1em
+					.rsArrowIcn
+						background-position center right
+				&.rsArrowLeft
+					right 2.5em
+					.rsArrowIcn
+						background-position center left
+				&.rsArrowDisabled
+					.rsArrowIcn
+						background-color lighten(#333,60%)
+			.rsBullets 
+				position absolute
+				z-index 9
+				top -3.05em
+				padding-top 4px
+				padding-right 2.6em
+				right 0
+				height auto
+				margin 0 auto
+				line-height 5px
+				overflow hidden
+				background background
+			.rsBullet
+				width 6px
+				height 6px
+				display inline-block
+				*display inline
+				*zoom 1
+				padding 8px 6px
+				cursor pointer
+				opacity .5
+			.rsBullet span 
+				display block
+				width 6px
+				height 6px
+				border-radius 50%
+				background #BBB
+			.rsBullet.rsNavSelected span
+				background-color #000
+
+			
 		.list-wrapper
-			background lighten(light-grey,30%)
+			background lighten(light-grey,40%)
+			padding 1em 0
 			clear both
+			position relative
 			div.separator
 				clear both
 				display block
 			ul
 				font-family sans-serif
 				text-transform uppercase
-				font-size 80%
+				font-size 63%
 				list-style-type none
-				padding 0
-				padding-bottom 2em
+				padding 0 .5em
+				padding-bottom 1em
+				display block
 				li
 					padding .4em 0
+					letter-spacing -0.08em
+					display block
 				a
 					text-decoration none
+					display block
 	.gallery img
 		max-width 100%
 		height auto
@@ -563,7 +691,6 @@ POSTS &: CONTENT STYLES
 /* entry content */
 .entry-content,
 .content-row-content
-
 	p
 		font-size .8em
 		margin-bottom 1em
@@ -799,9 +926,15 @@ FOOTER STYLES
 	clear both
 	color grey
 	background turkos
+	//box-shadow 0 -14px 20px rgba(200,200,200,.3)
+	border-top 4px solid darken(turkos,5%)
 	padding 1.5em .5em
-	margin-top 1.5em
 	width 100%
+	position absolute
+	z-index 100
+	bottom 0
+	left 0
+	height 15em
 	a
 		color grey
 		text-decoration none

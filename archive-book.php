@@ -68,8 +68,8 @@
 								if( has_term( 'yes', 'upcoming' ) ) {
 									echo '<div class="overlay">';
 									if (get_field('upcoming_date')) {
-										$date = DateTime::createFromFormat('Ymd', get_field('upcoming_date'));
-										echo 'Kommer '.$date->format('d.m.y');
+										$date = date_i18n('d F', strtotime(get_field('upcoming_date')));
+										echo 'Kommer '.$date;
 									}else{
 										echo 'Kommer snart...';
 									}

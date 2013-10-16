@@ -19,13 +19,14 @@
 											while ( $news->have_posts() ) {
 												$news->the_post();
 												echo '<a href="'.get_permalink().'"><h4 class="widgettitle">'.get_the_title().'</h4></a>';
-												echo '<div class="textwidget"><p class="sweet-justice">'.get_the_excerpt().'</p></div>';
+												echo '<div class="textwidget"><p class="sweet-justice">'.excerpt(14).'</p></div>';
 												echo '<span>'.get_the_date('Y.m.d').'</span>';
 											}
 										}
 										wp_reset_query();
+										$archive_year = get_the_time('Y');
 									?>
-									<span class="link"><a href="/nyheter">Fler nyheter</a></span>
+									<span class="link"><a href="<?php echo get_year_link($archive_year); ?>">Fler nyheter</a></span>
 								</div>
 							</div>
 						</div>
@@ -47,8 +48,8 @@
 								if( has_term( 'yes', 'upcoming' ) ) {
 									echo '<div class="overlay">';
 									if (get_field('upcoming_date')) {
-										$date = DateTime::createFromFormat('Ymd', get_field('upcoming_date'));
-										echo 'Kommer '.$date->format('d.m.y');
+										$date = date_i18n('d F', strtotime(get_field('upcoming_date')));
+										echo 'Kommer '.$date;
 									}else{
 										echo 'Kommer snart...';
 									}

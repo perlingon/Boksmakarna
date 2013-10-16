@@ -41,34 +41,28 @@
 									</h1>
 							<?php } ?>
 
-							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+							<?php if (have_posts()) : ?>
+								<div class="archive-list">
+								<h4>Artiklar</h4>
+								<hr />
+								<div class="list-wrapper">
+									<div class="archive-slider">
+							<?php 
+							$i = 1;
+							$count = $posts_per_page/4;
 
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
-
-								<header class="article-header">
-
-									<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
-									<p class="byline vcard"><?php
-										printf(__( 'Posted <time class="updated" datetime="%1$s" pubdate>%2$s</time> by <span class="author">%3$s</span> <span class="amp">&</span> filed under %4$s.', 'bonestheme' ), get_the_time('Y-m-j'), get_the_time(__( 'F jS, Y', 'bonestheme' )), bones_get_the_author_posts_link(), get_the_category_list(', '));
-									?></p>
-
-								</header> <!-- end article header -->
-
-								<section class="entry-content clearfix">
-
-									<?php the_post_thumbnail( 'bones-thumb-300' ); ?>
-
-									<?php the_excerpt(); ?>
-
-								</section> <!-- end article section -->
-
-								<footer class="article-footer">
-
-								</footer> <!-- end article footer -->
-
-							</article> <!-- end article -->
-
-							<?php endwhile; ?>
+							echo '<ul>';
+							?>
+							<?php while (have_posts()) : the_post();?>
+							<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+							<?php if($i % $count == 0) {echo '</ul><ul>';}?>
+							<?php $i++; endwhile;?>
+									</ul>
+									</div>
+									<div style="clear:both"></div>
+								</div>
+								
+							</div>
 
 									<?php if ( function_exists( 'bones_page_navi' ) ) { ?>
 										<?php bones_page_navi(); ?>

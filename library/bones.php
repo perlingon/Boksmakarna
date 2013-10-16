@@ -47,6 +47,7 @@ function bones_ahoy() {
     // cleaning up random code around images
     add_filter( 'the_content', 'bones_filter_ptags_on_images' );
     // cleaning up excerpt
+    add_filter( 'get_the_excerpt', 'the_excerpt_always_show_read_more', 9 );
     add_filter( 'excerpt_more', 'bones_excerpt_more' );
     add_filter('excerpt_length', 'new_excerpt_length');
 
@@ -142,7 +143,7 @@ function bones_scripts_and_styles() {
     }
 
     //adding scripts file in the footer
-    wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/js/compressed/_custom.min.js', array( 'jquery' ), '', true );
+    wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/js/_custom.js', array( 'jquery' ), '', true );
 
     // enqueue styles and scripts
     wp_enqueue_script( 'bones-modernizr' );
@@ -358,11 +359,39 @@ function bones_filter_ptags_on_images($content){
 function bones_excerpt_more($more) {
 	global $post;
 	// edit here if you like
-return '...  <a class="excerpt-read-more" href="'. get_permalink($post->ID) . '" title="'. __( 'Read', 'bonestheme' ) . get_the_title($post->ID).'">'. __( 'Read more &raquo;', 'bonestheme' ) .'</a>';
+return '... <a class="excerpt-read-more" href="'. get_permalink($post->ID) . '" title="'. __( 'Read', 'bonestheme' ) . get_the_title($post->ID).'">Läs Mer</a>';
 }
 
 function new_excerpt_length($length) {
-return 12;
+return 40;
+}
+
+function excerpt($limit) {
+  $excerpt = explode(' ', get_the_excerpt(), $limit);
+  if (count($excerpt)>=$limit) {
+    array_pop($excerpt);
+    $excerpt = implode(" ",$excerpt).bones_excerpt_more();
+  } else {
+    $excerpt = implode(" ",$excerpt);
+  }
+  $excerpt = preg_replace('`[[^]]*]`','',$excerpt);
+  return $excerpt;
+}
+
+
+
+function content($limit) {
+  $content = explode(' ', get_the_content(), $limit);
+  if (count($content)>=$limit) {
+    array_pop($content);
+    $content = implode(" ",$content).'...';
+  } else {
+    $content = implode(" ",$content);
+  }
+  $content = preg_replace('/[.+]/','', $content);
+  $content = apply_filters('the_content', $content);
+  $content = str_replace(']]>', ']]&gt;', $content);
+  return $content;
 }
 
 /*
