@@ -9,6 +9,12 @@ and other resources. You'll also notice the grid starts to
 come into play. Have fun!
 
 ******************************************************************/
+
+.center
+	>hr
+		margin 0
+.small-image
+	display none
 .border
 	display none
 .header
@@ -21,14 +27,32 @@ come into play. Have fun!
 	height 12em
 	.logo
 		position absolute
-		display block
 		left 0.5em
 		top 2em
+		&.no-retina
+			display block
 	.social-box
 		display block
 #container
 	padding-top 0
+.single
+	.read-more-small
+		display none!important
 .single-book
+	article
+		.info-wrapper
+			overflow hidden
+		.article-header
+			.veckans-bok
+				display none
+	.latest-sticker
+		display none
+		.veckans-bok
+			right -5px
+			top 23px
+			height 60px
+			width 60px
+			background-image url(../images/veckans-bok_large.png)
 	article
 		p
 			font-size 0.75em
@@ -49,7 +73,7 @@ come into play. Have fun!
 	.media
 		#listen
 			.playlist
-				width 75%!important
+				width 70%!important
 			.attachment-featured
 				margin-bottom 1.4em
 .single-post,
@@ -77,8 +101,9 @@ come into play. Have fun!
 		max-width ((max-width)-(30px))
 	.media
 		column(8)
-		display none
 		position relative
+		overflow visible
+		display block
 		#listen
 			.playlist,
 			.sharing
@@ -86,13 +111,12 @@ come into play. Have fun!
 			.playlist
 				width 100%
 			.sharing
-				width 25%
+				width 30%
 				#ssba
 					padding-left 10%
 					padding-top .17em
 					.share-button
-						min-width 30px
-						width 30%
+						width 25%
 						max-width 36px
 						img
 							width 100%
@@ -101,7 +125,81 @@ come into play. Have fun!
 	article
 		column(4)
 
+.home
+	.center
+		padding 0 .5em 15em
+		#editorial
+			.widget
+				column(4)
+				float right
+			.push-spaces
+				position relative
+				bottom auto
+				hr
+					display none
 
+			.news
+				position relative
+				.widget
+					padding-right 0
+					position relative
+					overflow visible
+				.headline
+					top -.7em
+				.separator
+					position absolute
+					left -(gutter-width)
+					top -1em
+					height 16em
+					width gutter-width
+					background background
+				.link
+					/*position absolute
+					right -(gutter-width/2)
+					bottom -.7em
+					background background
+					padding-left 1em*/
+.home,
+.single
+		.grid-container
+			.grid-item
+				border-bottom 0
+
+.sorting
+	column(4)
+
+// CHOSEN
+.filters
+	background transparent
+	padding 0
+	border-radius .5em
+	.fold-out-filter
+		display none
+	.filters-foldout
+		background transparent
+		box-shadow none
+		display block
+		padding 0
+	h4,h5
+		display none
+	.chosen-container .chosen-results
+		max-height 240px
+	.chosen-container
+		column(4)
+		overflow visible!important
+		min-width 210px
+		.chosen-choices
+			background-color light-grey
+			li.search-choice
+				background-color white
+	.chosen-container-active
+		.chosen-choices
+			background orange
+			.search-field
+				background-image url('../images/chosen-sprite.png')
+				background-repeat no-repeat
+				background-position 99% -40px
+		
 /*********************
 MENU
 *********************/
@@ -133,7 +231,7 @@ MENU
 		//border-right: 1px solid white
 		background none
 		color grey
-		font-size .7em
+		font-size .705em
 		&:hover
 			//background white
 			color black
@@ -156,8 +254,9 @@ SLIDER
 			max-width max-width
 			.content
 				font-size 95%
-				q
-					font-size 200%
+		&.featured
+			q
+				//
 
 
 

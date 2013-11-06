@@ -150,7 +150,7 @@ add_action('do_meta_boxes', 'reorder_metaboxes');
 add_filter('manage_posts_columns', 'posts_columns', 5);
 add_action('manage_posts_custom_column', 'posts_custom_columns', 5, 2);
 function posts_columns($columns){
-	 $new = array();
+	  $new = array();
 	  foreach($columns as $key => $title) {
 	    if ($key=='title') // Put the Thumbnail column before the Title column
 	      $new['thumbnail'] = 'Image';
@@ -163,7 +163,5 @@ function posts_custom_columns($column_name, $id){
         echo the_post_thumbnail('admin-thumb');
     }
 }
-
-
 
 ?>

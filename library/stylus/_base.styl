@@ -25,26 +25,49 @@ body
 	line-height 1.35
 	color bread
 	background background
-
+.retina
+	display none
 
 /*********************
 LAYOUT
 *********************/
 #container
-	padding-top 3.7em
+	padding-top 56px
 	min-height 100%
 	position relative
-
+#inner-content
+	padding-bottom 1em
+	position relative
 .center
 	width 96%
 	max-width max-width
 	margin 0 auto
-	padding 0 .5em 15em
+	padding 0 .5em 37em
+	>hr
+		margin 1em 0
 .home
 	.center
 		margin-top 2em
 		z-index 99
 		position relative
+		padding 0 .5em 58em
+		#editorial
+			.push-spaces
+				position absolute
+				bottom -22em
+				.fb-like
+					float left
+					padding-right 1em
+					margin-top .3em
+			.news
+				.widget
+					//padding-right .5em
+				.headline
+					position absolute
+					top -.85em
+					left 0
+					z-index 1
+					padding-right 1em
 
 .border
 	height .5em
@@ -70,9 +93,11 @@ LAYOUT
 		position relative
 		left 0
 		top -0.8em
+		max-width 210px
+		height auto
 	.social-box
 		position absolute
-		right 0
+		right (gutter-width/2)
 		top 1.6em
 		display none
 		z-index 1
@@ -85,40 +110,53 @@ LAYOUT
 		font-size .8em
 		clear both
 		.widget
-			padding 1.7em 0 2.5em
+			padding 20px 0
 			h3
-				font-size 1.6em
+				font-size 1.4em
 				padding-bottom .3em
+				margin 0
 			h4
 				font-size 1.2em
 				padding-bottom .8em
+				margin 0
+			.textwidget a
+				text-decoration underline
 		.news
+			position relative
+			z-index 90
 			a
 				text-decoration none
 			span
 				font-family sans-serif
 				text-transform uppercase
+				letter-spacing -0.08em
 				color grey
 				background background
 				font-size 80%
+			.link
+				position absolute
+				bottom 2em
+				right 0
+				display none
+
 
 /*********************
 	  THE GRID
 *********************/
-.home
-	.grid-container
-		margin-top 2em
 .grid-container
 	clear both
 	display block
 	padding 1em 0
+	overflow visible!important
 	.grid-item
 		padding 0
 		border-bottom 4px solid lighten(grey,80%)
-		margin-bottom 1em
+		margin-bottom 20px
 		display block
 		font-size .8em
-		min-height 440px
+		overflow visible!important
+		min-height 390px
+		background background
 
 		.overlay
 			*background url(../images/opacity.png)
@@ -135,8 +173,9 @@ LAYOUT
 			width 100%
 			height auto
 		h4
-			max-width 80%
+			max-width 78%
 			font-size 110%
+			margin 0
 		.tags
 			clear both
 			font-size .85em
@@ -150,6 +189,9 @@ LAYOUT
 				padding-bottom .8em
 			a
 				color grey
+				&:hover,
+				&:focus
+					text-decoration underline
 		.belowimg
 			position relative
 			margin-top .6em
@@ -179,6 +221,8 @@ LAYOUT
 			line-height 1.3
 		a
 			text-decoration none
+		a.excerpt-read-more
+			text-decoration underline
 		.timestamp
 			display none
 /*********************
@@ -222,6 +266,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 	text-transform uppercase
 	letter-spacing -.08em
 	clear both
+	margin 0
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http//css-tricks.com/watch-your-font-weight/
@@ -236,27 +281,24 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5
 
 h1,.h1 
 	font-size 1.7em
-	line-height 1.2em
+	line-height 1.42em
 
 
 h2,.h2 
 	font-size 1.48em
 	line-height 1.2em
-	margin-bottom 0.375em
-
+	margin-bottom 4px
 
 h3,.h3 
 	font-size 1.3em
 
-
 h4,.h4 
 	font-size 1em
 
-
 h5,.h5 
-	font-size 0.846em
+	font-size 0.9em
 	line-height 2.09em
-	letter-spacing 2px
+	//letter-spacing 2px
 
 p
 	margin 0 0 0.5em 0
@@ -363,12 +405,12 @@ NAVIGATION STYLES
 		float left
 		left 2%
 		top 15px
-		padding-left 1.5em
+		//padding-left 21px
 		padding-top 3px
 		line-height auto
 		font-size 110%
 		color orange
-		background url(../images/logo-icon.png) no-repeat 0 0
+		//background url(../images/logo-icon.png) no-repeat 0 0
 
 
 /*********************
@@ -377,8 +419,9 @@ POSTS &: CONTENT STYLES
 .post-type-archive-episode,
 .single-episode
 	article
-		h4
-			color lighten(grey,20%)
+		header
+			h4
+				color lighten(grey,20%)
 	#main hr
 			margin .9em 0 2.9em
 	#ssba
@@ -389,6 +432,17 @@ POSTS &: CONTENT STYLES
 .single
 	.grid-container
 		display none
+	.back-btn
+		padding 0 0 3.5em
+		margin-top -.7em
+		text-align center
+	.read-more-small
+		padding 0 2%
+		text-align left!important
+		font-size 90%
+		display none
+		a
+			font-weight bold
 .single-post
 	#ssba
 		float right
@@ -530,7 +584,7 @@ POSTS &: CONTENT STYLES
 	.content-row
 		clear both
 		position relative
-		margin-top 1em
+		margin-top 16px
 		h4
 			font-size 90%
 			&.content-row-headline
@@ -541,17 +595,52 @@ POSTS &: CONTENT STYLES
 		.content
 			display block
 			padding 2em 0
+.grid-head
+	margin-top 20px
+	position relative
+	.grid-headline
+		text-align center
+		padding .5em
+		color grey
+		font-size 75%
+		bottom -16px
+	hr
+		height 4px
+		background light-grey
+		width 16%
+		//margin 0 0
+.grid-foot
+	border-top 4px solid light-grey
+	text-align center
+	margin-top 10px
+	clear both
+	font-size 70%
+	padding 1em 0
+	a
+		font-family sans-serif
+		text-transform uppercase
+		letter-spacing -0.08em
+		text-decoration none
+		color grey
+		&:hover
+			text-decoration underline
+			color grey
 
-
+.media
+	display none
 .single-book
 	article
+		header
+			position relative
 		.entry-content p,
 		.content-row-content p
 			padding 1em 0
 
 	h1
-		font-size 1.5em
+		font-size 1.3em
+		line-height 1.25em
 		margin-bottom .2em
+		width 90%
 	.buy-button
 		background-color lighten(grey,20%)
 		margin-left .5em
@@ -562,8 +651,6 @@ POSTS &: CONTENT STYLES
 		&:hover
 			background-color orange
 			
-	.media
-		display none
 	.taxonomies
 		.writers
 			font-size 80%
@@ -592,40 +679,39 @@ POSTS &: CONTENT STYLES
 		//border-bottom 4px solid light-grey
 		a
 			text-decoration none
-		.thumb
-			width 12%!important
-			max-width 40px
-			img
-				border-radius 3px
+		.text,
+		.icon
+			float left
 		h4
-			width 80%
 			line-height 120%
-			float left
-		div
-			width 2.1em
-			height 4em
-			margin-top -0.3em
-			float left
-			.icon
-				background-image url(../images/interview.png)
-				background-position center center
-				background-repeat no-repeat
-				background-color light-grey
-				font-family sans-serif
-				text-transform uppercase
-				display inline-block
-				height 1.8em
-				width 1.8em
-				border-radius 50%
-				transition-property color, background-color
-				transition-duration 0.3s, 0.3s;   
-				transition-timing-function linear, linear
+			margin 0
+		h5
+			color grey
+			padding-bottom .3em
+			line-height 100%
+			font-size 80%
+			margin 0
+		.icon
+			background-image url(../images/interview.png)
+			background-position center center
+			background-repeat no-repeat
+			background-color light-grey
+			font-family sans-serif
+			text-transform uppercase
+			display block
+			height 1.8em
+			width 1.8em
+			border-radius 50%
+			transition-property color, background-color
+			transition-duration 0.3s, 0.3s;   
+			transition-timing-function linear, linear
+			margin-right .5em
+			margin-top 3px
 		&:hover
-			div
-				.icon
-					background-color orange
-					a
-						color white
+			.icon
+				background-color orange
+				a
+					color white
 
 	.infobox
 		padding .5em 0
@@ -693,7 +779,7 @@ POSTS &: CONTENT STYLES
 .content-row-content
 	p
 		font-size .8em
-		margin-bottom 1em
+		padding 1em 0
 
 	ul, ol, table, dl 
 
@@ -890,24 +976,53 @@ SLIDER
 				position absolute
 				width 100%
 				bottom -12px
-				padding .8em 0
+				padding 5px 0
 				max-height 90px
 				height 90px
 				z-index 999
 				hr
-					width 50%
+					width 55%
+					margin 0 auto
 				h2,h3
 					margin 0
-				q
-					font-family quote
-					font-size 170%
-					text-transform uppercase
-					line-height 110%
-					letter-spacing -0.1em
-					padding .3em 10%
-					display none
-					text-align center
-					clear both
+				h5
+					line-height 14px
+		&.veckans
+			h2
+				font-size 1.7em
+				line-height 1.42em
+		&.featured
+			q
+				font-family quote
+				font-size 125%
+				text-transform uppercase
+				line-height 100%
+				letter-spacing -0.1em
+				padding 5px 15%
+				display none
+				text-align center
+				clear both
+			hr
+				display none
+				margin 10px auto 12px!important
+				background light-grey
+				opacity .3
+				height 2px
+			h2
+				font-size 250%
+				padding-bottom 3px
+			h4
+				border-bottom 1px solid
+				display inline
+				font-size 96%
+			h5
+				margin 0
+				padding 3px 0
+			i
+				display none
+				background url(../images/vinge.png) no-repeat center center
+				padding 5px 18px
+				margin 0 19px
 
 		img.big
 			display none
@@ -934,33 +1049,44 @@ FOOTER STYLES
 	z-index 100
 	bottom 0
 	left 0
-	height 15em
+	height 37em
 	a
 		color grey
 		text-decoration none
 	#inner-footer
 		width 100%
-		>div
-			margin-bottom 1.5em
+		text-align center
+		.widget
+			margin-bottom 2em
+			min-height 4em
 		ul
-			margin 0
 			-webkit-padding-start 0
 			list-style-type none
 			font-size 80%
 			font-family sans-serif
 			text-transform uppercase
 			font-size 80%
-
+			&.social-icons
+				li
+					padding-right .25em
+					padding-left .25em
+					float none
+					display inline-block
+					*float left
 			li
 				margin 0
 		p
 			font-size 75%
-			margin 0 0 .3em
+			margin 0 0 1.3em
 		h4
 			margin 0 0 .3em
 			clear both
 	 /* end .footer-links */
 
+	.footer-logo
+		background-repeat no-repeat
+		background-position top center
+		margin-bottom 1em
 
 	.copyright
 		clear both

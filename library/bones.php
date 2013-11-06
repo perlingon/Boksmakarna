@@ -363,7 +363,7 @@ return '... <a class="excerpt-read-more" href="'. get_permalink($post->ID) . '" 
 }
 
 function new_excerpt_length($length) {
-return 40;
+return 45;
 }
 
 function excerpt($limit) {

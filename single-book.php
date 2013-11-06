@@ -2,16 +2,16 @@
 
 			<div id="content">
 
-				<div id="inner-content" class="wrap clearfix">
-
+				<div id="inner-content" class="wrap clearfix main">
 					<div id="main" class="eightcol first clearfix" role="main">
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+								
 								<div class="info-wrapper">
 								<header class="article-header">
-
+									<?php is_latest_post_sticker($post->ID,'book');?>
 									<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 									<div class="taxonomies">
 										<?php
@@ -38,20 +38,45 @@
 									<?php 
 
 									echo '<p>'.excerpt(14).'</p>';
+									echo '<div class="read-more-small"><h4>'.get_the_title().'</h4><p>'.get_the_content().' <a href=":;javascript" class="close">Visa mindre</a><p></div>';
 
 									if( has_term( 'yes', 'upcoming' ) ) {
 									    echo 'Avsnitt kommer snart...';
+									}else if(!get_field('podcast_book_id')){
+										echo 'Bokens ID är inte ifyllt.';
 									}else{
+									 	
+									 	$book_id_searchterm = get_field('podcast_book_id').'.';
+										
+									 	$episodes = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=avsnitt-1,avsnitt-2,avsnitt-3,avsnitt-4,avsnitt-5&posts_per_page=-1&orderby=title&order=ASC');
+									 	$interview = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=fredagsintervju&posts_per_page=-1&orderby=title&order=ASC');
 
-									 	$slug = get_the_slug();
-									 	$episodes = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__not_in=20');
-									 	$interview = new WP_Query('post_type=episode&category_name='.$slug.'&posts_per_page=-1&orderby=title&order=ASC&tag__in=20');
 									 			if ($episodes->have_posts()) {
-													echo '<ul class="playlist small">';
+													echo '<ul class="playlist small small-list">';
 													while ( $episodes->have_posts() ) {
 															$episodes->the_post();
+
+															// Make title with category
+															$postcats = get_the_category();
+															if ( $postcats && ! is_wp_error( $postcats ) ) : 
+																$cats = array();
+																foreach ( $postcats as $postcat) {
+																		$cats[] = $postcat->name;
+																}		
+																$episode_cat_title = join( ' ', $cats );
+															endif;
+
+															//Find page numbers in parenthases
+															$string = get_the_title();
+															$regex = '#\((([^()]+|(?R))*)\)#';
+															if (preg_match_all($regex, $string ,$matches)) {
+															    $pages = ' '.implode(' ', $matches[0]).'';
+															}else{
+																$pages = '';
+															}
+
 															$count++;
-															echo '<li class="episode-'.$count.'"><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
+															echo '<li class="episode-'.$count.'"><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
 													}
 													$count = 0;
 
@@ -63,6 +88,10 @@
 													$ep4 = '<li>Avsnitt 4 kommer torsdag</li>';
 													$ep5 = '<li>Avsnitt 5 kommer fredag</li>';
 													$end = '</ul>';
+
+													if ($day == 'Monday') {
+														$ep2 = '<li>Avsnitt 2 kommer imorgon</li>';
+													}
 
 													if ($day == 'Tuesday') {
 														$ep2 = '<li>Avsnitt 2 kommer idag</li>';
@@ -114,20 +143,28 @@
 													echo '<ul class="playlist-nav">';
 													while ( $episodes->have_posts() ) {
 															$episodes->the_post();
-
-															$posttags = get_the_tags();
-															if ( $posttags && ! is_wp_error( $posttags ) ) : 
-																$tags = array();
-																foreach ( $posttags as $posttag ) {
-																	if ($posttag->term_id !== '20') {
-																		$tags[] = $posttag->name;
-																	}
+															
+															// Make title with category
+															$postcats = get_the_category();
+															if ( $postcats && ! is_wp_error( $postcats ) ) : 
+																$cats = array();
+																foreach ( $postcats as $postcat) {
+																		$cats[] = $postcat->name;
 																}		
-																$episode_tag_title = join( ' ', $tags );
+																$episode_cat_title = join( ' ', $cats );
 															endif;
 
+															//Find page numbers in parenthases
+															$string = get_the_title();
+															$regex = '#\((([^()]+|(?R))*)\)#';
+															if (preg_match_all($regex, $string ,$matches)) {
+															    $pages = ' ('.implode(' ', $matches[1]).')';
+															}else{
+																$pages = '';
+															}
+
 															$count++;
-															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . $episode_tag_title . '</span></a></li>';
+															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . $episode_cat_title . $pages .'</span></a></li>';
 													}
 													$count = 0;
 
@@ -158,33 +195,30 @@
 													echo '</ul>';
 
 												}else{
-													echo '<i>Inga avsnitt.</i>';
+													//echo '<i>Inga avsnitt.</i>';
 												}
 												wp_reset_query();
 												if ($interview->have_posts()) {
-													echo '<div class="interview">';
+													echo '<div class="interview infobox">';
 													while ( $interview->have_posts() ) {
 															$interview->the_post();
-															$posttags = get_the_tags();
-															if ( $posttags && ! is_wp_error( $posttags ) ) : 
-																$tags = array();
-																foreach ( $posttags as $posttag ) {
-																	if ($posttag->term_id !== '20') {
-																		$tags[] = $posttag->name;
-																	}
-																}		
-																$tag_title = join( ' & ', $tags );
-															endif;
+															
+															$title = get_the_title();
+															$title = substr($title, strrpos($title, "-") + 1);
+															
 															echo '<a href="'.get_permalink().'">';
-															echo '<div><span class="icon"></span></div><h4>Fredagsintervju - '.$tag_title.'</h4>';
+															echo '<div class="icon"></div>';
+															echo '<div class="text">';
+															echo "<h5>Fredagsintervjun</h5>";
+															echo '<h4>'.$title.'</h4>';
+															echo '</div>';
 															echo '</a>';
 													}
 													
 													echo '</div>';
 													echo '<div style="clear:both"></div>';
-												}else{
-													echo '<i>Ingen intervju.</i>';
 												}
+
 												wp_reset_query();
 											}
 
@@ -262,27 +296,49 @@
 								    <li><a href="#read-more"><span>Läs Mer</span></a></li>
 								    <li><a href="#listen"><span>Lyssna</span></a></li>
 								  </ul>
-								  	<div id="listen">							  
+								  	<div id="listen">
+								  	<div class="latest-sticker"><?php is_latest_post_sticker($post->ID,'book');?></div>							  
 									<?php the_post_thumbnail('featured');
-									if( !has_term( 'yes', 'upcoming' ) ) {
+									if( !has_term( 'yes', 'upcoming' ) && get_field('podcast_book_id') ) {
 									if ($episodes->have_posts()) {
 														echo '<ul id="main-player" class="playlist init main">';
 														while ( $episodes->have_posts() ) {
-																$episodes->the_post();
+															$episodes->the_post();
+																
+																// Make title with category
+																$postcats = get_the_category();
+																if ( $postcats && ! is_wp_error( $postcats ) ) : 
+																	$cats = array();
+																	foreach ( $postcats as $postcat) {
+																			$cats[] = $postcat->name;
+																	}		
+																	$episode_cat_title = join( ' ', $cats );
+																endif;
+
+																//Find page numbers in parenthases
+																$string = get_the_title();
+																$regex = '#\((([^()]+|(?R))*)\)#';
+																if (preg_match_all($regex, $string ,$matches)) {
+																    $pages = ' ('.implode(' ', $matches[1]).')';
+																}else{
+																	$pages = '';
+																}
+
+
 																$count++;
 																echo '<li id="episode-'.$count.'"';
 																if ($count==1) {echo 'style="display:block"';}
-																echo '><a href="'.get_field('mp3_source').'"><i></i>' . get_the_title() . '</a></li>';
+																echo '><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
 														}
 														echo "</ul>";
+														echo '<div class="sharing">';
+														echo do_shortcode('[ssba]');
+														echo '</div>';
 									}
 									$count = 0;
 									wp_reset_query();
 									}
 									?>
-									<div class="sharing">
-									<?php echo do_shortcode('[ssba]'); ?>
-									</div>
 									</div>
 									<div id="read-more">
 										<section class="entry-content">

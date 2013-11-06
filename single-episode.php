@@ -7,35 +7,80 @@
 					<div id="main" class="eightcol first clearfix" role="main">
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-							<?php 
-											$posttags = get_the_tags();
-											if ( $posttags && ! is_wp_error( $posttags ) ) : 
-												$tags = array();
+							<?php
+							$book_id = substr(get_the_title(), 0, 1);
+							$args = array( 'posts_per_page' => 1, 'post_type' => 'book', 'meta_key' => 'podcast_book_id','meta_value' => $book_id);
+							$theposts = get_posts( $args );
 
-												foreach ( $posttags as $posttag ) {
-													if ($posttag->term_id !== '20') {
-														$tags[] = $posttag->name;
-													}
-													
-												}
-																	
-												$tag_title = join( ' & ', $tags );
+							$title = get_the_title();
 
-											endif;
+							if ( 'fredagsintervjun' == has_category() ){
+								$title = substr($title, strrpos($title, "-") + 1);
+								$type_tag = 'Fredagsintervjun';
+							}else{
+								$regex = '#\((([^()]+|(?R))*)\)#';
+								if (preg_match_all($regex, $title ,$matches)) {
+									$pages = ' '.implode(' ', $matches[0]).'';
+								}else{
+									$pages = '';
+								}
+								// Make title with category
+								$postcats = get_the_category();
+								if ( $postcats && ! is_wp_error( $postcats ) ) : 
+									$cats = array();
+									foreach ( $postcats as $postcat) {
+											$cats[] = $postcat->name;
+									}		
+									$title = join( ' ', $cats );
+								endif;
+
+								$title = $title.$pages;
+								$type_tag = 'Fredagsintervjun';
+
+								if ($theposts) {
+										foreach($theposts as $post) :
+										setup_postdata($post);
+										$type_tag = get_the_title();
+										endforeach;
+										wp_reset_postdata();
+								}
+							}
+
+							
 							?>
 							<div class="post-wrapper">
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
 
 								<header class="article-header">
 
-									<h4 class="h4"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">Fredagsintervju</a></h3>
-									<h2 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo $tag_title; ?></a></h3>
+									<h4 class="h4"><?php echo $type_tag; ?></h3>
+									<h2 class="h2"><?php echo $title; ?></h3>
 
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix">
+									<div class="small-image">
+									<?php 
 
+										if (!get_field('thumbnail')) {
+											the_post_thumbnail('featured');
+										}else{
+											echo '<img class="attachment-featured wp-post-image" src="'.get_field('thumbnail').'" />';
+										}
+								
+									 ?>
+									</div>
 									<?php the_excerpt(); ?>
+									<?php echo '<div class="read-more-small"><h4>'.$type_tag.' - '.$title.'</h4><p>'.get_the_content().' <a href=":;javascript" class="close">Visa mindre</a><p></div>';?>
+
+									<?php if (get_field('mp3_source')) {?>
+									<div class="player">
+										<ul class="playlist init small">
+											  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
+											  <li><a href="<?php the_field('mp3_source'); ?>"><i></i><?php echo $type_tag; ?> - <?php echo $title; ?></a></li>
+										</ul>
+									</div>
+									<?php }?>
 									
 
 								</section> <!-- end article section -->
@@ -43,21 +88,15 @@
 								<footer class="article-footer">
 									<?php echo do_shortcode('[ssba url='.get_permalink().']'); ?>
 									<?php
-									$category = get_the_category(); 
-									$slug = $category[0]->slug;
-
-									$args = array( 'posts_per_page' => 1, 'name' => $slug, 'post_type' => 'book');
-									$theposts = get_posts( $args );
-
-									foreach($theposts as $post) :
-
-									setup_postdata($post);
 									
-									echo '<h4>Provlyssna boken</h4><h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
 
-									endforeach;
-
-									wp_reset_postdata();
+									if ($theposts) {
+										foreach($theposts as $post) :
+										setup_postdata($post);
+										echo '<h4>Provlyssna boken</h4><h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+										endforeach;
+										wp_reset_postdata();
+									}
 									?>
 									
 								</footer> <!-- end article footer -->
@@ -71,12 +110,20 @@
 								    <li><a href="#listen"><span>Lyssna</span></a></li>
 								  </ul>
 								  	<div id="listen">							  
-									<?php the_post_thumbnail('featured');?>
+									<?php 
+
+										if (!get_field('thumbnail')) {
+											the_post_thumbnail('featured');
+										}else{
+											echo '<img class="attachment-featured wp-post-image" src="'.get_field('thumbnail').'" />';
+										}
+								
+								 	?>
 									<?php if (get_field('mp3_source')) {?>
 									<div class="player">
 										<ul class="playlist init">
 											  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
-											  <li><a href="<?php the_field('mp3_source'); ?>"><i></i>Fredagsintervju - <?php echo $tag_title; ?></a></li>
+											  <li><a href="<?php the_field('mp3_source'); ?>"><i></i><?php echo $type_tag; ?> - <?php echo $title; ?></a></li>
 										</ul>
 									</div>
 									<?php }?>
@@ -84,9 +131,9 @@
 									<div id="read-more">
 										<section class="entry-content">
 											<div class="columns">
-
+												<p>
 												<?php the_content(); ?>
-
+												</p>
 											</div>
 										</section>
 									</div>

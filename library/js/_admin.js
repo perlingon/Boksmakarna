@@ -1,8 +1,13 @@
 jQuery(document).ready(function($) {
 	
-	//Remove thead value on thumbanil column
+	//Remove thead value on thumbnail column
 	$('.wp-list-table th.column-thumbnail').each(function(){
 		$(this).html('');
+	});
+
+	//change number input format on acf boxes
+	$('.acf_postbox input.number').each(function(){
+		//$(this).attr('type','tel');
 	});
 
 //********** SLIDER AIDS ***********//

@@ -14,8 +14,11 @@
 							$count_writers = count($all_writers);
 							$count_genres = count($all_genres);
 							
-							
+							echo '<div class="filters">';
+							echo '<h5 class="fold-out-filter"><span>Filtrera...</span></h5>';
+							echo '<div class="filters-foldout">';
 							if ($titles->have_posts()) {
+								echo "<h5>Titel</h5>";
 								echo '<select data-placeholder="Titel..." id="titles" class="chosen-select" multiple tabindex="4">';
 								while ( $titles->have_posts() ) {
 										$titles->the_post();
@@ -27,6 +30,7 @@
 							}
 							
 							if ( $count_writers > 0 ){
+								echo "<h5>Författare</h5>";
 							     echo '<select data-placeholder="Författare..." id="writers" class="chosen-select" multiple tabindex="4">';
 							     foreach ( $all_writers as $writer ) {
 							       echo '<option value=".'.$writer->slug.'">' . $writer->name . '</option>';
@@ -35,13 +39,15 @@
 							 }
 
 							if ( $count_genres > 0 ){
+								echo "<h5>Genre</h5>";
 							     echo '<select data-placeholder="Genre..." id="genres" class="chosen-select" multiple tabindex="4">';
 							     foreach ( $all_genres as $genre ) {
 							       echo '<option value=".'.$genre->slug.'">' . $genre->name . '</option>';
 							     }
 							     echo "</select>";
 							 }
-							 
+							 echo '</div>';
+							 echo '</div>';
 							?>
 							<div class="sorting">
 								<ul>Sortera på:</ul>
@@ -58,12 +64,16 @@
 								$count++;
 								$writers = get_the_terms( $post->ID , 'writer' );
 								$genres = get_the_terms( $post->ID , 'genre' );
+								
 								echo '<div id="block-'.$count.'" class="grid-item post ';
 								if( has_term( 'yes', 'upcoming' ) ) {echo 'upcoming ';}
 								echo get_the_slug();
 								foreach ( $writers as $writer ) {echo ' '.$writer->slug;}
 								foreach ( $genres as $genre ) {echo ' '.$genre->slug;}
 								echo '">';
+
+								is_latest_post_sticker($post->ID,'book');
+
 								if(!has_term( 'yes', 'upcoming' ) ) {echo '<a href="'.get_permalink().'">';}
 								if( has_term( 'yes', 'upcoming' ) ) {
 									echo '<div class="overlay">';

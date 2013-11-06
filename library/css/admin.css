@@ -32,3 +32,21 @@ Stylesheet: Admin Stylesheet
   height: 100%;
   opacity: 0.8;
 }
+.acf_postbox #acf-podcast_book_id {
+  z-index: 1;
+}
+.acf_postbox #acf-podcast_book_id input {
+  font-size: 2em;
+  height: 2em;
+  width: 60px;
+  border: 0;
+  background: #fffbcc;
+}
+.acf_postbox #acf-podcast_book_id input:focus {
+  border: 1px solid #ccc;
+}
+.acf_postbox #acf-podcast_book_id input::-webkit-outer-spin-button,
+.acf_postbox #acf-podcast_book_id input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -59,7 +59,8 @@ require_once( 'library/columns.php' );
 add_image_size( 'grid-block', 500, 400, true );
 
 add_image_size( 'featured', 680, 383, true );
-add_image_size( 'logo', 99999,130, false );
+add_image_size( 'logo', 210,99999, false );
+add_image_size( 'logo@2x', 420,99999, false );
 
 add_image_size( 'admin-thumb', 60, 60, true );
 
@@ -104,7 +105,38 @@ function set_episode_title( $data , $postarr ) {
 }
 //add_filter( 'wp_insert_post_data' , 'set_episode_title' , 10, 2 );
 
+foreach ( array (
+		'the_title'
+	) as $target )
+{
+	remove_filter( $target, 'wptexturize' );
+}
 
+
+
+function latest_sticker($get_post_type){
+	if ($get_post_type == 'book') {
+		echo '<div class="veckans-bok"></div>';
+	}
+	if ($get_post_type == 'episode') {
+		echo '<div class="veckans-intervju"></div>';
+	}
+};
+
+function is_latest_post_sticker($id,$post_type){
+
+		$latest_args = array(
+					    'numberposts' => 1,
+					    'post_type' => $post_type,
+					    'post_status' => 'publish'
+					 );
+		$latest = wp_get_recent_posts($latest_args);
+		$latest_id = $latest['0']['ID'];
+
+		if ($latest_id == $id) {
+			latest_sticker($post_type);
+		}
+}
 
 
 /************* LIBRARIES ********************/
@@ -151,7 +183,8 @@ function additional_libraries() {
 }
 
 function facebook_script() {
-    echo '<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "facebook-jssdk"));</script>';
+    echo '<div id="fb-root"></div>
+<script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/sv_SE/all.js#xfbml=1&appId=308190929319862";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "facebook-jssdk"));</script>';
 }
 add_action('wp_footer', 'facebook_script');
 
@@ -254,7 +287,7 @@ add_shortcode('partners', 'get_partner_footer_logos');
 function modify_query( $query ) {
 
 	if ( is_post_type_archive('episode') && !is_admin() && is_main_query() ) {
-	        set_query_var( 'tag', 'fredagsintervju' );
+	        set_query_var( 'category_name', 'fredagsintervjun' );
 	        set_query_var( 'posts_per_page', 10 );
 	    }
 	if ( is_post_type_archive('book') && !is_admin() && is_main_query() ) {

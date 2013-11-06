@@ -8,69 +8,80 @@
 
 							<?php if (have_posts()) : while (have_posts()) : the_post();?>
 							<?php 
-											$posttags = get_the_tags();
-											if ( $posttags && ! is_wp_error( $posttags ) ) : 
-												$tags = array();
-
-												foreach ( $posttags as $posttag ) {
-													if ($posttag->term_id !== '20') {
-														$tags[] = $posttag->name;
-													}
-													
-												}
-																	
-												$tag_title = join( ' & ', $tags );
-
-											endif;
+								$title = get_the_title();
+								$title = substr($title, strrpos($title, "-") + 1);
 							?>
 							<div class="post-wrapper">
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'clearfix' ); ?> role="article">
 
 								<header class="article-header">
 
-									<h4 class="h4"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">Fredagsintervju</a></h3>
-									<h2 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo $tag_title; ?></a></h3>
+									<h4 class="h4"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">Fredagsintervjun</a></h3>
+									<h2 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php echo $title; ?></a></h3>
 
 								</header> <!-- end article header -->
 
 								<section class="entry-content clearfix">
+									<div class="small-image">
+									<?php 
 
+										if (!get_field('thumbnail')) {
+											the_post_thumbnail('featured');
+										}else{
+											echo '<img class="attachment-featured wp-post-image" src="'.get_field('thumbnail').'" />';
+										}
+								
+									 ?>
+									</div>
 									<?php the_excerpt(); ?>
 									
+									<?php if (get_field('mp3_source')) {?>
+									<div class="player">
+										<ul class="playlist init small">
+											  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
+											  <li><a href="<?php the_field('mp3_source'); ?>"><i></i>Fredagsintervjun - <?php echo $title; ?></a></li>
+										</ul>
+									</div>
+									<?php }?>
 
 								</section> <!-- end article section -->
 
 								<footer class="article-footer">
 									<?php echo do_shortcode('[ssba url='.get_permalink().']'); ?>
 									<?php
-									$category = get_the_category(); 
-									$slug = $category[0]->slug;
+									$book_id = substr(get_the_title(), 0, 1);
 
-									$args = array( 'posts_per_page' => 1, 'name' => $slug, 'post_type' => 'book');
+									$args = array( 'posts_per_page' => 1, 'post_type' => 'book', 'meta_key' => 'podcast_book_id','meta_value' => $book_id);
 									$theposts = get_posts( $args );
+									if ($theposts) {
 
-									foreach($theposts as $post) :
+										foreach($theposts as $post) :
+											setup_postdata($post);
+											echo '<h4>Provlyssna boken</h4><h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+										endforeach;
 
-									setup_postdata($post);
-									
-									echo '<h4>Provlyssna boken</h4><h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
-
-									endforeach;
-
-									wp_reset_postdata();
+										wp_reset_postdata();
+									}
 									?>
-									
 								</footer> <!-- end article footer -->
 
 							</article> <!-- end article -->
 
 							<div class="media">
-								<?php the_post_thumbnail('featured'); ?>
+								<?php 
+
+								if (!get_field('thumbnail')) {
+									the_post_thumbnail('featured');
+								}else{
+									echo '<img class="attachment-featured wp-post-image" src="'.get_field('thumbnail').'" />';
+								}
+								
+								 ?>
 							
 							<div class="player">
 								<ul class="playlist init">
 									  <!-- files from the web (note that ID3 information will *not* load from remote domains without permission, Flash restriction) -->
-									  <li><a href="<?php the_field('mp3_source'); ?>"><i></i>Fredagsintervju - <?php echo $tag_title; ?></a></li>
+									  <li><a href="<?php the_field('mp3_source'); ?>"><i></i>Fredagsintervjun - <?php echo $title; ?></a></li>
 								</ul>
 							</div>
 							</div>

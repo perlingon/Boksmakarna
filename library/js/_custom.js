@@ -36,6 +36,7 @@ jQuery(document).ready(function($) {
         $imgs = $("img.lazyload");
 
     //GOOGLE EVENT TRACKING
+    
 
     $("#slider a").each(function() {
         var href = $(this).attr("href");
@@ -77,7 +78,6 @@ jQuery(document).ready(function($) {
         };
     });
 
-
     //LOCAL SCROLL
     function scrollfx(){
         var scrollTop = $(window).scrollTop();
@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
     var navigation = responsiveNav("#menu-main", {
         animate: true,        // Boolean: Use CSS3 transitions, true or false
         transition: 400,      // Integer: Speed of the transition, in milliseconds
-        label: "<p>oksmakarna</p>",        // String: Label for the navigation toggle
+        label: "<p>Boksmakarna</p>",        // String: Label for the navigation toggle
         insert: "after",      // String: Insert the toggle before or after the navigation
         customToggle: "",     // Selector: Specify the ID of a custom toggle
         openPos: "relative",  // String: Position of the opened nav, relative or static
@@ -120,7 +120,7 @@ jQuery(document).ready(function($) {
       });
     
     //CHOSEN AND ISOTOPE FILTERING
-    $(".chosen-select").chosen().change(function() {
+    $(".chosen-select").chosen({no_results_text: "Hittar inget som matchar "}).change(function() {
         var select_parent = '';
         var selected_titles = $("#titles").val();
         var selected_writers = $("#writers").val();
@@ -273,15 +273,23 @@ jQuery(document).ready(function($) {
                 var selector = $(this).attr('data-filter');
                 var sortName = $('.sort-by li a').first().attr('href').slice(1);
                 if ($('.sort-order a').first().hasClass('asc')) {var sort_order = true;} else {var sort_order = false;};
-
+                
+                $('.filters-foldout').show();
+                $('.filters-foldout').toggleClass('out');
+                $('.fold-out-filter span').html('Rensa alla filter');
+                $('.fold-out-filter span').css('background-position','-30px -64px');
                 //Filter
                 $container.isotope({ filter: selector, sortBy : sortName, sortAscending : sort_order });
                     //Add to hash
                     var hashvalue = $.param({ filter: selector });
                     $.bbq.pushState( hashvalue );
                 
-                //Add to chosen select
-                //$('#writers').val('häst');
+                //fill selectbox on init
+                var values= selector;
+                $.each(values.split(","), function(i,e){
+                    $(".chosen-select option").prop("selected", false).trigger('chosen:updated');
+                    $(".chosen-select option[value='" + e + "']").prop("selected", true).trigger('chosen:updated');
+                });
 
                 //ignore default link behaviour
                 return false;
@@ -298,6 +306,13 @@ jQuery(document).ready(function($) {
             $container.isotope({ filter: '*' });
         }else{
             $container.isotope( hashOptions );
+            
+            //fill selectbox on init
+            var values= hashOptions.filter;
+            $.each(values.split(","), function(i,e){
+                $(".chosen-select option[value='" + e + "']").prop("selected", true).trigger('chosen:updated');
+            });
+
             if (hashOptions.sortBy) {
                 var sortName = hashOptions.sortBy;
                 if (hashOptions.sortBy =='title') {var sortLabel = 'Titel'};
@@ -317,6 +332,34 @@ jQuery(document).ready(function($) {
       .trigger('hashchange');
 
 
+      //Filter UI
+
+        $('.chosen-select chosen-container-active').click(function(){
+
+        })
+        $('.filters .fold-out-filter').click(function(){
+        $('.filters-foldout').slideToggle(function(){
+            $(this).toggleClass('out');
+        });
+        if ($('.filters-foldout').hasClass('out')) {
+                var hashvalue = $.param({ filter: '*' });
+                $.bbq.pushState( hashvalue );
+                $(".chosen-select option").prop("selected", false).trigger('chosen:updated');
+
+            $(this).find('span').fadeOut(100,function(){
+                $(this).html('Filtrera...').fadeIn();
+                $(this).css('background-position','-30px -44px');
+
+            });
+        }else{
+            $(this).find('span').fadeOut(100,function(){
+                $(this).html('Rensa alla filter').fadeIn();
+                $(this).css('background-position','-30px -64px');
+            });
+        };
+    });
+
+
     function responsive_viewport(){
 
     /* getting viewport width */
@@ -328,8 +371,14 @@ jQuery(document).ready(function($) {
 
     $('.single .entry-content,.archive .entry-content,.page-template-default .entry-content').addClass('sweet-justice');
     /* if is below 481px */
-    if (responsive_viewport_width < 768) {
-        $( ".media" ).hide();
+    if (responsive_viewport_width < 481) {
+                    
+                    $('.single .entry-content .excerpt-read-more, .single .read-more-small .close').click(function(event){
+                        event.preventDefault();
+                        $( ".single .read-more-small" ).slideToggle();
+                    });
+    }
+    if (responsive_viewport_width < 750) {
         if (els.hasClass('columnized')) { 
             $('.column').each(function(){
                $(this).fadeOut(200, function(){
@@ -343,20 +392,43 @@ jQuery(document).ready(function($) {
     } /* end smallest screen */
     
     /* if is larger than 481px */
-    if (responsive_viewport_width > 768) {
-    $( ".media" ).show();
+    if (responsive_viewport_width >= 750) {
+    $( ".filters .filters-foldout" ).show(); 
+    $( ".single-book .latest-sticker" ).delay(800).fadeIn(300);
+        //playlist-nav
+    $('.playlist-nav a').click(function(event){
+        event.preventDefault();
+        var selector = $(this).attr('data');
+        var aLink = $('.playlist.main li.'+selector+' a');
+        
+        $('.playlist-nav a').removeClass('active');
+        $(this).addClass('active');
+        $('.playlist-nav a.active').each(function(){
+            $(this).toggleClass('playing');
+        })
 
+        $('.playlist.main li').hide();
+        $('.playlist.main li#'+ selector).show();
+
+        var href = $(this).attr("href");
+        var target = $(this).attr("target");
+        var text = $(this).text();
+        if (window._gaq) {
+        _gaq.push(["_trackEvent", "Playlist NavMenu", "Clicked", href, , false]); // create a custom event
+        }
+        return false;
+    });
+
+        
     //Conditional check for lte IE9
     if(document.addEventListener  ){
     //You have IE9 or higher
     if ($.fn.columnize) {
             if (!els.hasClass('columnized')) {
             els.columnize({
-                columns  : 3,
+                columns  : 2,
                 doneFunc : function(){
                     els.addClass('columnized');
-                    els.find('p').removeClass('sweet-justice');
-                    els.find('p').addClass('sweet-justice');
                     $( "#tabs" ).tabs({
                             active: -1,
                             show: function(event, ui) {
@@ -373,6 +445,10 @@ jQuery(document).ready(function($) {
                                     $(this).data("lastOpenedPanel", $(ui.panel));
                                 }
                     });
+
+                    if (!$('.entry-content .excerpt-read-more').length){
+                        $('.ui-tabs-nav').hide();
+                    }
                         
                     $('.excerpt-read-more').click(function(){
                         $( "#tabs" ).tabs({active:-2});
@@ -415,52 +491,17 @@ jQuery(document).ready(function($) {
                         return false;
                     });
     }
-   
-    //playlist-nav
-    $('.playlist-nav a').click(function(event){
-        event.preventDefault();
-        var selector = $(this).attr('data');
-        var aLink = $('.playlist.main li.'+selector+' a');
-        
-        $('.playlist-nav a').removeClass('active');
-        $(this).addClass('active');
-        $('.playlist-nav a.active').each(function(){
-            $(this).toggleClass('playing');
-        })
 
-        $('.playlist.main li').hide();
-        $('.playlist.main li#'+ selector).show();
-
-        var href = $(this).attr("href");
-        var target = $(this).attr("target");
-        var text = $(this).text();
-        if (window._gaq) {
-        _gaq.push(["_trackEvent", "Playlist NavMenu", "Clicked", href, , false]); // create a custom event
-        }
-        return false;
-    });
         
-    } /* end larger than 481px */
+    } /* end larger than 768px */
     
-    /* if is above or equal to 768px */
-    if (responsive_viewport_width >= 768) {
-    
-        
-    }
-    
-    /* off the bat large screen actions */
-    if (responsive_viewport_width > 1030) {
-        
-    }
 }
 
-    responsive_viewport();
-    
     $(window).resize(_.debounce(function(){
         responsive_viewport();
     }, 500));
 	
-	
+	responsive_viewport();
  
 }); /* end of as page load scripts */
 

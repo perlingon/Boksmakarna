@@ -41,8 +41,34 @@ hr
   img
     width 50px
     height auto
+header
+  ul.social-icons
+    li
+      float right
+      display block
+      padding-left .5em
+      padding-right 0
+
+.veckans-bok
+  height 40px
+  width 40px
+  border-radius 50%
+  background-image url('../images/veckans-bok.png')
+  background-repeat none
+  background-position center center
+  right -5px
+  top -5px
+  position absolute
+  z-index 10
+
+  display none
+.archive .veckans-bok
+  display block
+
 ul.social-icons
   clear both
+  h5
+    color grey
   li
     float left
     display block
@@ -177,7 +203,7 @@ validation-highlight = orange
 #tabs .columns
   height 430px
   .column
-    padding 0 15px 0 0
+    padding 0 30px 0 0
     font-size 90%
 .ui-tabs
   position relative
@@ -229,7 +255,7 @@ validation-highlight = orange
 // GRID SORTING
 .sorting
   font-family sans-serif
-  font-size 70%
+  font-size 90%
   min-height 1em
   padding 1em 0
   width 100%
@@ -264,10 +290,37 @@ validation-highlight = orange
       padding 0
 
 // CHOSEN
+.filters
+  h4,h5
+    text-align center
+    color cream
+  .fold-out-filter
+    box-shadow 5px 5px 0px darken(orange,60%)
+    background orange
+    border 3px solid orange
+    cursor pointer
+    span
+      background-image url(../images/chosen-sprite.png)
+      background-repeat no-repeat
+      background-position -30px -44px
+      padding-left 20px
+      color cream
+      margin 0
+    
+  .filters-foldout
+    display none
+    background orange
+    padding 10px
+    box-shadow 5px 5px 0px darken(orange,60%)
+    margin-top 20px
+
+
 .no-js select.chosen-select
     display block
 select.chosen-select
-    visibility hidden
+    display none
+    width 100%
+    margin 7px 0
 
 .chosen-container
   margin .4em 0
@@ -306,7 +359,7 @@ select.chosen-select
     overflow-y auto
     margin 0 4px 4px 0
     padding 0 0 0 4px
-    max-height 240px
+    max-height 80px
     -webkit-overflow-scrolling touch
     li
       display none
@@ -320,6 +373,9 @@ select.chosen-select
         display list-item
         cursor pointer
         color #333
+        &:hover,&:focus
+          background-color grey
+          color #fff
       &.disabled-result
         display list-item
         color #ccc
@@ -368,7 +424,9 @@ select.chosen-select
       display block
       width 12px
       height 12px
-      background url('../images/chosen-sprite.png') -42px 1px no-repeat
+      background-image url('../images/chosen-sprite.png')
+      background-position -42px 1px 
+      background-repeat no-repeat
       font-size 1px
       &:hover
         background-position -42px -10px
@@ -383,7 +441,11 @@ select.chosen-select
         display block
         width 100%
         height 100%
-        background url('../images/chosen-sprite.png') no-repeat 0px 2px
+        background-image url('../images/chosen-sprite.png')
+        background-position 0px 2px 
+        background-repeat no-repeat
+        font-size 1px
+
   .chosen-default
     color #999
   .chosen-single-with-deselect
@@ -410,7 +472,11 @@ select.chosen-select
       height auto
       outline 0
       border 1px solid #aaa
-      background white url('../images/chosen-sprite.png') no-repeat 100% -20px
+      background-image url('../images/chosen-sprite.png')
+      background-position 100% -20px 
+      background-repeat no-repeat
+      background-color white
+      font-size 1px
       font-size 1em
       font-family sans-serif
       line-height normal
@@ -439,7 +505,7 @@ select.chosen-select
     height 1%
     //border 1px solid #aaa
     box-shadow 0px 1px 2px lighten(grey,20%)
-    background-color light-grey
+    background-color white
     cursor text
     font-size 80%
     li
@@ -468,11 +534,10 @@ select.chosen-select
         position relative
         margin 3px 0 3px 5px
         padding .5em 1.5em .5em .5em
-        //border 1px solid grey
+        //border 1px solid darken(light-grey,5%)
         background-color light-grey
         background-clip padding-box
-        background linear-gradient(top, 90% cream, #ccc)
-        //box-shadow 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05)
+        box-shadow 0 2px 3px rgba(0, 0, 0, 0.2)
         color #666
         line-height 13px
         cursor default
@@ -480,15 +545,17 @@ select.chosen-select
         font-size 85%
         .search-choice-close
           position absolute
-          top 4px
+          top 3.5px
           right 3px
           display block
-          width 12px
+          width 20px
           height 12px
-          background url('../images/chosen-sprite.png') -42px 2px no-repeat
+          background-image url('../images/chosen-sprite.png')
+          background-position -32px 2px
+          background-repeat no-repeat
           font-size 1px
           &:hover
-            background-position -42px -9px
+            background-position -32px -9px
       &.search-choice-disabled
         padding-right 5px
         border 1px solid #ccc
@@ -526,13 +593,11 @@ select.chosen-select
         b
           background-position -18px 2px
   .chosen-choices
-    border 1px solid grey
-    //box-shadow 0 0 5px rgba(0, 0, 0, 0.3)
-    //border-radius 1em 1em 0 0
-    background orange
     li
       &.search-field
-          background url('../images/chosen-sprite.png') no-repeat 99% -20px
+          background-image url('../images/chosen-sprite.png')
+          background-position 99% -20px
+          background-repeat no-repeat
           width 100%
           input[type="text"]
             color #111 !important
@@ -603,7 +668,10 @@ select.chosen-select
   .chosen-search
     input[type="text"]
       padding 4px 5px 4px 20px
-      background white url('../images/chosen-sprite.png') no-repeat -30px -20px
+      background-image url('../images/chosen-sprite.png')
+      background-repeat no-repeat
+      background-position -30px -20px
+      background-color white
       direction rtl
 
 .chosen-rtl.chosen-container-single-nosearch .chosen-search,

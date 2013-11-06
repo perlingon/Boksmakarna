@@ -39,33 +39,56 @@ it would be 48px x 48px. You'd name it the same, but with a @2x at the end
 the original dimensions and you are good to go. 
 
 */
+body 
+    font-size 84%
+
+.retina
+    display block
+.no-retina
+    display none
+
+@media only screen and (min-width: 768px) 
+    #menu-main a
+        font-size 90%
+
 hr
     background-image url(../images/dot@2x.png)
     -webkit-background-size 11px 3px
     -moz-background-size 11px 3px
     -o-background-size 11px 3px
     background-size 11px 3px
+.footer-logo
+    -webkit-background-size 130px auto
+    -moz-background-size 130px auto
+    -o-background-size 130px auto
+    background-size 130px auto
 
 #nav-toggle 
     background-image url(../images/hamburger-retina.gif)
-    -webkit-background-size 200px 200px
-    -moz-background-size 200px 200px
-    -o-background-size 200px 200px
-    background-size 200px 200px
+    -webkit-background-size 25px 20px
+    -moz-background-size 25px 20px
+    -o-background-size 25px 20px
+    background-size 25px 20px
 
-ul.playlist-nav a i
+ul.playlist-nav li a i
     background-image url(../images/playlist-nav@2x.png)
-    -webkit-background-size 16px 16px
-    -moz-background-size 16px 16px
-    -o-background-size 16px 16px
-    background-size 16px 16px
+    -webkit-background-size 32px 16px
+    -moz-background-size 32px 16px
+    -o-background-size 32px 16px
+    background-size 32px 16px
 
-ul.playlist a i
+ul.playlist li a i
     background-image url(../images/play-pause@2x.png)
     -webkit-background-size 40px 80px
     -moz-background-size 40px 80px
     -o-background-size 40px 80px
     background-size 40px 80px
+ul.playlist.small-list li
+    background-image url(../images/play@2x.png)
+    -webkit-background-size 16px 16px
+    -moz-background-size 16px 16px
+    -o-background-size 16px 16px
+    background-size 16px 16px
 
 ul.social-icons li a
     background-image url(../images/social-icons@2x.png)
@@ -73,3 +96,46 @@ ul.social-icons li a
     -moz-background-size 175px 35px
     -o-background-size 175px 35px
     background-size 175px 35px
+#nav-toggle p
+    //background-image url(../images/logo-icon@2x.png)
+    -webkit-background-size 24px 20px
+    -moz-background-size 24px 20px
+    -o-background-size 24px 20px
+    background-size 24px 20px
+#scrolltop-btn
+    background-image url(../images/scroll-btn@2x.png)
+    -webkit-background-size 43px 39px
+    -moz-background-size 43px 39px
+    -o-background-size 43px 39px
+    background-size 43px 39px
+#slider .featured i
+    background-image url(../images/vinge@2x.png)
+    -webkit-background-size 10px 34px
+    -moz-background-size 10px 34px
+    -o-background-size 10px 34px
+    background-size 10px 34px
+.veckans-bok
+    background-image url(../images/veckans-bok@2x.png)
+    -webkit-background-size 40px 40px
+    -moz-background-size 40px 40px
+    -o-background-size 40px 40px
+    background-size 40px 40px
+.single-book .latest-sticker .veckans-bok
+    background-image url(../images/veckans-bok_large@2x.png)
+    -webkit-background-size 60px 60px
+    -moz-background-size 60px 60px
+    -o-background-size 60px 60px
+    background-size 60px 60px
+
+.filters .fold-out-filter span,
+.chosen-container-single .chosen-single abbr,
+.chosen-container-single .chosen-single div b,
+.chosen-container-single .chosen-search input[type="text"],
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close,
+.chosen-container-active .chosen-choices li.search-field,
+.chosen-rtl .chosen-choices .chosen-search input[type="text"]
+    background-image url(../images/chosen-sprite@2x.png)
+    -webkit-background-size 52px 80px
+    -moz-background-size 52px 80px
+    -o-background-size 52px 80px
+    background-size 52px 80px

@@ -673,11 +673,7 @@ function PagePlayer() {
           onmetadata:self.events.metadata,
           onload:self.events.onload
         });
-
-        /*//Track the Event
-        if (window._gaq) {
-        _gaq.push(["_trackEvent", "Episode Initiated", "Clicked", href, , false]); // create a custom event
-        }*/
+        
 
         // append control template
         oControls = self.oControls.cloneNode(true);
@@ -1105,6 +1101,7 @@ function PagePlayer() {
 
     if (elementExists(mainplayer)) {
           jQuery(document).ready(function($) {
+             
              $('.playlist-nav a').each(function(index){
                   
                     $(this).click(function(event){
@@ -1121,11 +1118,11 @@ function PagePlayer() {
 
 }
 
-var swfURL = window.location.protocol + "//" + window.location.host + "/boksmakarna/wp-content/themes/boksmakarna/library/js/soundmanager/swf/";
+var swfURL = window.location.protocol + "//" + window.location.host + "/wp-content/themes/boksmakarna/library/js/soundmanager/swf/";
 
 soundManager.setup({
   // disable or enable debug output
-  debugMode: true,
+  debugMode: false,
   // use HTML5 audio for MP3/MP4, if available
   preferFlash: false,
   useFlashBlock: true,

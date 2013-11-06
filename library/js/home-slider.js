@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 
     /* getting viewport width */
     var responsive_viewport_width = $(window).width();
-    console.log('slider window width: '+responsive_viewport_width);
+    //console.log('slider window width: '+responsive_viewport_width);
 
     /* if larger than 960 */
     if (responsive_viewport_width > 1030) {

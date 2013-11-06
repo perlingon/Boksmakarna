@@ -5,13 +5,28 @@
 ul,
 dd
 	margin 0
+	padding 0
 	list-style-type none
 	-webkit-margin-before 0
 	-webkit-margin-after 0
 	-webkit-margin-start 0
 	-webkit-margin-end 0
 	-webkit-padding-start 0
+	li
+		margin 0
+		padding 0
+		list-style-type none
 
+::selection
+	background text_select
+::-moz-selection
+	background text_select
+img::selection
+	background transparent
+img::-moz-selection
+	background transparent
+body
+	-webkit-tap-highlight-color text_select
 /*********************
 CLEARFIXIN'
 // Contain floats: nicolasgallagher.com/micro-clearfix-hack/

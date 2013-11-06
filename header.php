@@ -16,7 +16,7 @@
 		<!-- mobile meta (hooray!) -->
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no"/>
 
 		<!-- icons & favicons (for more: http://www.jonathantneal.com/blog/understand-the-favicon/) -->
 		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-icon-touch.png">
@@ -56,14 +56,18 @@
 						<?php bones_main_nav(); ?>
 					</nav>
 					<?php 
-						$attachment_id = get_field('logo','option');
-						$size = "logo"; // (thumbnail, medium, large, full or custom size)
+						$logo_attachment_id = get_field('logo','option');
+						$logo_img_size = "logo";
+						$logo_img_size_retina = "logo@2x";
 						 
-						$logo = wp_get_attachment_image_src( $attachment_id, $size );
-						echo '<a href="'.home_url().'" rel="nofollow"><img class="logo" src="'.$logo[0].'" alt="'.get_bloginfo('name').'" /></a>';
+						$logo = wp_get_attachment_image_src( $logo_attachment_id, $logo_img_size );
+						$logo_retina = wp_get_attachment_image_src( $logo_attachment_id, $logo_img_size_retina );
+
+						echo '<a href="'.home_url().'" rel="nofollow"><img class="logo no-retina" src="'.$logo[0].'" alt="'.get_bloginfo('name').'" /><img class="logo retina" src="'.$logo_retina[0].'" alt="'.get_bloginfo('name').'" /></a>';
 					?>
 					<div class="social-box">
 						<ul class="social-icons">
+							<h5>Följ podcasten</h5>
 							<?php if (get_field('podcast_rss','option')) {
 								echo '<li><a class="rss-link" title="Prenumera via RSS" href="'.get_field('podcast_rss','option').'" target="_blank"></a></li>';
 							}

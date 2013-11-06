@@ -97,12 +97,13 @@ if( get_field('slides','option')){
 	  							echo '<div class="content">';
 	  						}
   						}
+              if (get_sub_field('headline')) {
   						if (get_sub_field('text_color')) {
                 echo '<h2 style="color:'.get_sub_field('text_color').'">'.get_sub_field('headline').'</h2>';
               }else{
                 echo '<h2>'.get_sub_field('headline').'</h2>';
               }
-  						
+  						}
               if ($veckans == 1) {
                 if (get_sub_field('text_color')) {
                   echo '<span style="color:'.get_sub_field('text_color').'">';
