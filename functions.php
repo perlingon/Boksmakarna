@@ -128,7 +128,15 @@ function is_latest_post_sticker($id,$post_type){
 		$latest_args = array(
 					    'numberposts' => 1,
 					    'post_type' => $post_type,
-					    'post_status' => 'publish'
+					    'post_status' => 'publish',
+					    'tax_query' => array(
+												array(
+													'taxonomy' => 'upcoming',
+													'field' => 'slug',
+													'terms' => 'no'
+												)
+											)
+
 					 );
 		$latest = wp_get_recent_posts($latest_args);
 		$latest_id = $latest['0']['ID'];
@@ -137,6 +145,8 @@ function is_latest_post_sticker($id,$post_type){
 			latest_sticker($post_type);
 		}
 }
+
+
 
 
 /************* LIBRARIES ********************/

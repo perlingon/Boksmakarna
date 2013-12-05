@@ -161,7 +161,7 @@
 						<?php endif; ?>
 
 					</div> <!-- end #main -->
-					<?php grid_archive(false,'episode'); ?>
+					<?php grid_archive(false,'episode',3); ?>
 				</div> <!-- end #inner-content -->
 
 			</div> <!-- end #content -->

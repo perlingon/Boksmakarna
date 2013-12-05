@@ -49,7 +49,7 @@
 									 	$book_id_searchterm = get_field('podcast_book_id').'.';
 										
 									 	$episodes = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=avsnitt-1,avsnitt-2,avsnitt-3,avsnitt-4,avsnitt-5&posts_per_page=-1&orderby=title&order=ASC');
-									 	$interview = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=fredagsintervju&posts_per_page=-1&orderby=title&order=ASC');
+									 	$interview = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=fredagsintervjun&posts_per_page=-1&orderby=title&order=ASC');
 
 									 			if ($episodes->have_posts()) {
 													echo '<ul class="playlist small small-list">';

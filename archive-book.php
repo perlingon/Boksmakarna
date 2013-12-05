@@ -72,10 +72,12 @@
 								foreach ( $genres as $genre ) {echo ' '.$genre->slug;}
 								echo '">';
 
-								is_latest_post_sticker($post->ID,'book');
+								
 
-								if(!has_term( 'yes', 'upcoming' ) ) {echo '<a href="'.get_permalink().'">';}
-								if( has_term( 'yes', 'upcoming' ) ) {
+								if(!has_term( 'yes', 'upcoming' ) ) {
+									is_latest_post_sticker($post->ID,'book');
+									echo '<a href="'.get_permalink().'">';
+								}else{
 									echo '<div class="overlay">';
 									if (get_field('upcoming_date')) {
 										$date = date_i18n('d F', strtotime(get_field('upcoming_date')));

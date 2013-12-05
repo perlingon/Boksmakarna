@@ -171,7 +171,7 @@ ul.playlist li a i {
   background-repeat: no-repeat;
   background-position: top center;
   background-color: #3c3c3c;
-  border-radius: 20px;
+  border-radius: 50%;
   float: left;
 }
 ul.playlist li.sm2_playing,
