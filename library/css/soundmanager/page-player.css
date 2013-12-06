@@ -36,9 +36,6 @@ ul.use-spectrum .spectrum-box .spectrum {
 ul.playlist {
   list-style-type: none;
   margin: 0;
-  margin-bottom: 2em;
-  padding: 0px;
-  padding: 0.5em;
   border-radius: 4px;
 }
 ul.playlist li {
@@ -104,7 +101,6 @@ ul.playlist-nav {
   text-transform: uppercase;
   font-size: 80%;
   padding: 0;
-  margin-bottom: 2.4em;
 }
 ul.playlist-nav span {
   padding: 3px 0 5px;
@@ -135,6 +131,79 @@ ul.playlist-nav i {
   background-image: url("../../images/playlist-nav.png");
   background-position: center left;
   background-repeat: no-repeat;
+}
+ul.playlist-nav .new-play {
+  font-size: 110%;
+  padding-top: 1.3em;
+}
+ul.playlist-nav .new-play span {
+  font-size: 60%;
+  color: #808080;
+  padding-left: 33px;
+  margin: 0;
+}
+ul.playlist-nav .new-play i {
+  background-image: url("../../images/playlist-play-pause.png");
+  background-position: 25% -40%;
+  background-color: #808080;
+  border-radius: 50%;
+  height: 1.8em;
+  width: 1.8em;
+  margin-right: 0.5em;
+  margin-top: 3px;
+  float: left;
+  transition-property: color, background-color;
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: linear, linear;
+}
+ul.playlist-nav .new-play .active {
+  color: #393a39;
+}
+ul.playlist-nav .new-play .active i {
+  background-image: url("../../images/playlist-play-pause.png");
+  background-position: 25% -40%;
+  background-color: #808080;
+}
+ul.playlist-nav .new-play .active.playing i {
+  background-color: #3c3c3c;
+  background-position: 25% 105% !important;
+}
+ul.playlist-nav .new-play:hover i {
+  background-color: #3c3c3c;
+}
+ul.playlist-nav .new-play .text {
+  float: left;
+}
+ul.playlist-nav .new-play .text h5 {
+  color: #808080;
+  line-height: 100%;
+  font-size: 80%;
+  padding-bottom: 0.3em;
+  margin: 0;
+}
+ul.playlist-nav .new-play .text h4 {
+  line-height: 120%;
+  margin: 0;
+}
+ul.playlist.small .new-play {
+  background-image: url("../../images/play_small.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  padding-left: 35px;
+  margin: 1.5em 0 0.6em;
+}
+ul.playlist.small .new-play h5 {
+  color: #808080;
+  font-size: 90%;
+  line-height: 1;
+}
+ul.playlist.small .new-play p {
+  margin: 0;
+  font-family: "TrendSansOne";
+  text-transform: uppercase;
+  padding: 0.5em 0 0;
+  color: #808080;
+  font-size: 50%;
 }
 ul.playlist.init li {
   height: 1.7em;
@@ -184,6 +253,12 @@ ul.playlist li.sm2_paused i {
   position: relative;
   z-index: 999;
 }
+ul.playlist li.sm2_playing h5,
+ul.playlist li.sm2_paused h5,
+ul.playlist li.sm2_playing p,
+ul.playlist li.sm2_paused p {
+  display: none;
+}
 ul.playlist li:hover a {
   color: #333;
 }
@@ -192,7 +267,7 @@ ul.playlist li >div {
 }
 ul.playlist li.sm2_playing i,
 ul.playlist li.sm2_playing:hover i {
-  background-position: bottom center;
+  background-position: -1px 100%;
 }
 ul.playlist li.sm2_paused i {
   background-color: #636363;

@@ -15,7 +15,7 @@
 									<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 									<div class="taxonomies">
 										<?php
-											
+											$book_title = get_the_title();
 											$writers = get_the_terms( $post->ID , 'writer' );
 											if ( $writers && ! is_wp_error( $writers ) ) : 
 												$writer_links = array();
@@ -50,38 +50,49 @@
 										
 									 	$episodes = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=avsnitt-1,avsnitt-2,avsnitt-3,avsnitt-4,avsnitt-5&posts_per_page=-1&orderby=title&order=ASC');
 									 	$interview = new WP_Query('post_type=episode&s='.$book_id_searchterm.'&category_name=fredagsintervjun&posts_per_page=-1&orderby=title&order=ASC');
-
+									 	if (get_field('voice_actor')) {
+									 		$voice_actor = 'Uppläsare: '.get_field('voice_actor');
+									 	}
+									 	
 									 			if ($episodes->have_posts()) {
 													echo '<ul class="playlist small small-list">';
-													while ( $episodes->have_posts() ) {
-															$episodes->the_post();
+												
+														while ( $episodes->have_posts() ) {
+																$episodes->the_post();
 
-															// Make title with category
-															$postcats = get_the_category();
-															if ( $postcats && ! is_wp_error( $postcats ) ) : 
-																$cats = array();
-																foreach ( $postcats as $postcat) {
-																		$cats[] = $postcat->name;
-																}		
-																$episode_cat_title = join( ' ', $cats );
-															endif;
+																// Make title with category
+																$postcats = get_the_category();
+																if ( $postcats && ! is_wp_error( $postcats ) ) : 
+																	$cats = array();
+																	foreach ( $postcats as $postcat) {
+																			$cats[] = $postcat->name;
+																	}		
+																	$episode_cat_title = join( ' ', $cats );
+																endif;
 
-															//Find page numbers in parenthases
-															$string = get_the_title();
-															$regex = '#\((([^()]+|(?R))*)\)#';
-															if (preg_match_all($regex, $string ,$matches)) {
-															    $pages = ' '.implode(' ', $matches[0]).'';
-															}else{
-																$pages = '';
-															}
+																//Find page numbers in parenthases
+																$string = get_the_title();
+																$regex = '#\((([^()]+|(?R))*)\)#';
+																if (preg_match_all($regex, $string ,$matches)) {
+																    $pages = ' '.implode(' ', $matches[0]).'';
+																}else{
+																	$pages = '';
+																}
 
-															$count++;
-															echo '<li class="episode-'.$count.'"><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
-													}
+																$count++;
+																if ($episodes->post_count === 1) {
+																	echo '<li class="episode-'.$count.' new-play"><a href="'.get_field('mp3_source').'"><i></i><h5>Provlyssna</h5> ' . $book_title .'</a><p>'. $voice_actor .'</p></li>';
+																}else{
+																	echo '<li class="episode-'.$count.'"><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
+																}
+														}
+
 													$count = 0;
 
+													/*
 													$day = date('l');
 
+													
 													$start = '<ul class="upcoming-episode">';
 													$ep2 = '<li>Avsnitt 2 kommer tisdag</li>';
 													$ep3 = '<li>Avsnitt 3 kommer onsdag</li>';
@@ -137,6 +148,7 @@
 														echo $ep5;
 														echo $end;
 													}
+													*/
 													wp_reset_query();
 													echo '</ul>';
 
@@ -164,10 +176,15 @@
 															}
 
 															$count++;
-															echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . $episode_cat_title . $pages .'</span></a></li>';
+															if ($episodes->post_count === 1) {
+																	echo '<li class="new-play"><a href=":;javascript" data="episode-'.$count.'"><i></i><div class="text"><h5>Provlyssna</h5><h4>'.$book_title.'</h4></div><div style="clear:both"></div><span>'.$voice_actor.'</span></li>';
+																}else{
+																	echo '<li><a href=":;javascript" data="episode-'.$count.'"><i></i><span>' . $episode_cat_title . $pages .'</span></a></li>';
+																}
 													}
 													$count = 0;
 
+													/*
 													if ($episodes->post_count == 1) {
 														echo $start;
 														echo $ep2;
@@ -190,7 +207,7 @@
 														echo $start;
 														echo $ep5;
 														echo $end;
-													}
+													}*/
 													//wp_reset_query();
 													echo '</ul>';
 
@@ -213,6 +230,7 @@
 															echo '<h4>'.$title.'</h4>';
 															echo '</div>';
 															echo '</a>';
+															echo '<div style="clear:both"></div>';
 													}
 													
 													echo '</div>';
@@ -223,6 +241,9 @@
 											}
 
 									?>
+
+
+
 									<div id="sm2-container">
   										<!-- SM2 flash goes here -->
 									 </div>
@@ -235,15 +256,45 @@
 
 								<?php comments_template(); ?>
 								</div>
+
 								<?php if (get_field('offer')) {
+									$offer_count = 0;
+									echo '<div class="offer infobox">';
 										while (has_sub_field('offer')) {
+
+										$scheduling = get_sub_field('scheduling');
+
+										if ($scheduling) {
+											$first_row = $scheduling[0];
+											$today = date("Ymd");
+											
+											if ($first_row['start_date']) {
+												$start_date = $first_row['start_date'];
+											}else{
+												$start_date = $today;
+											}
+											
+											if ($first_row['end_date']) {
+												$end_date = $first_row['end_date'];
+											}else{
+												$end_date = 99999999;
+											}
+											
+											if(($today >= $start_date) && ($today <= $end_date)){
+												$valid_offer = true;
+											}
+										}
+
+										if ($valid_offer) {
+											
+										$offer_count++;
 								?>
-								
-								<div class="offer infobox">
+									
+									<div class="offer-item item-<?php echo $offer_count; ?>">
 									<?php if (get_sub_field('link')) {?>
 											<a class="buy-link" href="<?php the_sub_field('link'); ?>" target="_blank" title="<?php the_sub_field('headline'); ?>">
 	 								<?php } ?>
-	 								<h4><?php the_sub_field('headline'); ?></h4>
+	 								<h5><?php the_sub_field('headline');?></h5>
 									<div class="thumb">
 										<?php 
 										$partner = get_sub_field('partner');
@@ -264,9 +315,16 @@
 									</div>
 									</div>
 									<?php if (get_sub_field('link')) { echo '</a>';} ?>
-									<br style="clear:both" />
-								</div>
-								<?php } };?>
+									</div>
+								<?php 
+								if ($offer_count == 1) {
+									echo '<div class="slash"></div>';
+								}
+								}};
+								echo '<div style="clear:both"></div>';
+								echo "</div>";
+								};
+								?>
 								
 							</article> <!-- end article -->
 
@@ -328,7 +386,11 @@
 																$count++;
 																echo '<li id="episode-'.$count.'"';
 																if ($count==1) {echo 'style="display:block"';}
-																echo '><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
+																if ($episodes->post_count === 1) {
+																	echo '><a href="'.get_field('mp3_source').'"><i></i>' . $book_title .'</a></li>';
+																}else{
+																	echo '><a href="'.get_field('mp3_source').'"><i></i>' . $episode_cat_title . $pages .'</a></li>';
+																}
 														}
 														echo "</ul>";
 														echo '<div class="sharing">';

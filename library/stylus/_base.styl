@@ -662,19 +662,45 @@ POSTS &: CONTENT STYLES
 				text-decoration none
 				color grey
 	.offer
+		//background url(../images/slash.png) center center no-repeat
+		padding 40px 0 .5em!important
 		h4
 			font-size 80%
 			margin .5em 0
-		.description
-			font-size 85%
-			line-height 110%
-			color grey
-			text-align left
+		.offer-item
+			width 50%
+			padding-bottom 15px
+			&.item-1
+				padding-right 5%
+				float left
+			&.item-2
+				padding-left 5%
+				float left
+				clear right
+			h5
+				font-size 70%
+				line-height 100%
+				margin .5em 0
+			.description
+				font-size 85%
+				line-height 110%
+				color grey
+				text-align left
+			img
+				max-height 40px
+				width auto
+			&:hover
+				border-top solid 2px light-grey
+		.slashy
+			background url(../images/slash.png) left center no-repeat
+			width 40px
+			float left
+			display block
 	.interview
 		margin-top 1em
 		font-size 90%
 		border-top solid 2px light-grey
-		padding-top 1.2em
+		padding-top 1.5em!important
 		//border-top 4px solid light-grey
 		//border-bottom 4px solid light-grey
 		a

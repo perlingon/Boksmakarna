@@ -898,21 +898,55 @@ p {
   text-decoration: none;
   color: #868686;
 }
+.single-book .offer {
+  padding: 40px 0 0.5em !important;
+}
 .single-book .offer h4 {
   font-size: 80%;
   margin: 0.5em 0;
 }
-.single-book .offer .description {
+.single-book .offer .offer-item {
+  width: 50%;
+  padding-bottom: 15px;
+}
+.single-book .offer .offer-item.item-1 {
+  padding-right: 5%;
+  float: left;
+}
+.single-book .offer .offer-item.item-2 {
+  padding-left: 5%;
+  float: left;
+  clear: right;
+}
+.single-book .offer .offer-item h5 {
+  font-size: 70%;
+  line-height: 100%;
+  margin: 0.5em 0;
+}
+.single-book .offer .offer-item .description {
   font-size: 85%;
   line-height: 110%;
   color: #868686;
   text-align: left;
 }
+.single-book .offer .offer-item img {
+  max-height: 40px;
+  width: auto;
+}
+.single-book .offer .offer-item:hover {
+  border-top: solid 2px #e6e6e6;
+}
+.single-book .offer .slashy {
+  background: url("../images/slash.png") left center no-repeat;
+  width: 40px;
+  float: left;
+  display: block;
+}
 .single-book .interview {
   margin-top: 1em;
   font-size: 90%;
   border-top: solid 2px #e6e6e6;
-  padding-top: 1.2em;
+  padding-top: 1.5em !important;
 }
 .single-book .interview a {
   text-decoration: none;
@@ -1631,7 +1665,7 @@ font-weight bold ul .next-link,
 .single-book .info-wrapper,
 .single-episode .info-wrapper,
 .post-type-archive-episode .info-wrapper {
-  height: 23em;
+  height: 300px;
 }
 .single-book .player,
 .single-episode .player,
@@ -1642,6 +1676,7 @@ font-weight bold ul .next-link,
 .single-book .media,
 .single-episode .media,
 .post-type-archive-episode .media {
+  padding-bottom: 10px;
   display: inline;
   float: left;
   overflow: hidden;

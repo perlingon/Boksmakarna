@@ -36,7 +36,8 @@
 
 		<!-- drop Google Analytics Here -->
 		<!-- end analytics -->
-
+		
+		<!-- TradeDoubler site verification 2355765 -->
 	</head>
 
 	<body <?php body_class(); ?>>

@@ -49,9 +49,7 @@ ul.use-spectrum .spectrum-box .spectrum
 ul.playlist 
  list-style-type none
  margin 0
- margin-bottom 2em
- padding 0px
- padding .5em
+ //padding .5em
  border-radius 4px
 
 
@@ -116,7 +114,6 @@ ul.playlist-nav
 	text-transform uppercase
 	font-size 80%
 	padding 0
-	margin-bottom 2.4em
 	span
 		padding: 3px 0 5px
 	a
@@ -143,6 +140,75 @@ ul.playlist-nav
 		background-image: url("../../images/playlist-nav.png")
 		background-position: center left
 		background-repeat:no-repeat
+
+//NEW PLAYER STYLE 2013-12-09
+ul.playlist-nav
+	.new-play
+		font-size 110%
+		padding-top 1.3em
+		span
+			//font-family 'Courier'
+			//text-transform none
+			font-size 60%
+			color grey
+			padding-left 33px
+			margin 0
+
+		i
+			background-image url("../../images/playlist-play-pause.png")
+			background-position 25% -40%
+			background-color grey
+			border-radius 50%
+			height 1.8em
+			width 1.8em
+			margin-right 0.5em
+			margin-top 3px
+			float left
+			transition-property color, background-color
+			transition-duration 0.3s, 0.3s;   
+			transition-timing-function linear, linear
+		.active
+			color #393a39
+			i
+				background-image url("../../images/playlist-play-pause.png")
+				background-position 25% -40%
+				background-color grey
+		.active.playing i
+			background-color dark
+			background-position 25% 105%!important
+		&:hover
+			i
+				background-color dark
+		.text
+			float left
+			h5
+				color grey
+				line-height 100%
+				font-size 80%
+				padding-bottom 0.3em
+				margin 0
+			h4
+				line-height 120%
+				margin 0
+ul.playlist.small
+	.new-play
+		background-image url('../../images/play_small.png')
+		background-repeat no-repeat
+		background-position 0 0
+		padding-left 35px
+		margin 1.5em 0 .6em
+		h5
+			color grey
+			font-size 90%
+			line-height 1
+		p
+			margin 0
+			font-family sans-serif
+			text-transform uppercase
+			padding .5em 0 0
+			color grey
+			font-size 50%
+//////////////////////////////////
 
 ul.playlist.init li
 	height 1.7em
@@ -187,6 +253,8 @@ ul.playlist li.sm2_paused
 		display block
 		position relative
 		z-index 999
+	h5,p
+		display none
 
 ul.playlist li.sm2_playing,
 ul.playlist li.sm2_paused,
@@ -209,7 +277,7 @@ ul.playlist li.sm2_playing,
 ul.playlist li.sm2_playing:hover 
  //background-color orange
  i
- 	background-position bottom center
+ 	background-position -1px 100%
 
 ul.playlist li.sm2_paused 
  i
